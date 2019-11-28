@@ -1,0 +1,22 @@
+{
+  "name": "외대 종강시계",
+  "description": "종강까지 며칠 남았지?? 한국외대 학생들을 위한 종강시계",
+  "version": "1.0",
+  "manifest_version": 2,
+  "icons": {
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "외대 종강시계",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "chrome_url_overrides": {
+    "newtab": "tab/tab.html"
+  }
+}
