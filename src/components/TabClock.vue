@@ -73,7 +73,8 @@ export default {
       font-size: 20px;
     }
     .tab-clock-main-contents {
-      font-size: 75px;
+      font-size: 20px;
+      font-weight: 600;
     }
   }
   .tab-clock-info {
