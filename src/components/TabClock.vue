@@ -1,8 +1,8 @@
 <template>
   <div class="main__clock">
-    <div>종강 {{ this.semesterExpiredDate }}</div>
-    <div>현재시간 {{ this.todayDate }}</div>
-    <div>남은시간 {{ this.gapDay }}일 {{ this.gapHour }}시간 {{ this.gapMinute }}분 {{ this.gapSeconds }}초</div>
+    <div>종강 {{ this.semesterExpired | moment("YYYY-MM-DD") }}</div>
+    <div>오늘 {{ this.today | moment("YYYY-MM-DD") }}</div>
+    <div>종강까지 남은시간 {{ this.gapDay }}일 {{ this.gapHour }}시간 {{ this.gapMinute }}분 {{ this.gapSeconds }}초</div>
   </div>
 </template>
 
@@ -11,8 +11,8 @@ export default {
   name: 'Clock',
   data () {
     return {
-      semesterExpiredDate: new Date(2019, 11, 20, 11, 59, 59),
-      todayDate: new Date(),
+      semesterExpired: new Date(2019, 11, 20, 11, 59, 59),
+      today: new Date(),
       gapDay: 0,
       gapHour: 0,
       gapMinute: 0,
@@ -21,8 +21,8 @@ export default {
   },
   methods: {
     getDueDates () {
-      let today = new Date()
-      let gapTime = parseInt((this.semesterExpiredDate - today) / 1000)
+      const today = new Date()
+      const gapTime = parseInt((this.semesterExpired - today) / 1000)
       this.getLeftTime(gapTime)
     },
     getLeftTime (time) {
