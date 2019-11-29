@@ -1,19 +1,24 @@
 <template>
-  <div class="tab">{{message}}</div>
+  <div class="tab">
+    <div class="tab-main">
+      <tab-clock></tab-clock>
+    </div>
+  </div>
 </template>
 
 <script>
+import TabClock from '../components/TabClock.vue';
+
 export default {
-  data () {
-    return {
-      message: '외대종강시계!!'
-    }
+  name: 'App',
+  components: {
+    TabClock
   }
 }
 </script>
 
-<style scoped>
-p {
-  font-size: 20px;
+<style scoped lang="scss">
+* {
+  font-family: "Noto Sans KR", sans-serif;
 }
 </style>
