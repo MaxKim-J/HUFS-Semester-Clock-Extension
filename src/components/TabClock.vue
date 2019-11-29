@@ -1,44 +1,63 @@
 <template>
-  <div class="main__clock">
-    <div>종강 {{ this.semesterExpired | moment("YYYY-MM-DD") }}</div>
-    <div>오늘 {{ this.today | moment("YYYY-MM-DD") }}</div>
-    <div>종강까지 남은시간 {{ this.gapDay }}일 {{ this.gapHour }}시간 {{ this.gapMinute }}분 {{ this.gapSeconds }}초</div>
+  <div class="tab-clock">
+    <div class="tab-clock-main">
+      <div class="tab-clock-main-title">{{this.semesterInfo}}학기 종강까지 남은시간</div>
+      <div
+        class="tab-clock-main-contents"
+        ref="mainclock"
+        v-cloak
+      >{{ this.daysCalculated }}일 {{ this.hoursCalculated }}시간 {{ this.minutesCalculated }}분 {{ this.secondsCalculated }}초</div>
+    </div>
+    <div class="tab-clock-expired">종강 : {{ this.semesterExpired | moment("YYYY년 MM월 DD일") }}</div>
+    <div class="tab-clock-today">오늘 : {{ this.today | moment("YYYY년 MM월 DD일") }}</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Clock',
+  name: 'TabClock',
   data () {
     return {
       semesterExpired: new Date(2019, 11, 20, 11, 59, 59),
+      semesterInfo: '2019-2',
       today: new Date(),
-      gapDay: 0,
-      gapHour: 0,
-      gapMinute: 0,
-      gapSeconds: 0
+      gapTime: 0
+    }
+  },
+  computed: {
+    secondsCalculated () {
+      return this.gapTime % 60
+    },
+    minutesCalculated () {
+      return parseInt((this.gapTime / 60) % 60)
+    },
+    hoursCalculated () {
+      return parseInt((this.gapTime / (60 * 60)) % 24)
+    },
+    daysCalculated () {
+      return parseInt((this.gapTime / (3600 * 24)) % 24)
     }
   },
   methods: {
     getDueDates () {
       const today = new Date()
-      const gapTime = parseInt((this.semesterExpired - today) / 1000)
-      this.getLeftTime(gapTime)
-    },
-    getLeftTime (time) {
-      this.gapSeconds = time % 60
-      this.gapMinute = parseInt((time / 60) % 60)
-      this.gapHour = parseInt((time / (60 * 60)) % 24)
-      this.gapDay = parseInt((time / (3600 * 24)) % 24)
+      this.gapTime = parseInt((this.semesterExpired - today) / 1000)
     }
   },
-
   created () {
-    // todo 추후에 로딩 화면 삽입
+    this.getDueDates()
+  },
+  mounted () {
     this.interval = setInterval(() => this.getDueDates(), 1000)
   }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.tab-clock {
+  .tab-clock-main {
+    .tab-clock-main-title {
+    }
+  }
+}
 </style>
