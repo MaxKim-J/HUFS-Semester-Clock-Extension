@@ -59,26 +59,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.tab-clock {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  .tab-clock-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px 0px;
-    .tab-clock-main-title {
-      font-size: 20px;
-    }
-    .tab-clock-main-contents {
-      font-size: 20px;
-      font-weight: 600;
-    }
-  }
-  .tab-clock-info {
-    font-size: 15px;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

@@ -3,6 +3,12 @@
     <div class="tab-header-content">
       <div class="tab-header-content-username">김종혁 님,</div>
       <div class="tab-header-content-message">오늘도 수고하세요!</div>
+      <div class="tab-header-content-hotlink">
+        <v-icon x-large>school</v-icon>
+        <v-icon x-large>menu_book</v-icon>
+        <v-icon x-large>folder_shared</v-icon>
+        <v-icon x-large>event_note</v-icon>
+      </div>
     </div>
   </div>
 </template>
@@ -14,18 +20,4 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-.tab-header {
-  .tab-header-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .tab-header-content-username {
-      font-size: 30px;
-      font-weight: 600;
-    }
-    .tab-header-content-message {
-      font-size: 20px;
-    }
-  }
-}
 </style>
