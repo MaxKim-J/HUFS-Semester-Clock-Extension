@@ -23,7 +23,21 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+* {
+  font-size: 20px;
+
+  margin: 0;
+  padding: 0;
+
+  a,
+  a:hover,
+  a:active {
+    text-decoration: none;
+    color: black;
+  }
+}
+
 img {
   width: 500px;
 }
