@@ -3,23 +3,11 @@
     <div class="tab-header-content">
       <div class="tab-header-content-username">김종혁 님,</div>
       <div class="tab-header-content-message">{{this.greetingMessages[this.INDEXNUM].message}}</div>
-      <div class="tab-header-content-hotlinks">
-        <div
-          class="tab-header-content-hotlinks-link"
-          v-for="hotlink in this.hotlinkData"
-          :key="hotlink.id"
-        >
-          <a :href="hotlink.link">
-            <div class="tab-header-content-hotlinks-link-title">{{hotlink.name}}</div>
-          </a>
-        </div>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { HOTLINK } from '../utils/HotLinks.js';
 import { GREETINGS } from '../utils/GreetingsMessage.js';
 
 export default {
@@ -27,7 +15,6 @@ export default {
   data () {
     return {
       INDEXNUM: 0,
-      hotlinkData: HOTLINK,
       greetingMessages: GREETINGS
     }
   },

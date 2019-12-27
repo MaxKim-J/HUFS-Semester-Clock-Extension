@@ -54,7 +54,6 @@ export default {
   },
   created () {
     this.getDueDates()
-    console.log(this.gapTime)
   },
   mounted () {
     this.interval = setInterval(this.getDueDates, 1000)

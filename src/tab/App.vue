@@ -3,6 +3,7 @@
     <div class="tab-main">
       <tab-header></tab-header>
       <tab-clock></tab-clock>
+      <tab-hotlinks></tab-hotlinks>
     </div>
     <div class="background">
       <img src="http://ppcdn.500px.org/75319705/1991f76c0c6a91ae1d23eb94ac5c7a9f7e79c480/2048.jpg" />
@@ -13,12 +14,14 @@
 <script>
 import TabClock from '../components/TabClock.vue';
 import TabHeader from '../components/TabHeader.vue';
+import TabHotlinks from '../components/TabHotlinks.vue';
 
 export default {
   name: 'App',
   components: {
     TabClock,
-    TabHeader
+    TabHeader,
+    TabHotlinks
   }
 }
 </script>
