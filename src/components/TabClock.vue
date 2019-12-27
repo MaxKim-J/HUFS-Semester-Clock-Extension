@@ -13,12 +13,14 @@
 </template>
 
 <script>
+import { SEMESTER_INFO, SEMESTER_DUE } from '../utils/semesterInfo';
+
 export default {
   name: 'TabClock',
   data () {
     return {
-      semesterExpired: new Date(2019, 11, 20, 11, 59, 59),
-      semesterInfo: '2019-2',
+      semesterExpired: SEMESTER_DUE,
+      semesterInfo: SEMESTER_INFO,
       today: new Date(),
       gapTime: 0
     }
