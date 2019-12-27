@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { SEMESTER_INFO, SEMESTER_DUE } from '../utils/semesterInfo';
+import { SEMESTER_INFO, SEMESTER_DUE } from '../utils/SemesterInfo.js';
 
 export default {
   name: 'TabClock',
@@ -27,22 +27,22 @@ export default {
   },
   computed: {
     secondsCalculated () {
-      return this.addZero(this.gapTime % 60)
+      return this.addZero(parseInt((this.gapTime / 1000) % 60))
     },
     minutesCalculated () {
-      return this.addZero(parseInt((this.gapTime / 60) % 60))
+      return this.addZero(parseInt((this.gapTime / (1000 * 60)) % 60))
     },
     hoursCalculated () {
-      return this.addZero(parseInt((this.gapTime / (60 * 60)) % 24))
+      return this.addZero(parseInt((this.gapTime / (1000 * 60 * 60)) % 24))
     },
     daysCalculated () {
-      return this.addZero(parseInt((this.gapTime / (3600 * 24)) % 24))
+      return this.addZero(parseInt(this.gapTime / (1000 * 60 * 60 * 24)))
     }
   },
   methods: {
     getDueDates () {
       const today = new Date()
-      this.gapTime = parseInt((this.semesterExpired - today) / 1000)
+      this.gapTime = parseInt(this.semesterExpired - today)
     },
     addZero (num) {
       if (num < 10) {
@@ -54,6 +54,7 @@ export default {
   },
   created () {
     this.getDueDates()
+    console.log(this.gapTime)
   },
   mounted () {
     this.interval = setInterval(this.getDueDates, 1000)
