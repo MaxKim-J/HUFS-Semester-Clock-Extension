@@ -10,9 +10,8 @@
           :key="hotlink.id"
         >
           <a :href="hotlink.link">
-            <v-icon x-large>{{ hotlink.icon }}</v-icon>
+            <div class="tab-header-content-hotlinks-link-title">{{hotlink.name}}</div>
           </a>
-          <div class="tab-header-content-hotlinks-link-title">{{hotlink.name}}</div>
         </div>
       </div>
     </div>
