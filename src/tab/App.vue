@@ -1,8 +1,8 @@
 <template>
   <div class="tab">
     <div class="tab-main">
-      <tab-header></tab-header>
       <tab-clock></tab-clock>
+      <tab-middle></tab-middle>
       <tab-hotlinks></tab-hotlinks>
     </div>
     <div class="background">
@@ -13,14 +13,14 @@
 
 <script>
 import TabClock from '../components/TabClock.vue';
-import TabHeader from '../components/TabHeader.vue';
+import TabMiddle from '../components/TabMiddle.vue';
 import TabHotlinks from '../components/TabHotlinks.vue';
 
 export default {
   name: 'App',
   components: {
     TabClock,
-    TabHeader,
+    TabMiddle,
     TabHotlinks
   }
 }
