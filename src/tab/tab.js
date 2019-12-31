@@ -5,6 +5,5 @@ Vue.use(require('vue-moment'))
 
 new Vue({
   el: '#app',
-  render: h => h(App),
-  router: router
+  render: h => h(App)
 })
