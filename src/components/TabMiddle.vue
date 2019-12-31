@@ -1,8 +1,12 @@
 <template>
   <div class="tab-middle">
     <div class="tab-middle-content" v-if="this.isInput === true">
-      <div class="tab-middle-content-username">{{this.userFreshmanYear}}학번 {{this.userName}}님,</div>
-      <div class="tab-middle-content-message">{{this.greetingMessages[this.INDEXNUM].message}}</div>
+      <div
+        class="tab-middle-content-message"
+      >{{this.userFreshmanYear}}학번 외대입학 {{this.getDistance}}일 째</div>
+      <div
+        class="tab-middle-content-message"
+      >{{this.userName}}님, {{this.greetingMessages[this.INDEXNUM].message}}</div>
     </div>
 
     <div class="tab-middle-content" v-else-if="this.isInput === undefined">
@@ -24,6 +28,7 @@
 <script>
 import { GREETINGS } from '../utils/GreetingsMessage.js';
 import { FRESHMANYEARS } from '../utils/FreshmanYears.js';
+import { getDistanceFreshman } from '../utils/TimeDistanceCalculator.js';
 
 export default {
   name: 'tabMiddle',
@@ -37,6 +42,11 @@ export default {
       isInput: null
     }
   },
+  computed: {
+    getDistance () {
+      return getDistanceFreshman(this.userFreshmanYear)
+    }
+  },
   methods: {
     getRandomArrayIndex (arr) {
       return Math.floor(Math.random() * arr.length)
@@ -46,7 +56,6 @@ export default {
         chrome.storage.local.get(
           ['userInitInput', 'userName', 'userFreshmanYear'],
           function (result) {
-            console.log(result)
             resolve(result)
           }
         )
@@ -59,7 +68,7 @@ export default {
         userInitInput: true
       }
       chrome.storage.local.set(userInfo, function () {
-        console.log(userInfo)
+        console.log('데이터가 저장됐습니다')
       })
     }
   },
@@ -69,7 +78,6 @@ export default {
       this.isInput = data.userInitInput
       this.userName = data.userName
       this.userFreshmanYear = data.userFreshmanYear
-      console.log(this.isInput)
     })
   }
 }

@@ -14,6 +14,12 @@
 
 <script>
 import { SEMESTER_INFO, SEMESTER_DUE } from '../utils/SemesterInfo.js';
+import {
+  getDistanceSeconds,
+  getDistanceMinutes,
+  getDistanceHours,
+  getDistanceDays
+} from '../utils/TimeDistanceCalculator.js';
 
 export default {
   name: 'TabClock',
@@ -27,29 +33,22 @@ export default {
   },
   computed: {
     secondsCalculated () {
-      return this.addZero(parseInt((this.gapTime / 1000) % 60))
+      return getDistanceSeconds(this.gapTime)
     },
     minutesCalculated () {
-      return this.addZero(parseInt((this.gapTime / (1000 * 60)) % 60))
+      return getDistanceMinutes(this.gapTime)
     },
     hoursCalculated () {
-      return this.addZero(parseInt((this.gapTime / (1000 * 60 * 60)) % 24))
+      return getDistanceHours(this.gapTime)
     },
     daysCalculated () {
-      return this.addZero(parseInt(this.gapTime / (1000 * 60 * 60 * 24)))
+      return getDistanceDays(this.gapTime)
     }
   },
   methods: {
     getDueDates () {
       const today = new Date()
       this.gapTime = parseInt(this.semesterExpired - today)
-    },
-    addZero (num) {
-      if (num < 10) {
-        return `0${num}`
-      } else {
-        return `${num}`
-      }
     }
   },
   created () {
