@@ -20,7 +20,7 @@
           <option v-for="option in this.freshmanYearOptions" :key="option.value">{{ option.text }}</option>
         </select>
       </div>
-      <div class="tab-tabinit-startbtn" @click="this.saveUserInfo">입력하기</div>
+      <div class="tab-tabinit-startbtn" @click="this.saveUserInfo" style="cursor:pointer">입력하기</div>
     </div>
   </div>
 </template>
@@ -61,6 +61,13 @@ export default {
         )
       })
     },
+    updateUserInfo () {
+      this.getUserInput().then(data => {
+        this.isInput = data.userInitInput
+        this.userName = data.userName
+        this.userFreshmanYear = data.userFreshmanYear
+      })
+    },
     saveUserInfo () {
       const userInfo = {
         userName: this.userName,
@@ -70,15 +77,12 @@ export default {
       chrome.storage.local.set(userInfo, function () {
         console.log('데이터가 저장됐습니다')
       })
+      this.updateUserInfo()
     }
   },
   created () {
     this.INDEXNUM = this.getRandomArrayIndex(this.greetingMessages)
-    this.getUserInput().then(data => {
-      this.isInput = data.userInitInput
-      this.userName = data.userName
-      this.userFreshmanYear = data.userFreshmanYear
-    })
+    this.updateUserInfo()
   }
 }
 </script>
