@@ -20,7 +20,7 @@
           <option v-for="option in this.freshmanYearOptions" :key="option.value">{{ option.text }}</option>
         </select>
       </div>
-      <div class="tab-tabinit-startbtn" @click="this.saveUserInfo" style="cursor:pointer">입력하기</div>
+      <div class="tab-tabinit-startbtn" @click="this.userInputValid" style="cursor:pointer">입력하기</div>
     </div>
   </div>
 </template>
@@ -67,6 +67,19 @@ export default {
         this.userName = data.userName
         this.userFreshmanYear = data.userFreshmanYear
       })
+    },
+    userInputValid () {
+      if (this.userName === undefined) {
+        alert('학우님의 이름을 입력해주세요!')
+      } else if (this.userFreshmanYear === undefined) {
+        alert('학우님의 학번을 입력해주세요!')
+      } else {
+        if (this.userName.length > 5 || this.userName.length < 1) {
+          alert('학우님 이름은 1자 이상부터 5자까지 가능합니다')
+        } else {
+          this.saveUserInfo()
+        }
+      }
     },
     saveUserInfo () {
       const userInfo = {
