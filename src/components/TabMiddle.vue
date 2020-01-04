@@ -26,78 +26,78 @@
 </template>
 
 <script>
-import { GREETINGS } from '../utils/GreetingsMessage.js';
-import { FRESHMANYEARS } from '../utils/FreshmanYears.js';
-import { getDistanceFreshman } from '../utils/TimeDistanceCalculator.js';
+import { GREETINGS } from "../utils/GreetingsMessage.js";
+import { FRESHMANYEARS } from "../utils/FreshmanYears.js";
+import { getDistanceFreshman } from "../utils/TimeDistanceCalculator.js";
 
 export default {
-  name: 'tabMiddle',
-  data () {
+  name: "tabMiddle",
+  data() {
     return {
       greetingMessages: GREETINGS,
       freshmanYearOptions: FRESHMANYEARS,
       userFreshmanYear: 0,
-      userName: '',
+      userName: "",
       INDEXNUM: 0,
       isInput: null
-    }
+    };
   },
   computed: {
-    getDistance () {
-      return getDistanceFreshman(this.userFreshmanYear)
+    getDistance() {
+      return getDistanceFreshman(this.userFreshmanYear);
     }
   },
   methods: {
-    getRandomArrayIndex (arr) {
-      return Math.floor(Math.random() * arr.length)
+    getRandomArrayIndex(arr) {
+      return Math.floor(Math.random() * arr.length);
     },
-    getUserInput () {
-      return new Promise(function (resolve, reject) {
+    getUserInput() {
+      return new Promise(function(resolve, reject) {
         chrome.storage.local.get(
-          ['userInitInput', 'userName', 'userFreshmanYear'],
-          function (result) {
-            resolve(result)
+          ["userInitInput", "userName", "userFreshmanYear"],
+          function(result) {
+            resolve(result);
           }
-        )
-      })
+        );
+      });
     },
-    updateUserInfo () {
+    updateUserInfo() {
       this.getUserInput().then(data => {
-        this.isInput = data.userInitInput
-        this.userName = data.userName
-        this.userFreshmanYear = data.userFreshmanYear
-      })
+        this.isInput = data.userInitInput;
+        this.userName = data.userName;
+        this.userFreshmanYear = data.userFreshmanYear;
+      });
     },
-    userInputValid () {
+    userInputValid() {
       if (this.userName === undefined) {
-        alert('학우님의 이름을 입력해주세요!')
+        alert("학우님의 이름을 입력해주세요!");
       } else if (this.userFreshmanYear === undefined) {
-        alert('학우님의 학번을 입력해주세요!')
+        alert("학우님의 학번을 입력해주세요!");
       } else {
         if (this.userName.length > 5 || this.userName.length < 1) {
-          alert('학우님 이름은 1자 이상부터 5자까지 가능합니다')
+          alert("학우님 이름은 1자 이상부터 5자까지 가능합니다");
         } else {
-          this.saveUserInfo()
+          this.saveUserInfo();
         }
       }
     },
-    saveUserInfo () {
+    saveUserInfo() {
       const userInfo = {
         userName: this.userName,
         userFreshmanYear: this.userFreshmanYear,
         userInitInput: true
-      }
-      chrome.storage.local.set(userInfo, function () {
-        console.log('데이터가 저장됐습니다')
-      })
-      this.updateUserInfo()
+      };
+      chrome.storage.local.set(userInfo, function() {
+        console.log("데이터가 저장됐습니다");
+      });
+      this.updateUserInfo();
     }
   },
-  created () {
-    this.INDEXNUM = this.getRandomArrayIndex(this.greetingMessages)
-    this.updateUserInfo()
+  created() {
+    this.INDEXNUM = this.getRandomArrayIndex(this.greetingMessages);
+    this.updateUserInfo();
   }
-}
+};
 </script>
 
 <style scoped lang='scss'>

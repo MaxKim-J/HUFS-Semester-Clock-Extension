@@ -9,16 +9,16 @@
 </template>
 
 <script>
-import { HOTLINK } from '../utils/HotLinks.js';
+import { HOTLINK } from "../utils/HotLinks.js";
 
 export default {
-  name: 'tabHotlinks',
-  data () {
+  name: "tabHotlinks",
+  data() {
     return {
       hotlinkData: HOTLINK
-    }
+    };
   }
-}
+};
 </script>
 
 <style>

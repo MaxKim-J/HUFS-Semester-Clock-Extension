@@ -8,25 +8,25 @@
 </template>
 
 <script>
-import { GREETINGS } from '../utils/GreetingsMessage.js';
+import { GREETINGS } from "../utils/GreetingsMessage.js";
 
 export default {
-  name: 'tabHeader',
-  data () {
+  name: "tabHeader",
+  data() {
     return {
       INDEXNUM: 0,
       greetingMessages: GREETINGS
-    }
+    };
   },
   methods: {
-    getRandomArrayIndex (arr) {
-      return Math.floor(Math.random() * arr.length)
+    getRandomArrayIndex(arr) {
+      return Math.floor(Math.random() * arr.length);
     }
   },
-  created () {
-    this.INDEXNUM = this.getRandomArrayIndex(this.greetingMessages)
+  created() {
+    this.INDEXNUM = this.getRandomArrayIndex(this.greetingMessages);
   }
-}
+};
 </script>
 
 <style scoped lang='scss'>

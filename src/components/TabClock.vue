@@ -1,63 +1,64 @@
 <template>
   <div class="tab-clock">
     <div class="tab-clock-main">
-      <div class="tab-clock-main-title">{{this.semesterInfo}}학기 종강까지</div>
+      <div class="tab-clock-main-title">{{this.semesterInfo.id}}학기 종강까지</div>
       <div
         class="tab-clock-main-contents"
       >{{ this.daysCalculated }}일 {{ this.hoursCalculated }}시간 {{ this.minutesCalculated }}분 {{ this.secondsCalculated }}초</div>
       <div class="tab-clock-main-title">남았습니다</div>
     </div>
-    <div class="tab-clock-info">종강 : {{ this.semesterExpired | moment("YYYY년 MM월 DD일") }}</div>
+    <div class="tab-clock-info">종강 : {{ this.semesterInfo.due | moment("YYYY년 MM월 DD일") }}</div>
     <div class="tab-clock-info">오늘 : {{ this.today | moment("YYYY년 MM월 DD일") }}</div>
   </div>
 </template>
 
 <script>
-import { SEMESTER_INFO, SEMESTER_DUE } from '../utils/SemesterInfo.js';
+import { CURRENT_SEMESTER_INFO } from "../utils/SemesterInfo.js";
+
 import {
   getDistanceSeconds,
   getDistanceMinutes,
   getDistanceHours,
   getDistanceDays
-} from '../utils/TimeDistanceCalculator.js';
+} from "../utils/TimeDistanceCalculator.js";
 
 export default {
-  name: 'TabClock',
-  data () {
+  name: "TabClock",
+  data() {
     return {
-      semesterExpired: SEMESTER_DUE,
-      semesterInfo: SEMESTER_INFO,
+      semesterInfo: CURRENT_SEMESTER_INFO,
       today: new Date(),
       gapTime: 0
-    }
+    };
   },
   computed: {
-    secondsCalculated () {
-      return getDistanceSeconds(this.gapTime)
+    secondsCalculated() {
+      return getDistanceSeconds(this.gapTime);
     },
-    minutesCalculated () {
-      return getDistanceMinutes(this.gapTime)
+    minutesCalculated() {
+      return getDistanceMinutes(this.gapTime);
     },
-    hoursCalculated () {
-      return getDistanceHours(this.gapTime)
+    hoursCalculated() {
+      return getDistanceHours(this.gapTime);
     },
-    daysCalculated () {
-      return getDistanceDays(this.gapTime)
+    daysCalculated() {
+      return getDistanceDays(this.gapTime);
     }
   },
   methods: {
-    getDueDates () {
-      const today = new Date()
-      this.gapTime = parseInt(this.semesterExpired - today)
+    getDueDates() {
+      const today = new Date();
+      console.log(this.semesterInfo);
+      this.gapTime = parseInt(this.semesterInfo.due - today);
     }
   },
-  created () {
-    this.getDueDates()
+  created() {
+    this.getDueDates();
   },
-  mounted () {
-    this.interval = setInterval(this.getDueDates, 1000)
+  mounted() {
+    this.interval = setInterval(this.getDueDates, 1000);
   }
-}
+};
 </script>
 
 <style lang="scss" scoped></style>
