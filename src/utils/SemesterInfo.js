@@ -3,7 +3,7 @@
 export const CURRENT_SEMESTER_INFO = {
   id: '2020-1',
   act: '종강',
-  due: new Date(2020, 0, 4, 16, 26)
+  due: new Date(2020, 5, 19, 23, 59, 59)
 }
 
 export const SEASONAL_SEMESTER_INFO = {

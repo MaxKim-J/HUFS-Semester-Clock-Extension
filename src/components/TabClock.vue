@@ -1,18 +1,25 @@
 <template>
   <div class="tab-clock">
     <div class="tab-clock-main">
-      <div class="tab-clock-main-title">{{this.semesterInfo.id}}학기 {{this.semesterInfo.act}}까지</div>
+      <div
+        class="tab-clock-main-title"
+      >{{this.semesterInfo.id}}학기 {{this.semesterInfo.act}}({{this.semesterInfo.due | moment("YY년 MM월 DD일")}})까지</div>
       <div
         class="tab-clock-main-contents"
       >{{ this.daysCalculated }}일 {{ this.hoursCalculated }}시간 {{ this.minutesCalculated }}분 {{ this.secondsCalculated }}초</div>
       <div class="tab-clock-main-title">남았습니다</div>
       <div
         class="tab-clock-main-btn"
-        v-if="hadSeason === true"
-        @click="this.drawNextSemester"
-      >계절학기를 안들어요!</div>
+        v-if="this.drawSeason === false"
+        @click="this.changeSeasonalSemester"
+      >계절학기 종강까지는?</div>
+      <div
+        class="tab-clock-main-btn"
+        v-else-if="this.drawSeason === true"
+        @click="this.changeNextSemester"
+      >다음학기 개강까지는?</div>
     </div>
-    <div class="tab-clock-info">오늘 : {{ this.today | moment("YYYY년 MM월 DD일 h:mm a") }}</div>
+    <div class="tab-clock-info">현재시간 : {{ this.today | moment("YYYY년 MM월 DD일 h:mm a") }}</div>
   </div>
 </template>
 
@@ -35,7 +42,7 @@ export default {
   data() {
     return {
       semesterInfo: null,
-      hadSeason: null,
+      drawSeason: null,
       today: new Date(),
       gapTime: 0
     };
@@ -56,24 +63,27 @@ export default {
   },
   methods: {
     clockValid() {
-      const today = new Date();
-      if (today < CURRENT_SEMESTER_INFO.due) {
+      if (this.today <= CURRENT_SEMESTER_INFO.due) {
         this.semesterInfo = CURRENT_SEMESTER_INFO;
-      } else if (today > CURRENT_SEMESTER_INFO.due) {
-        this.semesterInfo = SEASONAL_SEMESTER_INFO;
-        this.hadSeason = true;
+      } else if (this.today > CURRENT_SEMESTER_INFO.due) {
+        this.changeNextSemester();
       }
     },
     getDueDates() {
-      const today = new Date();
-      this.gapTime = parseInt(this.semesterInfo.due - today);
+      this.gapTime = parseInt(this.semesterInfo.due - this.today);
     },
     getNowDates() {
       this.today = new Date();
     },
-    drawNextSemester() {
-      this.hadSeason = false;
+    changeNextSemester() {
       this.semesterInfo = NEXT_SEMESTER_INFO;
+      this.drawSeason = false;
+      this.getDueDates();
+    },
+    changeSeasonalSemester() {
+      this.semesterInfo = SEASONAL_SEMESTER_INFO;
+      this.drawSeason = true;
+      this.getDueDates();
     }
   },
   created() {
@@ -82,8 +92,8 @@ export default {
   },
   mounted() {
     this.interval = setInterval(() => {
-      this.getDueDates();
       this.getNowDates();
+      this.getDueDates();
     }, 1000);
   }
 };
