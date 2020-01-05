@@ -1,84 +1,102 @@
 <template>
   <div class="tab-clock">
     <div class="tab-clock-main">
-      <div class="tab-clock-main-title">{{this.semesterInfo}}학기 종강까지</div>
+      <div
+        class="tab-clock-main-title"
+      >{{this.semesterInfo.id}}학기 {{this.semesterInfo.act}}({{this.semesterInfo.due | moment("YY년 MM월 DD일")}})까지</div>
       <div
         class="tab-clock-main-contents"
       >{{ this.daysCalculated }}일 {{ this.hoursCalculated }}시간 {{ this.minutesCalculated }}분 {{ this.secondsCalculated }}초</div>
       <div class="tab-clock-main-title">남았습니다</div>
+      <div
+        class="tab-clock-main-btn"
+        v-if="this.drawSeason === false"
+        @click="this.changeSeasonalSemester"
+      >계절학기 종강까지는?</div>
+      <div
+        class="tab-clock-main-btn"
+        v-else-if="this.drawSeason === true"
+        @click="this.changeNextSemester"
+      >다음학기 개강까지는?</div>
     </div>
-    <div class="tab-clock-info">종강 : {{ this.semesterExpired | moment("YYYY년 MM월 DD일") }}</div>
-    <div class="tab-clock-info">오늘 : {{ this.today | moment("YYYY년 MM월 DD일") }}</div>
+    <div class="tab-clock-info">현재시간 : {{ this.today | moment("YYYY년 MM월 DD일 h:mm a") }}</div>
   </div>
 </template>
 
 <script>
+import {
+  CURRENT_SEMESTER_INFO,
+  SEASONAL_SEMESTER_INFO,
+  NEXT_SEMESTER_INFO
+} from "../utils/SemesterInfo.js";
+
+import {
+  getDistanceSeconds,
+  getDistanceMinutes,
+  getDistanceHours,
+  getDistanceDays
+} from "../utils/TimeDistanceCalculator.js";
+
 export default {
-  name: 'TabClock',
-  data () {
+  name: "TabClock",
+  data() {
     return {
-      semesterExpired: new Date(2019, 11, 20, 11, 59, 59),
-      semesterInfo: '2019-2',
+      semesterInfo: null,
+      drawSeason: null,
       today: new Date(),
       gapTime: 0
-    }
+    };
   },
   computed: {
-    secondsCalculated () {
-      return this.addZero(this.gapTime % 60)
+    secondsCalculated() {
+      return getDistanceSeconds(this.gapTime);
     },
-    minutesCalculated () {
-      return this.addZero(parseInt((this.gapTime / 60) % 60))
+    minutesCalculated() {
+      return getDistanceMinutes(this.gapTime);
     },
-    hoursCalculated () {
-      return this.addZero(parseInt((this.gapTime / (60 * 60)) % 24))
+    hoursCalculated() {
+      return getDistanceHours(this.gapTime);
     },
-    daysCalculated () {
-      return this.addZero(parseInt((this.gapTime / (3600 * 24)) % 24))
+    daysCalculated() {
+      return getDistanceDays(this.gapTime);
     }
   },
   methods: {
-    getDueDates () {
-      const today = new Date()
-      this.gapTime = parseInt((this.semesterExpired - today) / 1000)
-    },
-    addZero (num) {
-      if (num < 10) {
-        return `0${num}`
-      } else {
-        return `${num}`
+    clockValid() {
+      if (this.today <= CURRENT_SEMESTER_INFO.due) {
+        this.semesterInfo = CURRENT_SEMESTER_INFO;
+      } else if (this.today > CURRENT_SEMESTER_INFO.due) {
+        this.changeNextSemester();
       }
+    },
+    getDueDates() {
+      this.gapTime = parseInt(this.semesterInfo.due - this.today);
+    },
+    getNowDates() {
+      this.today = new Date();
+    },
+    changeNextSemester() {
+      this.semesterInfo = NEXT_SEMESTER_INFO;
+      this.drawSeason = false;
+      this.getDueDates();
+    },
+    changeSeasonalSemester() {
+      this.semesterInfo = SEASONAL_SEMESTER_INFO;
+      this.drawSeason = true;
+      this.getDueDates();
     }
   },
-  created () {
-    this.getDueDates()
+  created() {
+    this.clockValid();
+    this.getDueDates();
   },
-  mounted () {
-    this.interval = setInterval(this.getDueDates, 1000)
+  mounted() {
+    this.interval = setInterval(() => {
+      this.getNowDates();
+      this.getDueDates();
+    }, 1000);
   }
-}
+};
 </script>
 
-<style lang="scss" scoped>
-.tab-clock {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  .tab-clock-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px 0px;
-    .tab-clock-main-title {
-      font-size: 20px;
-    }
-    .tab-clock-main-contents {
-      font-size: 20px;
-      font-weight: 600;
-    }
-  }
-  .tab-clock-info {
-    font-size: 15px;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

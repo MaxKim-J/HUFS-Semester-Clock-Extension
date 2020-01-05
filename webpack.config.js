@@ -10,7 +10,7 @@ const config = {
   mode: process.env.NODE_ENV,
   context: __dirname + '/src',
   entry: {
-    'background': './background.js',
+    background: './background.js',
     'popup/popup': './popup/popup.js',
     'tab/tab': './tab/tab.js'
   },
@@ -84,7 +84,7 @@ const config = {
           jsonContent.version = version
 
           if (config.mode === 'development') {
-            jsonContent['content_security_policy'] = "script-src 'self' 'unsafe-eval'; object-src 'self'"
+            jsonContent.content_security_policy = "script-src 'self' 'unsafe-eval'; object-src 'self'"
           }
 
           return JSON.stringify(jsonContent, null, 2)
