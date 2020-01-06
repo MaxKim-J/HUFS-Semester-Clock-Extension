@@ -7,6 +7,7 @@
       <div
         class="tab-middle-content-message"
       >{{this.userName}}님, {{this.greetingMessages[this.INDEXNUM].message}}</div>
+      <div class="tab-middle-content-update" @click="this.removeUserInfo">이름/학번 수정하기</div>
     </div>
 
     <div class="tab-middle-content" v-else-if="this.isInput === undefined">
@@ -91,6 +92,10 @@ export default {
         console.log("데이터가 저장됐습니다");
       });
       this.updateUserInfo();
+    },
+    removeUserInfo() {
+      chrome.storage.local.clear();
+      this.isInput = undefined;
     }
   },
   created() {
