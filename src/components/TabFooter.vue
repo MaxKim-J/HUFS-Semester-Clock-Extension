@@ -63,6 +63,7 @@ export default {
       });
     },
     fileToData() {
+      console.log(event.target.files[0]);
       this.handleFileUpload().then(data => {
         this.backgroundImgFile = data;
         this.$emit("upload", this.backgroundImgFile);

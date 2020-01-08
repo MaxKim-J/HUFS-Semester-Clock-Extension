@@ -1,8 +1,5 @@
 <template>
-  <div class="tab">
-    <div class="background">
-      <img :src="`${backgroundImg}`" />
-    </div>
+  <div class="tab" :style="{'background-image' : 'url('+backgroundImg+')'}">
     <div class="tab-main">
       <tab-clock></tab-clock>
       <tab-middle></tab-middle>
@@ -42,10 +39,8 @@ export default {
 <style lang="scss">
 * {
   font-size: 20px;
-
   margin: 0;
   padding: 0;
-
   a,
   a:hover,
   a:active {
@@ -54,7 +49,12 @@ export default {
   }
 }
 
-img {
-  width: 500px;
+.tab {
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  // background-size: 100% 110%;
 }
 </style>
