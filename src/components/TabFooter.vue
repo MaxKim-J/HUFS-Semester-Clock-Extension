@@ -3,15 +3,25 @@
     <div class="tab-footer-boxes">
       <div class="tab-footer-box-wrap tab-footer-box-left-wrap">
         <div class="tab-footer-box tab-footer-box-left" v-if="this.imgUpdateIsShowing">
-          <div class="tab-footer-box-imgupdate">
-            <div>이미지 수정</div>
-            <div>이미지를 찾아보세요</div>
-            <input type="file" />
+          <div class="tab-side-box">
+            <div class="tab-side-box-title">배경화면 바꾸기</div>
+            <div class="tab-side-box-content">사진 업로드</div>
+            <input type="file" @change="fileToData" />
           </div>
         </div>
       </div>
       <div class="tab-footer-box-wrap tab-footer-box-right-wrap">
-        <div class="tab-footer-box tab-footer-box-right" v-if="this.developerIsShowing">나 김종혁이요!</div>
+        <div class="tab-footer-box tab-footer-box-right" v-if="this.developerIsShowing">
+          <div class="tab-side-box">
+            <div class="tab-side-box-title">개발자 소개</div>
+            <div class="tab-side-box-content">서울캠에서 융소를 이중하는 학생입니다</div>
+            <div class="tab-side-box-content">
+              <a href="https://github.com/MaxKim-J/hufs-semester-clock-extension">깃헙 레포</a>
+              <div>모든 종류의 커밋 환영합니다!</div>
+            </div>
+            <div class="tab-footer-content">이메일 : hwaseen@gmail.com</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="tab-footer-contents">
@@ -26,20 +36,37 @@
 </template>
 
 <script>
+import TabImgChange from "./TabImgChange";
+import "../../sidePage.scss";
+
 export default {
+  components: {},
   data() {
     return {
       imgUpdateIsShowing: false,
-      developerIsShowing: false
+      developerIsShowing: false,
+      backgroundImgFile: "없음"
     };
   },
   methods: {
     showImgUpdate() {
       this.imgUpdateIsShowing = !this.imgUpdateIsShowing;
-      console.log(this.imgUpdateIsShowing);
     },
     showDeveloper() {
       this.developerIsShowing = !this.developerIsShowing;
+    },
+    handleFileUpload() {
+      return new Promise((resolve, reject) => {
+        let fileReader = new FileReader();
+        fileReader.readAsDataURL(event.target.files[0]);
+        fileReader.onload = () => resolve(fileReader.result);
+      });
+    },
+    fileToData() {
+      this.handleFileUpload().then(data => {
+        this.backgroundImgFile = data;
+        this.$emit("upload", this.backgroundImgFile);
+      });
     }
   }
 };
@@ -57,11 +84,14 @@ export default {
       width: 50%;
       z-index: 10;
       display: flex;
-    }
-    .tab-footer-box {
-      width: 500px;
-      height: 150px;
-      background-color: grey;
+      .tab-footer-box {
+        width: 500px;
+        height: 150px;
+        background-color: black;
+        opacity: 0.7;
+        color: white;
+        border-radius: 5px;
+      }
     }
     .tab-footer-box-right-wrap {
       justify-content: flex-end;
@@ -76,6 +106,9 @@ export default {
         margin-bottom: 10px;
         margin-left: 20px;
       }
+    }
+    .tab-footer-box-contents {
+      margin: 10px;
     }
   }
   .tab-footer-contents {
@@ -94,6 +127,10 @@ export default {
       font-size: 16px;
       margin: 10px 20px;
       cursor: pointer;
+      transition: font-size 1s;
+    }
+    .tab-footer-content:hover {
+      font-size: 17px;
     }
   }
 }
