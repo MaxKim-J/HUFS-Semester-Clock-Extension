@@ -19,6 +19,9 @@
       "background.js"
     ]
   },
+  "web_accessible_resources": [
+    "RELATIVE_PATH_TO_RESOURCE.EXTENTION"
+  ],
   "chrome_url_overrides": {
     "newtab": "tab/tab.html"
   }

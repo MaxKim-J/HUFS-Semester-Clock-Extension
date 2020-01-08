@@ -50,7 +50,11 @@ export default {
     },
     drawBackgroundImg() {
       this.getBackgroundImg().then(data => {
-        this.backgroundImg = data.backgroundImg;
+        if (data.backgroundImg) {
+          this.backgroundImg = data.backgroundImg;
+        } else {
+          this.backgroundImg = "../img/default_image.jpg";
+        }
       });
     }
   },

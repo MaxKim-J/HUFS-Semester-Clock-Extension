@@ -112,7 +112,7 @@ if (process.env.HMR === 'true') {
   ])
 }
 
-function transformHtml (content) {
+function transformHtml(content) {
   return ejs.render(content.toString(), {
     ...process.env
   })
