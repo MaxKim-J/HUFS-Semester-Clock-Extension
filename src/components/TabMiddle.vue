@@ -94,7 +94,12 @@ export default {
       this.updateUserInfo();
     },
     removeUserInfo() {
-      chrome.storage.local.clear();
+      chrome.storage.local.remove(
+        ["userInitInput", "userName", "userFreshmanYear"],
+        function() {
+          console.log("유저 데이터를 수정합니다");
+        }
+      );
       this.isInput = undefined;
     }
   },
