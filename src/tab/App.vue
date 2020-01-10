@@ -1,47 +1,88 @@
 <template>
-  <div class="tab">
+  <div class="tab" :style="{'background-image' : 'url('+backgroundImg+')'}">
     <div class="tab-main">
       <tab-clock></tab-clock>
       <tab-middle></tab-middle>
       <tab-hotlinks></tab-hotlinks>
-    </div>
-    <div class="background">
-      <img src="http://ppcdn.500px.org/75319705/1991f76c0c6a91ae1d23eb94ac5c7a9f7e79c480/2048.jpg" />
+      <tab-footer @upload="updateBackgroundImg"></tab-footer>
     </div>
   </div>
 </template>
 
 <script>
-import TabClock from '../components/TabClock.vue';
-import TabMiddle from '../components/TabMiddle.vue';
-import TabHotlinks from '../components/TabHotlinks.vue';
+import TabClock from "../components/TabClock.vue";
+import TabMiddle from "../components/TabMiddle.vue";
+import TabHotlinks from "../components/TabHotlinks.vue";
+import TabFooter from "../components/TabFooter.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     TabClock,
     TabMiddle,
-    TabHotlinks
+    TabHotlinks,
+    TabFooter
+  },
+  data() {
+    return {
+      backgroundImg: ""
+    };
+  },
+  methods: {
+    updateBackgroundImg(imgFile) {
+      this.backgroundImg = imgFile;
+      this.saveBackgroundImg();
+    },
+    saveBackgroundImg() {
+      chrome.storage.local.set(
+        { backgroundImg: this.backgroundImg },
+        function() {
+          console.log("배경화면 이미지가 저장됐습니다");
+        }
+      );
+    },
+    getBackgroundImg() {
+      return new Promise(function(resolve, reject) {
+        chrome.storage.local.get(["backgroundImg"], function(result) {
+          resolve(result);
+        });
+      });
+    },
+    drawBackgroundImg() {
+      this.getBackgroundImg().then(data => {
+        if (data.backgroundImg) {
+          this.backgroundImg = data.backgroundImg;
+        } else {
+          this.backgroundImg = "../img/default_image.jpg";
+        }
+      });
+    }
+  },
+  created() {
+    this.drawBackgroundImg();
   }
-}
+};
 </script>
 
 <style lang="scss">
 * {
   font-size: 20px;
-
   margin: 0;
   padding: 0;
-
   a,
   a:hover,
   a:active {
     text-decoration: none;
-    color: black;
+    color: white;
   }
 }
 
-img {
-  width: 500px;
+.tab {
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  // background-size: 100% 110%;
 }
 </style>
