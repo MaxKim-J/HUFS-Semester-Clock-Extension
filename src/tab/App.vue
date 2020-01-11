@@ -100,7 +100,7 @@ export default {
   }
   .tab-main {
     text-align: center;
-    margin-top: 230px;
+    margin-top: 250px;
     z-index: 40;
   }
 }
