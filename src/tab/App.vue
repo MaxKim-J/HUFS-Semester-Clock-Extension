@@ -1,6 +1,7 @@
 <template>
   <div class="tab" :style="{'background-image' : 'url('+backgroundImg+')'}">
     <div class="tab-main">
+      <tab-header></tab-header>
       <tab-clock></tab-clock>
       <tab-middle></tab-middle>
       <tab-hotlinks></tab-hotlinks>
@@ -14,6 +15,7 @@ import TabClock from "../components/TabClock.vue";
 import TabMiddle from "../components/TabMiddle.vue";
 import TabHotlinks from "../components/TabHotlinks.vue";
 import TabFooter from "../components/TabFooter.vue";
+import TabHeader from "../components/TabHeader.vue";
 
 export default {
   name: "App",
@@ -21,7 +23,8 @@ export default {
     TabClock,
     TabMiddle,
     TabHotlinks,
-    TabFooter
+    TabFooter,
+    TabHeader
   },
   data() {
     return {
@@ -69,6 +72,7 @@ export default {
   font-size: 20px;
   margin: 0;
   padding: 0;
+  color: white;
   a,
   a:hover,
   a:active {
