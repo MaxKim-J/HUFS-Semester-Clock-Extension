@@ -37,6 +37,7 @@ export default {
       width: 33%;
       .tab-header-content-title {
         font-weight: 700;
+        margin: 10px 0px;
       }
     }
     .tab-header-contents-left {

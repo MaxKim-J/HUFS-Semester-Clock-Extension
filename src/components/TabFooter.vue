@@ -37,7 +37,6 @@
 </template>
 
 <script>
-import TabImgChange from "./TabImgChange";
 import "../../sidePage.scss";
 
 export default {

@@ -4,9 +4,19 @@
       <div
         class="tab-clock-main-title"
       >{{this.semesterInfo.id}}학기 {{this.semesterInfo.act}}({{this.semesterInfo.due | moment("YY년 MM월 DD일")}})까지</div>
-      <div
-        class="tab-clock-main-contents"
-      >{{ this.daysCalculated }}일 {{ this.hoursCalculated }}시간 {{ this.minutesCalculated }}분 {{ this.secondsCalculated }}초</div>
+      <div class="tab-clock-main-contents">
+        <span class="tab-clock-main-contents-time">{{ this.daysCalculated }}</span>
+        <span class="tab-clock-main-contents-figure">일</span>
+
+        <span class="tab-clock-main-contents-time">{{ this.hoursCalculated }}</span>
+        <span class="tab-clock-main-contents-figure">시간</span>
+
+        <span class="tab-clock-main-contents-time">{{ this.minutesCalculated }}</span>
+        <span class="tab-clock-main-contents-figure">분</span>
+
+        <span class="tab-clock-main-contents-time">{{ this.secondsCalculated }}</span>
+        <span class="tab-clock-main-contents-figure">초</span>
+      </div>
       <div class="tab-clock-main-title">남았습니다</div>
       <div
         class="tab-clock-main-btn"
@@ -99,4 +109,20 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.tab-clock-main {
+  margin-bottom: 20px;
+  .tab-clock-main-contents {
+    .tab-clock-main-contents-time {
+      font-size: 90px;
+    }
+    .tab-clock-main-contents-figure {
+      font-size: 25px;
+      margin-right: 15px;
+    }
+  }
+}
+.tab-clock-info {
+  margin-bottom: 20px;
+}
+</style>

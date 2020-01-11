@@ -21,5 +21,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
+.tab-hotlinks {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  .tab-hotlinks-link {
+    margin: 0px 20px;
+    font-size: 14px;
+  }
+}
 </style>
