@@ -95,7 +95,7 @@ export default {
   .tab-background {
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.35);
     position: absolute;
   }
   .tab-main {
