@@ -2,43 +2,40 @@
   <div class="tab-header">
     <div class="tab-header-contents">
       <div class="tab-header-contents-left">
-        <div class="tab-header-content" @click="this.showCafeteria">학식</div>
-        <div class="tab-header-content" @click="this.showEclass">이클래스</div>
+        <div
+          class="tab-header-content"
+          :class="[this.cafeteriaIsShowing ? 'tab-header-content-checked' : '']"
+          @click="this.showCafeteria"
+        >학식</div>
+        <div
+          class="tab-header-content"
+          :class="[this.eclassIsShowing ? 'tab-header-content-checked' : '']"
+          @click="this.showEclass"
+        >이클래스</div>
       </div>
       <div class="tab-header-contents-center">
         <div class="tab-header-content-title">외대 종강시계</div>
       </div>
       <div class="tab-header-contents-right">
-        <div class="tab-header-content" @click="this.showWeather">이문동날씨</div>
+        <div
+          class="tab-header-content"
+          :class="[this.weatherIsShowing ? 'tab-header-content-checked' : '']"
+          @click="this.showWeather"
+        >이문동 날씨</div>
       </div>
     </div>
-
     <div class="tab-header-boxes">
       <div class="tab-header-box-wrap tab-header-box-left-wrap">
         <div class="tab-header-box tab-header-box-left" v-if="this.cafeteriaIsShowing">
-          <div class="tab-side-box">
-            <div class="tab-side-box-title">학식</div>
-            <div class="tab-side-box-content">학식 연동 기능은</div>
-            <div class="tab-side-box-content">준비중입니다</div>
-          </div>
+          <tab-cafeteria></tab-cafeteria>
         </div>
-
         <div class="tab-header-box tab-header-box-left" v-if="this.eclassIsShowing">
-          <div class="tab-side-box">
-            <div class="tab-side-box-title">이클래스</div>
-            <div class="tab-side-box-content">이클래스 연동 기능은</div>
-            <div class="tab-side-box-content">준비중입니다</div>
-          </div>
+          <tab-eclass></tab-eclass>
         </div>
       </div>
-
       <div class="tab-header-box-wrap tab-header-box-right-wrap">
         <div class="tab-header-box tab-header-box-right" v-if="this.weatherIsShowing">
-          <div class="tab-side-box">
-            <div class="tab-side-box-title">날씨</div>
-            <div class="tab-side-box-content">이문동 날씨와 미세먼지!</div>
-            <div class="tab-side-box-content">는 준비중</div>
-          </div>
+          <tab-weather></tab-weather>
         </div>
       </div>
     </div>
@@ -47,9 +44,17 @@
 
 <script>
 import { GREETINGS } from "../utils/GreetingsMessage.js";
+import TabWeather from "../components/sidepages/TabWeather";
+import TabCafeteria from "../components/sidepages/TabCafeteria";
+import TabEclass from "../components/sidepages/TabEclass";
 
 export default {
   name: "tabHeader",
+  components: {
+    TabWeather,
+    TabCafeteria,
+    TabEclass
+  },
   data() {
     return {
       weatherIsShowing: false,
@@ -60,12 +65,16 @@ export default {
   methods: {
     showEclass() {
       this.eclassIsShowing = !this.eclassIsShowing;
+      this.weatherIsShowing = false;
     },
     showCafeteria() {
       this.cafeteriaIsShowing = !this.cafeteriaIsShowing;
+      this.weatherIsShowing = false;
     },
     showWeather() {
       this.weatherIsShowing = !this.weatherIsShowing;
+      this.cafeteriaIsShowing = false;
+      this.eclassIsShowing = false;
     }
   }
 };
@@ -81,13 +90,9 @@ export default {
     display: flex;
     .tab-header-box-wrap {
       width: 50%;
-      z-index: 10;
       display: flex;
       .tab-header-box {
-        width: 500px;
-        height: 150px;
-        background-color: black;
-        opacity: 0.7;
+        background-color: rgba(0, 0, 0, 0.7);
         color: white;
         border-radius: 5px;
       }
@@ -105,6 +110,7 @@ export default {
       .tab-header-box-left {
         margin-bottom: 10px;
         margin-left: 20px;
+        width: 500px;
       }
     }
     .tab-header-box-contents {
@@ -136,10 +142,13 @@ export default {
       font-size: 16px;
       margin: 10px 20px;
       cursor: pointer;
-      transition: font-size 1s;
+      opacity: 0.7;
+    }
+    .tab-header-content-checked {
+      opacity: 1;
     }
     .tab-header-content:hover {
-      font-size: 17px;
+      opacity: 1;
     }
   }
 }

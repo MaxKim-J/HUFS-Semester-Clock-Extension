@@ -1,13 +1,13 @@
 <template>
   <div class="tab" :style="{'background-image' : 'url('+backgroundImg+')'}">
     <div class="tab-background"></div>
-    <tab-header></tab-header>
+    <tab-header class="tab-header"></tab-header>
     <div class="tab-main">
       <tab-clock></tab-clock>
       <tab-middle></tab-middle>
       <tab-hotlinks></tab-hotlinks>
     </div>
-    <tab-footer @upload="updateBackgroundImg"></tab-footer>
+    <tab-footer class="tab-footer" @upload="updateBackgroundImg"></tab-footer>
   </div>
 </template>
 
@@ -98,10 +98,16 @@ export default {
     background-color: rgba(0, 0, 0, 0.35);
     position: absolute;
   }
+  .tab-header {
+    z-index: 2;
+  }
   .tab-main {
     text-align: center;
     margin-top: 250px;
-    z-index: 40;
+    z-index: 1;
+  }
+  .tab-footer {
+    z-index: 2;
   }
 }
 </style>
