@@ -17,6 +17,7 @@ import TabMiddle from "../components/TabMiddle.vue";
 import TabHotlinks from "../components/TabHotlinks.vue";
 import TabFooter from "../components/TabFooter.vue";
 import TabHeader from "../components/TabHeader.vue";
+import "../style/initialize.scss";
 
 export default {
   name: "App",
@@ -69,26 +70,12 @@ export default {
 </script>
 
 <style lang="scss">
-* {
-  font-size: 20px;
-  margin: 0;
-  padding: 0;
-  color: white;
-  a,
-  a:hover,
-  a:active {
-    text-decoration: none;
-    color: white;
-  }
-}
-
 .tab {
   width: 100vw;
   height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  // background-size: 100% 110%;
   display: flex;
   flex-direction: column;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.77);
