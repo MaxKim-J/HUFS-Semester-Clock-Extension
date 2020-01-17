@@ -17,17 +17,16 @@
         <span class="tab-clock-main-contents-time">{{ this.secondsCalculated }}</span>
         <span class="tab-clock-main-contents-figure">초</span>
       </div>
-      <div class="tab-clock-main-title">남았습니다</div>
       <div
         class="tab-clock-main-btn"
         v-if="this.drawSeason === false"
         @click="this.changeSeasonalSemester"
-      >계절학기 종강까지는?</div>
+      >계절학기 종강까지</div>
       <div
         class="tab-clock-main-btn"
         v-else-if="this.drawSeason === true"
         @click="this.changeNextSemester"
-      >다음학기 개강까지는?</div>
+      >다음학기 개강까지</div>
     </div>
     <div class="tab-clock-info">현재시간 : {{ this.today | moment("YYYY년 MM월 DD일 h:mm a") }}</div>
   </div>
@@ -121,6 +120,12 @@ export default {
       margin-right: 15px;
     }
   }
+}
+
+.tab-clock-main-btn {
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: underline;
 }
 .tab-clock-info {
   margin-bottom: 20px;
