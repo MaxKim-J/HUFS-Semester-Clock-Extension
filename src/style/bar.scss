@@ -1,0 +1,84 @@
+@import "global.scss";
+
+.tab-bar {
+  width: 100%;
+  position: fixed;
+  .tab-bar-boxes {
+    width: 100%;
+    display: flex;
+    .tab-bar-box-wrap {
+      width: 50%;
+      display: flex;
+      .tab-bar-box {
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        border-radius: 5px;
+      }
+    }
+    .tab-bar-box-right-wrap {
+      justify-content: flex-end;
+      .tab-bar-box-right {
+        margin-bottom: 10px;
+        margin-right: 20px;
+      }
+    }
+    .tab-bar-box-left-wrap {
+      justify-content: flex-start;
+      flex-direction: column;
+      .tab-bar-box-left {
+        margin-bottom: 10px;
+        margin-left: 20px;
+        width:450px;
+      }
+    }
+    .tab-bar-box-contents {
+      margin: 10px;
+    }
+  }
+  .tab-bar-contents {
+    display: flex;
+    width: 100%;
+    .tab-bar-contents-center {
+      display: flex;
+      justify-content: center;
+      width: 33.3%;
+      .tab-bar-content-title {
+        font-weight: 700;
+        margin: 10px 0px;
+      }
+      .tab-bar-content-schedule{
+        margin:10px 0px;
+        font-size:$small;
+        opacity: 0.7;
+        cursor: pointer;
+        transition: opacity 0.4s, margin 0.4s;
+      }
+      .tab-bar-content-schedule:hover{
+        margin:0;
+        opacity: 1;
+      }
+    }
+    .tab-bar-contents-left {
+      display: flex;
+      width: 33.3%;
+    }
+    .tab-bar-contents-right {
+      display: flex;
+      width: 33.3%;
+      justify-content: flex-end;
+    }
+    .tab-bar-content {
+      font-size: $small;
+      margin: 10px 20px;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.4s;
+    }
+    .tab-bar-content-checked {
+      opacity: 1;
+    }
+    .tab-bar-content:hover {
+      opacity: 1;
+    }
+  }
+}

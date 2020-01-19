@@ -7,20 +7,30 @@
       <div
         class="tab-middle-content-message"
       >{{this.userName}}님, {{this.greetingMessages[this.INDEXNUM].message}}</div>
-      <div class="tab-middle-content-update" @click="this.removeUserInfo">이름/학번 수정하기</div>
+      <div class="tab-middle-content-updatemessage-wrapper">
+        <div class="tab-middle-content-updatemessage" @click="this.removeUserInfo">이름/학번 수정하기</div>
+      </div>
     </div>
 
     <div class="tab-middle-content" v-else-if="this.isInput === undefined">
-      <div class="tab-middle-content-message">학번과 이름을 입력하시면 입학하신지 몇 일 째인지 볼 수 있습니다</div>
-      <div class="tab-tabinit-name">
-        <input v-model="userName" placeholder="학우님의 이름을 입력해주세요!" />
+      <div class="tab-middle-content-update-message">학번과 이름을 입력하시면 입학하신지 몇 일 째인지 볼 수 있습니다</div>
+      <div class="tab-middle-content-update">
+        <div class="tab-middle-content-update-input">
+          <input
+            class="tab-middle-content-update-name"
+            v-model="userName"
+            placeholder="학우님의 이름"
+            autofocus
+          />
+        </div>
+        <div class="tab-middle-content-update-input">
+          <select v-model="userFreshmanYear" class="tab-middle-content-update-freshman" required>
+            <option value selected hidden>학번</option>
+            <option v-for="option in this.freshmanYearOptions" :key="option.value">{{ option.text }}</option>
+          </select>
+        </div>
       </div>
-      <div class="tab-tabinit-freshman">
-        <select v-model="userFreshmanYear">
-          <option :value="null" disabled selected hidden>학번</option>
-          <option v-for="option in this.freshmanYearOptions" :key="option.value">{{ option.text }}</option>
-        </select>
-      </div>
+
       <div class="tab-tabinit-startbtn" @click="this.userInputValid" style="cursor:pointer">입력하기</div>
     </div>
   </div>
@@ -94,7 +104,12 @@ export default {
       this.updateUserInfo();
     },
     removeUserInfo() {
-      chrome.storage.local.clear();
+      chrome.storage.local.remove(
+        ["userInitInput", "userName", "userFreshmanYear"],
+        function() {
+          console.log("유저 데이터를 수정합니다");
+        }
+      );
       this.isInput = undefined;
     }
   },
@@ -105,5 +120,55 @@ export default {
 };
 </script>
 
+
 <style scoped lang='scss'>
+@import "../style/global.scss";
+
+.tab-middle {
+  margin-bottom: 20px;
+  .tab-middle-content {
+    .tab-middle-content-message {
+      font-size: $xlarge;
+    }
+    .tab-middle-content-updatemessage-wrapper {
+      display: flex;
+      justify-content: center;
+      .tab-middle-content-updatemessage {
+        width: 140px;
+        font-size: $small;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+  .tab-middle-content-update {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0px;
+    .tab-middle-content-update-input {
+      margin-right: 10px;
+      color: black;
+      input::placeholder {
+        color: white;
+        font-weight: 700;
+      }
+      .tab-middle-content-update-name {
+        background: none;
+        outline: none;
+        border: none;
+        border-bottom: 2px solid white;
+        color: white;
+        font-weight: 500;
+      }
+      .tab-middle-content-update-freshman {
+        border: 2px solid white;
+        background: none;
+        width: 80px;
+        option {
+          color: black;
+        }
+      }
+    }
+  }
+}
 </style>

@@ -4,21 +4,27 @@
       <div
         class="tab-clock-main-title"
       >{{this.semesterInfo.id}}학기 {{this.semesterInfo.act}}({{this.semesterInfo.due | moment("YY년 MM월 DD일")}})까지</div>
-      <div
-        class="tab-clock-main-contents"
-      >{{ this.daysCalculated }}일 {{ this.hoursCalculated }}시간 {{ this.minutesCalculated }}분 {{ this.secondsCalculated }}초</div>
-      <div class="tab-clock-main-title">남았습니다</div>
-      <div
-        class="tab-clock-main-btn"
-        v-if="this.drawSeason === false"
-        @click="this.changeSeasonalSemester"
-      >계절학기 종강까지는?</div>
-      <div
-        class="tab-clock-main-btn"
-        v-else-if="this.drawSeason === true"
-        @click="this.changeNextSemester"
-      >다음학기 개강까지는?</div>
+      <div class="tab-clock-main-contents">
+        <span class="tab-clock-main-contents-time">{{ this.daysCalculated }}</span>
+        <span class="tab-clock-main-contents-figure">일</span>
+
+        <span class="tab-clock-main-contents-time">{{ this.hoursCalculated }}</span>
+        <span class="tab-clock-main-contents-figure">시간</span>
+
+        <span class="tab-clock-main-contents-time">{{ this.minutesCalculated }}</span>
+        <span class="tab-clock-main-contents-figure">분</span>
+
+        <span class="tab-clock-main-contents-time">{{ this.secondsCalculated }}</span>
+        <span class="tab-clock-main-contents-figure">초</span>
+      </div>
+      <div class="tab-clock-main-btn-wrapper" v-if="this.drawSeason === false">
+        <div class="tab-clock-main-btn" @click="this.changeSeasonalSemester">계절학기 종강까지</div>
+      </div>
+      <div class="tab-clock-main-btn-wrapper" v-else-if="this.drawSeason === true">
+        <div class="tab-clock-main-btn" @click="this.changeNextSemester">다음학기 개강까지</div>
+      </div>
     </div>
+
     <div class="tab-clock-info">현재시간 : {{ this.today | moment("YYYY년 MM월 DD일 h:mm a") }}</div>
   </div>
 </template>
@@ -99,4 +105,33 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import "../style/global.scss";
+
+.tab-clock-main {
+  margin-bottom: 20px;
+  .tab-clock-main-contents {
+    .tab-clock-main-contents-time {
+      font-size: $time-size;
+    }
+    .tab-clock-main-contents-figure {
+      font-size: $large;
+      margin-right: 15px;
+    }
+  }
+}
+
+.tab-clock-main-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  .tab-clock-main-btn {
+    width: 140px;
+    cursor: pointer;
+    font-size: $small;
+    text-decoration: underline;
+  }
+}
+.tab-clock-info {
+  margin-bottom: 20px;
+}
+</style>

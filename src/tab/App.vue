@@ -1,11 +1,13 @@
 <template>
   <div class="tab" :style="{'background-image' : 'url('+backgroundImg+')'}">
+    <div class="tab-background"></div>
+    <tab-header class="tab-header"></tab-header>
     <div class="tab-main">
       <tab-clock></tab-clock>
       <tab-middle></tab-middle>
       <tab-hotlinks></tab-hotlinks>
-      <tab-footer @upload="updateBackgroundImg"></tab-footer>
     </div>
+    <tab-footer class="tab-footer" @upload="updateBackgroundImg"></tab-footer>
   </div>
 </template>
 
@@ -14,6 +16,8 @@ import TabClock from "../components/TabClock.vue";
 import TabMiddle from "../components/TabMiddle.vue";
 import TabHotlinks from "../components/TabHotlinks.vue";
 import TabFooter from "../components/TabFooter.vue";
+import TabHeader from "../components/TabHeader.vue";
+import "../style/initialize.scss";
 
 export default {
   name: "App",
@@ -21,7 +25,8 @@ export default {
     TabClock,
     TabMiddle,
     TabHotlinks,
-    TabFooter
+    TabFooter,
+    TabHeader
   },
   data() {
     return {
@@ -65,24 +70,31 @@ export default {
 </script>
 
 <style lang="scss">
-* {
-  font-size: 20px;
-  margin: 0;
-  padding: 0;
-  a,
-  a:hover,
-  a:active {
-    text-decoration: none;
-    color: white;
-  }
-}
-
 .tab {
   width: 100vw;
   height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  // background-size: 100% 110%;
+  display: flex;
+  flex-direction: column;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.77);
+  .tab-background {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.35);
+    position: absolute;
+  }
+  .tab-header {
+    z-index: 2;
+  }
+  .tab-main {
+    text-align: center;
+    margin-top: 250px;
+    z-index: 1;
+  }
+  .tab-footer {
+    z-index: 2;
+  }
 }
 </style>
