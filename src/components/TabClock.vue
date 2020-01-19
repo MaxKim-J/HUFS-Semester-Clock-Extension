@@ -106,14 +106,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../style/global.scss";
+
 .tab-clock-main {
   margin-bottom: 20px;
   .tab-clock-main-contents {
     .tab-clock-main-contents-time {
-      font-size: 90px;
+      font-size: $time-size;
     }
     .tab-clock-main-contents-figure {
-      font-size: 25px;
+      font-size: $large;
       margin-right: 15px;
     }
   }
@@ -125,7 +127,7 @@ export default {
   .tab-clock-main-btn {
     width: 140px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: $small;
     text-decoration: underline;
   }
 }

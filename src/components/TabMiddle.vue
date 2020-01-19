@@ -122,18 +122,20 @@ export default {
 
 
 <style scoped lang='scss'>
+@import "../style/global.scss";
+
 .tab-middle {
   margin-bottom: 20px;
   .tab-middle-content {
     .tab-middle-content-message {
-      font-size: 30px;
+      font-size: $xlarge;
     }
     .tab-middle-content-updatemessage-wrapper {
       display: flex;
       justify-content: center;
       .tab-middle-content-updatemessage {
         width: 140px;
-        font-size: 16px;
+        font-size: $small;
         text-decoration: underline;
         cursor: pointer;
       }

@@ -23,17 +23,19 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../style/global.scss";
+
 .tab-hotlinks {
   display: flex;
   justify-content: center;
   margin-top: 40px;
   .tab-hotlinks-icon {
-    font-size: 30px;
+    font-size: $xlarge;
     margin-bottom: 10px;
   }
   .tab-hotlinks-link-title {
     margin: 0px 20px;
-    font-size: 14px;
+    font-size: $xsmall;
   }
 }
 </style>
