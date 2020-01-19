@@ -1,7 +1,7 @@
 <template>
   <div class="tab-bar tab-footer">
     <div class="tab-bar-boxes">
-      <div class="tab-bar-box-wrap tab-footer-box-left-wrap">
+      <div class="tab-bar-box-wrap tab-bar-box-left-wrap">
         <div class="tab-bar-box tab-bar-box-left" v-if="this.imgUpdateIsShowing">
           <tab-img-update @upload="this.handleUpload"></tab-img-update>
         </div>
@@ -20,9 +20,7 @@
           @click="this.showImgUpdate"
         >배경화면 수정</div>
       </div>
-      <div class="tab-bar-contents-center">
-        <div class="tab-bar-content-schedule">학사일정고고</div>
-      </div>
+      <div class="tab-bar-contents-center"></div>
       <div class="tab-bar-contents-right">
         <div
           class="tab-bar-content"

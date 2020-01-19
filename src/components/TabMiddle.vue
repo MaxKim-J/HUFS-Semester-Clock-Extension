@@ -7,7 +7,9 @@
       <div
         class="tab-middle-content-message"
       >{{this.userName}}님, {{this.greetingMessages[this.INDEXNUM].message}}</div>
-      <div class="tab-middle-content-updatemessage" @click="this.removeUserInfo">이름/학번 수정하기</div>
+      <div class="tab-middle-content-updatemessage-wrapper">
+        <div class="tab-middle-content-updatemessage" @click="this.removeUserInfo">이름/학번 수정하기</div>
+      </div>
     </div>
 
     <div class="tab-middle-content" v-else-if="this.isInput === undefined">
@@ -126,10 +128,15 @@ export default {
     .tab-middle-content-message {
       font-size: 30px;
     }
-    .tab-middle-content-updatemessage {
-      font-size: 16px;
-      text-decoration: underline;
-      cursor: pointer;
+    .tab-middle-content-updatemessage-wrapper {
+      display: flex;
+      justify-content: center;
+      .tab-middle-content-updatemessage {
+        width: 140px;
+        font-size: 16px;
+        text-decoration: underline;
+        cursor: pointer;
+      }
     }
   }
   .tab-middle-content-update {

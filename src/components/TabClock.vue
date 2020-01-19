@@ -17,17 +17,14 @@
         <span class="tab-clock-main-contents-time">{{ this.secondsCalculated }}</span>
         <span class="tab-clock-main-contents-figure">초</span>
       </div>
-      <div
-        class="tab-clock-main-btn"
-        v-if="this.drawSeason === false"
-        @click="this.changeSeasonalSemester"
-      >계절학기 종강까지</div>
-      <div
-        class="tab-clock-main-btn"
-        v-else-if="this.drawSeason === true"
-        @click="this.changeNextSemester"
-      >다음학기 개강까지</div>
+      <div class="tab-clock-main-btn-wrapper" v-if="this.drawSeason === false">
+        <div class="tab-clock-main-btn" @click="this.changeSeasonalSemester">계절학기 종강까지</div>
+      </div>
+      <div class="tab-clock-main-btn-wrapper" v-else-if="this.drawSeason === true">
+        <div class="tab-clock-main-btn" @click="this.changeNextSemester">다음학기 개강까지</div>
+      </div>
     </div>
+
     <div class="tab-clock-info">현재시간 : {{ this.today | moment("YYYY년 MM월 DD일 h:mm a") }}</div>
   </div>
 </template>
@@ -122,10 +119,15 @@ export default {
   }
 }
 
-.tab-clock-main-btn {
-  cursor: pointer;
-  font-size: 16px;
-  text-decoration: underline;
+.tab-clock-main-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  .tab-clock-main-btn {
+    width: 140px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: underline;
+  }
 }
 .tab-clock-info {
   margin-bottom: 20px;
