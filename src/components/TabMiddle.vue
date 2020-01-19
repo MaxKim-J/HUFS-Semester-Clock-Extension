@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { GREETINGS } from "../utils/GreetingsMessage.js";
+import { greetingValid } from "../utils/GreetingsMessageLogic.js";
 import { FRESHMANYEARS } from "../utils/FreshmanYears.js";
 import { getDistanceFreshman } from "../utils/TimeDistanceCalculator.js";
 
@@ -45,7 +45,7 @@ export default {
   name: "tabMiddle",
   data() {
     return {
-      greetingMessages: GREETINGS,
+      greetingMessages: null,
       freshmanYearOptions: FRESHMANYEARS,
       userFreshmanYear: 0,
       userName: "",
@@ -61,6 +61,11 @@ export default {
   methods: {
     getRandomArrayIndex(arr) {
       return Math.floor(Math.random() * arr.length);
+    },
+    getGreetingMessage() {
+      const current = new Date().getHours();
+      this.greetingMessages = greetingValid(current);
+      this.INDEXNUM = this.getRandomArrayIndex(this.greetingMessages);
     },
     getUserInput() {
       return new Promise(function(resolve, reject) {
@@ -114,8 +119,8 @@ export default {
     }
   },
   created() {
-    this.INDEXNUM = this.getRandomArrayIndex(this.greetingMessages);
     this.updateUserInfo();
+    this.getGreetingMessage();
   }
 };
 </script>
@@ -133,6 +138,7 @@ export default {
     .tab-middle-content-updatemessage-wrapper {
       display: flex;
       justify-content: center;
+      margin-top: 20px;
       .tab-middle-content-updatemessage {
         width: 140px;
         font-size: $small;

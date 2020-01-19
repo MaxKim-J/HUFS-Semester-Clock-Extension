@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import { GREETINGS } from "../utils/GreetingsMessage.js";
 import TabWeather from "../components/sidepages/TabWeather";
 import TabCafeteria from "../components/sidepages/TabCafeteria";
 import TabEclass from "../components/sidepages/TabEclass";
