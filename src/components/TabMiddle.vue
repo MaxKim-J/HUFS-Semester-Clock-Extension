@@ -63,8 +63,8 @@ export default {
       return Math.floor(Math.random() * arr.length);
     },
     getGreetingMessage() {
-      const current = new Date().getHours();
-      this.greetingMessages = greetingValid(current);
+      const currentHour = new Date().getHours();
+      this.greetingMessages = greetingValid(currentHour);
       this.INDEXNUM = this.getRandomArrayIndex(this.greetingMessages);
     },
     getUserInput() {
