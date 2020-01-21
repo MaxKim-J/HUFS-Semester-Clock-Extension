@@ -3,7 +3,7 @@
     <div class="tab-bar-boxes">
       <div class="tab-bar-box-wrap tab-bar-box-left-wrap">
         <div class="tab-bar-box tab-bar-box-left" v-if="this.imgUpdateIsShowing">
-          <tab-img-update @upload="this.handleUpload"></tab-img-update>
+          <tab-img-update></tab-img-update>
         </div>
       </div>
       <div class="tab-bar-box-wrap tab-bar-box-right-wrap">
@@ -56,9 +56,6 @@ export default {
     showDeveloper() {
       this.imgUpdateIsShowing = false;
       this.developerIsShowing = !this.developerIsShowing;
-    },
-    handleUpload(imgFile) {
-      this.$emit("upload", imgFile);
     }
   }
 };

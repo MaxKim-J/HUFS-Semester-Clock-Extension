@@ -7,7 +7,7 @@
       <tab-middle></tab-middle>
       <tab-hotlinks></tab-hotlinks>
     </div>
-    <tab-footer class="tab-footer" @upload="updateBackgroundImg"></tab-footer>
+    <tab-footer class="tab-footer"></tab-footer>
   </div>
 </template>
 
@@ -28,43 +28,18 @@ export default {
     TabFooter,
     TabHeader
   },
-  data() {
-    return {
-      backgroundImg: ""
-    };
+  computed: {
+    backgroundImg() {
+      return this.$store.state.userBackgroundImg;
+    }
   },
   methods: {
-    updateBackgroundImg(imgFile) {
-      this.backgroundImg = imgFile;
-      this.saveBackgroundImg();
-    },
-    saveBackgroundImg() {
-      chrome.storage.local.set(
-        { backgroundImg: this.backgroundImg },
-        function() {
-          console.log("배경화면 이미지가 저장됐습니다");
-        }
-      );
-    },
     getBackgroundImg() {
-      return new Promise(function(resolve, reject) {
-        chrome.storage.local.get(["backgroundImg"], function(result) {
-          resolve(result);
-        });
-      });
-    },
-    drawBackgroundImg() {
-      this.getBackgroundImg().then(data => {
-        if (data.backgroundImg) {
-          this.backgroundImg = data.backgroundImg;
-        } else {
-          this.backgroundImg = "../img/default_image.jpg";
-        }
-      });
+      this.$store.dispatch("getBackgroundImg");
     }
   },
   created() {
-    this.drawBackgroundImg();
+    this.getBackgroundImg();
   }
 };
 </script>
