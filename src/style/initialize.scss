@@ -1,5 +1,14 @@
+// 폰트 넷마블체 M
+@font-face {
+  font-family: 'netmarbleM'; 
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.1/netmarbleM.woff') format('woff'); 
+  font-weight: normal; 
+  font-style: normal; 
+}
+
 * {
   font-size: 20px;
+  font-family: 'netmarbleM';
   margin: 0;
   padding: 0;
   color: white;
@@ -9,3 +18,4 @@ a, a:hover, a:active {
     text-decoration: none;
     color: white;
   }
+
