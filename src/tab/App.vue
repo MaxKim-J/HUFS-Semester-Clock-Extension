@@ -1,14 +1,16 @@
 <template>
-  <div class="tab" :style="{'background-image' : 'url('+backgroundImg+')'}">
-    <div class="tab-background"></div>
-    <tab-header class="tab-header"></tab-header>
-    <div class="tab-main">
-      <tab-clock></tab-clock>
-      <tab-middle></tab-middle>
-      <tab-hotlinks></tab-hotlinks>
+  <transition name="fadeMain" v-if="mainIsShowing">
+    <div class="tab" :style="{'background-image' : 'url('+backgroundImg+')'}">
+      <div class="tab-background"></div>
+      <tab-header class="tab-header"></tab-header>
+      <div class="tab-main">
+        <tab-clock></tab-clock>
+        <tab-middle></tab-middle>
+        <tab-hotlinks></tab-hotlinks>
+      </div>
+      <tab-footer class="tab-footer"></tab-footer>
     </div>
-    <tab-footer class="tab-footer"></tab-footer>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -18,6 +20,7 @@ import TabHotlinks from "../components/TabHotlinks.vue";
 import TabFooter from "../components/TabFooter.vue";
 import TabHeader from "../components/TabHeader.vue";
 import "../style/initialize.scss";
+import "../style/defaultTransition.scss";
 
 export default {
   name: "App",
@@ -27,6 +30,11 @@ export default {
     TabHotlinks,
     TabFooter,
     TabHeader
+  },
+  data() {
+    return {
+      mainIsShowing: false
+    };
   },
   computed: {
     backgroundImg() {
@@ -40,6 +48,9 @@ export default {
   },
   created() {
     this.getBackgroundImg();
+    setInterval(() => {
+      this.mainIsShowing = true;
+    }, 300);
   }
 };
 </script>

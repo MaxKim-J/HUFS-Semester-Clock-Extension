@@ -26,17 +26,23 @@
     </div>
     <div class="tab-bar-boxes">
       <div class="tab-bar-box-wrap tab-bar-box-left-wrap">
-        <div class="tab-bar-box tab-bar-box-left" v-if="this.cafeteriaIsShowing">
-          <tab-cafeteria></tab-cafeteria>
-        </div>
-        <div class="tab-bar-box tab-bar-box-left" v-if="this.eclassIsShowing">
-          <tab-eclass></tab-eclass>
-        </div>
+        <transition name="fade">
+          <div class="tab-bar-box tab-bar-box-left" v-if="this.cafeteriaIsShowing">
+            <tab-cafeteria></tab-cafeteria>
+          </div>
+        </transition>
+        <transition name="fade">
+          <div class="tab-bar-box tab-bar-box-left" v-if="this.eclassIsShowing">
+            <tab-eclass></tab-eclass>
+          </div>
+        </transition>
       </div>
       <div class="tab-bar-box-wrap tab-bar-box-right-wrap">
-        <div class="tab-bar-box tab-bar-box-right" v-if="this.weatherIsShowing">
-          <tab-weather></tab-weather>
-        </div>
+        <transition name="fade">
+          <div class="tab-bar-box tab-bar-box-right" v-if="this.weatherIsShowing">
+            <tab-weather></tab-weather>
+          </div>
+        </transition>
       </div>
     </div>
   </div>

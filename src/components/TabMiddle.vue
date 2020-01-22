@@ -7,7 +7,6 @@
         <div class="tab-middle-content-updatemessage" @click="removeUserInfo">이름/학번 수정하기</div>
       </div>
     </div>
-
     <div class="tab-middle-content" v-else>
       <div class="tab-middle-content-update-message">학번과 이름을 입력하시면 입학하신지 몇 일 째인지 볼 수 있습니다</div>
       <div class="tab-middle-content-update">
