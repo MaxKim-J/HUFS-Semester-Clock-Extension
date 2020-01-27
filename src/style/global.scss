@@ -6,3 +6,27 @@ $medium:20px;
 $small:16px;
 $xsmall:14px;
 $tab-size-small:12px;
+
+// 반응형 스크린 사이즈
+$large-width : 1200px;
+$middle-width :720px;
+$small-width :200px;
+
+// 믹스인 함수
+@mixin large {
+	@media screen and (min-width: #{$large-width})  {
+		@content;
+	}
+}
+ 
+@mixin middle {
+	@media screen and (min-width: #{$middle-width}) and (max-width: #{$large-width}) {
+		@content;
+	}
+}
+
+@mixin small {
+	@media screen and (min-width: #{$small-width}) and (max-width: #{$middle-width}) {
+		@content;
+	}
+}

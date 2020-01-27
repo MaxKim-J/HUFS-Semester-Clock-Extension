@@ -1,14 +1,16 @@
 <template>
-  <div class="tab" :style="{'background-image' : 'url('+backgroundImg+')'}">
-    <div class="tab-background"></div>
-    <tab-header class="tab-header"></tab-header>
-    <div class="tab-main">
-      <tab-clock></tab-clock>
-      <tab-middle></tab-middle>
-      <tab-hotlinks></tab-hotlinks>
+  <transition name="fadeMain" v-if="mainIsShowing">
+    <div class="tab" :style="{'background-image' : 'url('+backgroundImg+')'}">
+      <div class="tab-background"></div>
+      <tab-header class="tab-header"></tab-header>
+      <div class="tab-main">
+        <tab-clock></tab-clock>
+        <tab-middle></tab-middle>
+        <tab-hotlinks></tab-hotlinks>
+      </div>
+      <tab-footer class="tab-footer"></tab-footer>
     </div>
-    <tab-footer class="tab-footer" @upload="updateBackgroundImg"></tab-footer>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -18,6 +20,7 @@ import TabHotlinks from "../components/TabHotlinks.vue";
 import TabFooter from "../components/TabFooter.vue";
 import TabHeader from "../components/TabHeader.vue";
 import "../style/initialize.scss";
+import "../style/defaultTransition.scss";
 
 export default {
   name: "App",
@@ -30,41 +33,24 @@ export default {
   },
   data() {
     return {
-      backgroundImg: ""
+      mainIsShowing: false
     };
   },
+  computed: {
+    backgroundImg() {
+      return this.$store.state.userBackgroundImg;
+    }
+  },
   methods: {
-    updateBackgroundImg(imgFile) {
-      this.backgroundImg = imgFile;
-      this.saveBackgroundImg();
-    },
-    saveBackgroundImg() {
-      chrome.storage.local.set(
-        { backgroundImg: this.backgroundImg },
-        function() {
-          console.log("배경화면 이미지가 저장됐습니다");
-        }
-      );
-    },
     getBackgroundImg() {
-      return new Promise(function(resolve, reject) {
-        chrome.storage.local.get(["backgroundImg"], function(result) {
-          resolve(result);
-        });
-      });
-    },
-    drawBackgroundImg() {
-      this.getBackgroundImg().then(data => {
-        if (data.backgroundImg) {
-          this.backgroundImg = data.backgroundImg;
-        } else {
-          this.backgroundImg = "../img/default_image.jpg";
-        }
-      });
+      this.$store.dispatch("getBackgroundImg");
     }
   },
   created() {
-    this.drawBackgroundImg();
+    this.getBackgroundImg();
+    setInterval(() => {
+      this.mainIsShowing = true;
+    }, 300);
   }
 };
 </script>

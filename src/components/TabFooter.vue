@@ -2,14 +2,18 @@
   <div class="tab-bar tab-footer">
     <div class="tab-bar-boxes">
       <div class="tab-bar-box-wrap tab-bar-box-left-wrap">
-        <div class="tab-bar-box tab-bar-box-left" v-if="this.imgUpdateIsShowing">
-          <tab-img-update @upload="this.handleUpload"></tab-img-update>
-        </div>
+        <transition name="fade">
+          <div class="tab-bar-box tab-bar-box-left" v-if="this.imgUpdateIsShowing">
+            <tab-img-update></tab-img-update>
+          </div>
+        </transition>
       </div>
       <div class="tab-bar-box-wrap tab-bar-box-right-wrap">
-        <div class="tab-bar-box tab-bar-box-right" v-if="this.developerIsShowing">
-          <tab-developer></tab-developer>
-        </div>
+        <transition name="fade">
+          <div class="tab-bar-box tab-bar-box-right" v-if="this.developerIsShowing">
+            <tab-developer></tab-developer>
+          </div>
+        </transition>
       </div>
     </div>
     <div class="tab-bar-contents">
@@ -36,6 +40,7 @@
 import TabDeveloper from "../components/sidepages/TabDeveloper";
 import TabImgUpdate from "../components/sidepages/TabImgUpdate";
 import "../style/bar.scss";
+import "../style/defaultTransition.scss";
 
 export default {
   components: {
@@ -56,9 +61,6 @@ export default {
     showDeveloper() {
       this.imgUpdateIsShowing = false;
       this.developerIsShowing = !this.developerIsShowing;
-    },
-    handleUpload(imgFile) {
-      this.$emit("upload", imgFile);
     }
   }
 };
