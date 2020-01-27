@@ -11,11 +11,17 @@
     "default_title": "외대 종강시계",
     "default_popup": "popup/popup.html"
   },
+  "permissions": [
+    "storage"
+  ],
   "background": {
     "scripts": [
       "background.js"
     ]
   },
+  "web_accessible_resources": [
+    "RELATIVE_PATH_TO_RESOURCE.EXTENTION"
+  ],
   "chrome_url_overrides": {
     "newtab": "tab/tab.html"
   }
