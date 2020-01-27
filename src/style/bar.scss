@@ -30,7 +30,6 @@
       .tab-bar-box-left {
         margin-bottom: 10px;
         margin-left: 20px;
-        width:450px;
       }
     }
     .tab-bar-box-contents {
@@ -81,6 +80,19 @@
     }
     .tab-bar-content:hover {
       opacity: 1;
+    }
+  }
+}
+
+@include small {
+  .tab-bar-boxes{
+    flex-direction: column;
+    .tab-bar-box-wrap {
+      flex-direction: column;
+    }
+    .tab-bar-box-right {
+      margin-bottom: 10px;
+      margin-left: 20px;
     }
   }
 }

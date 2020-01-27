@@ -6,3 +6,32 @@ $medium:20px;
 $small:16px;
 $xsmall:14px;
 $tab-size-small:12px;
+
+// 반응형
+$large-width : 1200px;
+$middle-width : 780px;
+$small-width :200px;
+
+// PC
+@mixin pc {
+	@media screen and (min-width: #{$large-width})  {
+		@content;
+	}
+}
+ 
+// 모바일
+@mixin tab {
+	@media screen and (min-width: #{$middle-width}) and (max-width: #{$large-width}) {
+		@content;
+	}
+}
+// 모바일 
+@mixin small {
+	@media screen and (min-width: #{$small-width}) and (max-width: #{$middle-width}) {
+		@content;
+	}
+}
+
+body {
+  min-width: 450px;
+}
