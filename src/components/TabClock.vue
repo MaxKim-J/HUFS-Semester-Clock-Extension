@@ -107,7 +107,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "../style/global.scss";
-
 .tab-clock-main {
   margin-bottom: 20px;
   .tab-clock-main-contents {
@@ -120,7 +119,6 @@ export default {
     }
   }
 }
-
 .tab-clock-main-btn-wrapper {
   display: flex;
   justify-content: center;
@@ -133,5 +131,11 @@ export default {
 }
 .tab-clock-info {
   margin-bottom: 20px;
+}
+
+@include small {
+  .tab-clock-main-contents-time {
+    font-size: 60px !important;
+  }
 }
 </style>
