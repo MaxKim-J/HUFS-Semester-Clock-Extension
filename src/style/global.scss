@@ -7,31 +7,26 @@ $small:16px;
 $xsmall:14px;
 $tab-size-small:12px;
 
-// 반응형
+// 반응형 스크린 사이즈
 $large-width : 1200px;
-$middle-width : 780px;
+$middle-width :680px;
 $small-width :200px;
 
-// PC
-@mixin pc {
+// 믹스인 함수
+@mixin large {
 	@media screen and (min-width: #{$large-width})  {
 		@content;
 	}
 }
  
-// 모바일
-@mixin tab {
+@mixin middle {
 	@media screen and (min-width: #{$middle-width}) and (max-width: #{$large-width}) {
 		@content;
 	}
 }
-// 모바일 
+
 @mixin small {
 	@media screen and (min-width: #{$small-width}) and (max-width: #{$middle-width}) {
 		@content;
 	}
-}
-
-body {
-  min-width: 450px;
 }

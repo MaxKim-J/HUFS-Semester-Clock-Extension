@@ -6,26 +6,24 @@
   .tab-bar-boxes {
     width: 100%;
     display: flex;
+    justify-content: space-between;
     .tab-bar-box-wrap {
-      width: 50%;
       display: flex;
       .tab-bar-box {
         background-color: rgba(0, 0, 0, 0.7);
         color: white;
         border-radius: 5px;
-        width:500px;
-        height: 175px;
+        height: 200px;
+        width: 480px;
       }
     }
     .tab-bar-box-right-wrap {
-      justify-content: flex-end;
       .tab-bar-box-right {
         margin-bottom: 10px;
         margin-right: 20px;
       }
     }
     .tab-bar-box-left-wrap {
-      justify-content: flex-start;
       flex-direction: column;
       .tab-bar-box-left {
         margin-bottom: 10px;
