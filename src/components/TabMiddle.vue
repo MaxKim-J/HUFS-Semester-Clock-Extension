@@ -89,8 +89,8 @@ export default {
       } else if (this.inputYear === undefined) {
         alert("학우님의 학번을 입력해주세요!");
       } else {
-        if (this.inputName.length > 5 || this.inputName.length < 1) {
-          alert("학우님 이름은 1자 이상부터 5자까지 가능합니다");
+        if (this.inputName.length > 10 || this.inputName.length < 1) {
+          alert("학우님 이름은 1자 이상부터 10자까지 가능합니다");
         } else {
           this.updateUserInfo();
         }
@@ -138,6 +138,7 @@ export default {
         font-weight: 500;
       }
       .tab-middle-content-update-name {
+        width: 250px;
         background: none;
         outline: none;
         border: none;
