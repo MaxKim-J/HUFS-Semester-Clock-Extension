@@ -49,7 +49,7 @@ export default {
     return {
       semesterInfo: null,
       drawSeason: null,
-      exceedSeason: true,
+      exceedSeason: false,
       today: new Date(),
       gapTime: 0
     };
@@ -73,9 +73,9 @@ export default {
       if (this.today <= CURRENT_SEMESTER_INFO.due) {
         this.semesterInfo = CURRENT_SEMESTER_INFO;
       } else if (this.today > SEASONAL_SEMESTER_INFO.due) {
-        this.exceedSeason = false;
         this.changeSemester("next");
       } else if (this.today > CURRENT_SEMESTER_INFO.due) {
+        this.exceedSeason = true;
         this.changeSemester("next");
       }
     },
