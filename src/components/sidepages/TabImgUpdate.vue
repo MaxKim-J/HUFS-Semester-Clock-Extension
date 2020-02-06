@@ -10,6 +10,7 @@
       <div class="tab-side-box-content">기본 배경화면</div>
       <span class="tab-img-update-default" @click="handleChangeImg('seoul')">서울</span>
       <span class="tab-img-update-default" @click="handleChangeImg('global')">글로벌</span>
+      <div class="tab-side-box-content-small">📷 Photo by Kihyun Lim, Sangyoung Oh</div>
     </div>
   </div>
 </template>
@@ -47,7 +48,9 @@ export default {
           backgroundImg: "../../img/default_image_seoul.jpg"
         });
       } else if (key === "global") {
-        console.log("바꿈");
+        this.$store.commit("UPDATE_BACKGROUND_IMG", {
+          backgroundImg: "../../img/default_image_global.png"
+        });
       }
     }
   }
@@ -56,17 +59,17 @@ export default {
 
 <style lang="scss" scoped>
 .tab-img-update-box {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 .tab-img-update-default {
   cursor: pointer;
   width: 10px;
-  margin-top: 10px;
   font-size: 14px;
   border: solid 1px white;
   padding: 2px 10px;
 }
-.tab-img-update-box-checked {
+
+.tab-img-update-default:hover {
   background-color: white;
   color: black;
 }
