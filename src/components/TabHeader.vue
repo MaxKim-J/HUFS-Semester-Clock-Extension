@@ -7,11 +7,6 @@
           :class="[this.cafeteriaIsShowing ? 'tab-bar-content-checked' : '']"
           @click="this.showCafeteria"
         >학식</div>
-        <div
-          class="tab-bar-content"
-          :class="[this.eclassIsShowing ? 'tab-bar-content-checked' : '']"
-          @click="this.showEclass"
-        >이클래스</div>
       </div>
       <div class="tab-bar-contents-center">
         <div class="tab-bar-content-title">외대 종강시계</div>
@@ -19,9 +14,9 @@
       <div class="tab-bar-contents-right">
         <div
           class="tab-bar-content"
-          :class="[this.weatherIsShowing ? 'tab-bar-content-checked' : '']"
-          @click="this.showWeather"
-        >이문동 날씨</div>
+          :class="[this.randomMenuIsShowing ? 'tab-bar-content-checked' : '']"
+          @click="this.showRandomMenu"
+        >오늘 뭐먹지</div>
       </div>
     </div>
     <div class="tab-bar-boxes">
@@ -31,16 +26,11 @@
             <tab-cafeteria></tab-cafeteria>
           </div>
         </transition>
-        <transition name="fade">
-          <div class="tab-bar-box tab-bar-box-left" v-if="this.eclassIsShowing">
-            <tab-eclass></tab-eclass>
-          </div>
-        </transition>
       </div>
       <div class="tab-bar-box-wrap tab-bar-box-right-wrap">
         <transition name="fade">
-          <div class="tab-bar-box tab-bar-box-right" v-if="this.weatherIsShowing">
-            <tab-weather></tab-weather>
+          <div class="tab-bar-box tab-bar-box-right" v-if="this.randomMenuIsShowing">
+            <tab-random-menu></tab-random-menu>
           </div>
         </transition>
       </div>
@@ -49,7 +39,7 @@
 </template>
 
 <script>
-import TabWeather from "../components/sidepages/TabWeather";
+import TabRandomMenu from "../components/sidepages/TabRandomMenu";
 import TabCafeteria from "../components/sidepages/TabCafeteria";
 import TabEclass from "../components/sidepages/TabEclass";
 import "../style/bar.scss";
@@ -57,28 +47,23 @@ import "../style/bar.scss";
 export default {
   name: "tabHeader",
   components: {
-    TabWeather,
-    TabCafeteria,
-    TabEclass
+    TabRandomMenu,
+    TabCafeteria
   },
   data() {
     return {
-      weatherIsShowing: false,
+      randomMenuIsShowing: false,
       cafeteriaIsShowing: false,
       eclassIsShowing: false
     };
   },
   methods: {
-    showEclass() {
-      this.eclassIsShowing = !this.eclassIsShowing;
-      this.weatherIsShowing = false;
-    },
     showCafeteria() {
       this.cafeteriaIsShowing = !this.cafeteriaIsShowing;
-      this.weatherIsShowing = false;
+      this.randomMenuIsShowing = false;
     },
-    showWeather() {
-      this.weatherIsShowing = !this.weatherIsShowing;
+    showRandomMenu() {
+      this.randomMenuIsShowing = !this.randomMenuIsShowing;
       this.cafeteriaIsShowing = false;
       this.eclassIsShowing = false;
     }
