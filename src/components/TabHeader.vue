@@ -4,9 +4,9 @@
       <div class="tab-bar-contents-left">
         <div
           class="tab-bar-content"
-          :class="[this.cafeteriaIsShowing ? 'tab-bar-content-checked' : '']"
-          @click="this.showCafeteria"
-        >학식</div>
+          :class="[this.notificationIsShowing ? 'tab-bar-content-checked' : '']"
+          @click="this.showNotifications"
+        >학사공지</div>
       </div>
       <div class="tab-bar-contents-center">
         <div class="tab-bar-content-title">외대 종강시계</div>
@@ -22,8 +22,8 @@
     <div class="tab-bar-boxes">
       <div class="tab-bar-box-wrap tab-bar-box-left-wrap">
         <transition name="fade">
-          <div class="tab-bar-box tab-bar-box-left" v-if="this.cafeteriaIsShowing">
-            <tab-cafeteria></tab-cafeteria>
+          <div class="tab-bar-box tab-bar-box-left" v-if="this.notificationIsShowing">
+            <tab-notifications></tab-notifications>
           </div>
         </transition>
       </div>
@@ -40,7 +40,7 @@
 
 <script>
 import TabRandomMenu from "../components/sidepages/TabRandomMenu";
-import TabCafeteria from "../components/sidepages/TabCafeteria";
+import TabNotifications from "../components/sidepages/TabNotifications";
 import TabEclass from "../components/sidepages/TabEclass";
 import "../style/bar.scss";
 
@@ -48,24 +48,22 @@ export default {
   name: "tabHeader",
   components: {
     TabRandomMenu,
-    TabCafeteria
+    TabNotifications
   },
   data() {
     return {
       randomMenuIsShowing: false,
-      cafeteriaIsShowing: false,
-      eclassIsShowing: false
+      notificationIsShowing: false
     };
   },
   methods: {
-    showCafeteria() {
-      this.cafeteriaIsShowing = !this.cafeteriaIsShowing;
+    showNotifications() {
+      this.notificationIsShowing = !this.notificationIsShowing;
       this.randomMenuIsShowing = false;
     },
     showRandomMenu() {
       this.randomMenuIsShowing = !this.randomMenuIsShowing;
-      this.cafeteriaIsShowing = false;
-      this.eclassIsShowing = false;
+      this.notificationIsShowing = false;
     }
   }
 };

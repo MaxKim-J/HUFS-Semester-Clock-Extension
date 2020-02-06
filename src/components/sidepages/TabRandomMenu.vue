@@ -2,9 +2,8 @@
   <div class="tab-side-box">
     <div class="tab-side-box-title">오늘 뭐먹지</div>
     <div class="tab-side-box-content">뭐 드셔야 할지 모르겠다고요? 딱! 정해드립니다.</div>
-    <div class="tab-side-box-line"></div>
     <div class="random-menu-box" v-if="!this.menuName">
-      <span class="tab-side-box-content random-menu-message">하단의 버튼을 눌러주세요!</span>
+      <span class="tab-side-box-content random-menu-message">🍽 하단의 버튼을 눌러주세요!</span>
     </div>
     <div class="random-menu-box" v-else>
       <span class="tab-side-box-content random-menu-figure">오늘</span>
