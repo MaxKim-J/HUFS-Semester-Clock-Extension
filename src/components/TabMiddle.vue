@@ -34,6 +34,7 @@
 import { greetingValid } from "../utils/GreetingsMessageLogic.js";
 import { FRESHMANYEARS } from "../utils/FreshmanYears.js";
 import { getDistanceFreshman } from "../utils/TimeDistanceCalculator.js";
+import { getRandomArrayIndex } from "../utils/RandomArrayIndex.js";
 
 export default {
   name: "tabMiddle",
@@ -63,7 +64,7 @@ export default {
     getGreetingMessage() {
       const currentHour = new Date().getHours();
       const currentHourMessages = greetingValid(currentHour);
-      const INDEXNUM = this.getRandomArrayIndex(currentHourMessages);
+      const INDEXNUM = getRandomArrayIndex(currentHourMessages);
       this.greetingMessage = currentHourMessages[INDEXNUM].message;
     },
     getUserInfo() {

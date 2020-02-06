@@ -4,14 +4,9 @@
       <div class="tab-bar-contents-left">
         <div
           class="tab-bar-content"
-          :class="[this.cafeteriaIsShowing ? 'tab-bar-content-checked' : '']"
-          @click="this.showCafeteria"
-        >학식</div>
-        <div
-          class="tab-bar-content"
-          :class="[this.eclassIsShowing ? 'tab-bar-content-checked' : '']"
-          @click="this.showEclass"
-        >이클래스</div>
+          :class="[this.notificationIsShowing ? 'tab-bar-content-checked' : '']"
+          @click="this.showNotifications"
+        >학사공지</div>
       </div>
       <div class="tab-bar-contents-center">
         <div class="tab-bar-content-title">외대 종강시계</div>
@@ -19,28 +14,23 @@
       <div class="tab-bar-contents-right">
         <div
           class="tab-bar-content"
-          :class="[this.weatherIsShowing ? 'tab-bar-content-checked' : '']"
-          @click="this.showWeather"
-        >이문동 날씨</div>
+          :class="[this.randomMenuIsShowing ? 'tab-bar-content-checked' : '']"
+          @click="this.showRandomMenu"
+        >오늘 뭐먹지</div>
       </div>
     </div>
     <div class="tab-bar-boxes">
       <div class="tab-bar-box-wrap tab-bar-box-left-wrap">
         <transition name="fade">
-          <div class="tab-bar-box tab-bar-box-left" v-if="this.cafeteriaIsShowing">
-            <tab-cafeteria></tab-cafeteria>
-          </div>
-        </transition>
-        <transition name="fade">
-          <div class="tab-bar-box tab-bar-box-left" v-if="this.eclassIsShowing">
-            <tab-eclass></tab-eclass>
+          <div class="tab-bar-box tab-bar-box-left" v-if="this.notificationIsShowing">
+            <tab-notifications></tab-notifications>
           </div>
         </transition>
       </div>
       <div class="tab-bar-box-wrap tab-bar-box-right-wrap">
         <transition name="fade">
-          <div class="tab-bar-box tab-bar-box-right" v-if="this.weatherIsShowing">
-            <tab-weather></tab-weather>
+          <div class="tab-bar-box tab-bar-box-right" v-if="this.randomMenuIsShowing">
+            <tab-random-menu></tab-random-menu>
           </div>
         </transition>
       </div>
@@ -49,38 +39,31 @@
 </template>
 
 <script>
-import TabWeather from "../components/sidepages/TabWeather";
-import TabCafeteria from "../components/sidepages/TabCafeteria";
+import TabRandomMenu from "../components/sidepages/TabRandomMenu";
+import TabNotifications from "../components/sidepages/TabNotifications";
 import TabEclass from "../components/sidepages/TabEclass";
 import "../style/bar.scss";
 
 export default {
   name: "tabHeader",
   components: {
-    TabWeather,
-    TabCafeteria,
-    TabEclass
+    TabRandomMenu,
+    TabNotifications
   },
   data() {
     return {
-      weatherIsShowing: false,
-      cafeteriaIsShowing: false,
-      eclassIsShowing: false
+      randomMenuIsShowing: false,
+      notificationIsShowing: false
     };
   },
   methods: {
-    showEclass() {
-      this.eclassIsShowing = !this.eclassIsShowing;
-      this.weatherIsShowing = false;
+    showNotifications() {
+      this.notificationIsShowing = !this.notificationIsShowing;
+      this.randomMenuIsShowing = false;
     },
-    showCafeteria() {
-      this.cafeteriaIsShowing = !this.cafeteriaIsShowing;
-      this.weatherIsShowing = false;
-    },
-    showWeather() {
-      this.weatherIsShowing = !this.weatherIsShowing;
-      this.cafeteriaIsShowing = false;
-      this.eclassIsShowing = false;
+    showRandomMenu() {
+      this.randomMenuIsShowing = !this.randomMenuIsShowing;
+      this.notificationIsShowing = false;
     }
   }
 };

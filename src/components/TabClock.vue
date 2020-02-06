@@ -17,11 +17,11 @@
         <span class="tab-clock-main-contents-time">{{ this.secondsCalculated }}</span>
         <span class="tab-clock-main-contents-figure">초</span>
       </div>
-      <div class="tab-clock-main-btn-wrapper" v-if="this.drawSeason === false">
-        <div class="tab-clock-main-btn" @click="this.changeSeasonalSemester">계절학기 종강까지</div>
+      <div class="tab-clock-main-btn-wrapper" v-if="this.drawSeason && this.exceedSeason">
+        <div class="tab-clock-main-btn" @click="changeSemester('next')">다음학기 개강까지</div>
       </div>
-      <div class="tab-clock-main-btn-wrapper" v-else-if="this.drawSeason === true">
-        <div class="tab-clock-main-btn" @click="this.changeNextSemester">다음학기 개강까지</div>
+      <div class="tab-clock-main-btn-wrapper" v-else-if="(!this.drawSeason) && this.exceedSeason">
+        <div class="tab-clock-main-btn" @click="changeSemester('season')">계절학기 종강까지</div>
       </div>
     </div>
 
@@ -49,6 +49,7 @@ export default {
     return {
       semesterInfo: null,
       drawSeason: null,
+      exceedSeason: false,
       today: new Date(),
       gapTime: 0
     };
@@ -71,8 +72,11 @@ export default {
     clockValid() {
       if (this.today <= CURRENT_SEMESTER_INFO.due) {
         this.semesterInfo = CURRENT_SEMESTER_INFO;
+      } else if (this.today > SEASONAL_SEMESTER_INFO.due) {
+        this.changeSemester("next");
       } else if (this.today > CURRENT_SEMESTER_INFO.due) {
-        this.changeNextSemester();
+        this.exceedSeason = true;
+        this.changeSemester("next");
       }
     },
     getDueDates() {
@@ -81,14 +85,14 @@ export default {
     getNowDates() {
       this.today = new Date();
     },
-    changeNextSemester() {
-      this.semesterInfo = NEXT_SEMESTER_INFO;
-      this.drawSeason = false;
-      this.getDueDates();
-    },
-    changeSeasonalSemester() {
-      this.semesterInfo = SEASONAL_SEMESTER_INFO;
-      this.drawSeason = true;
+    changeSemester(key) {
+      if (key === "next") {
+        this.semesterInfo = NEXT_SEMESTER_INFO;
+        this.drawSeason = false;
+      } else {
+        this.semesterInfo = SEASONAL_SEMESTER_INFO;
+        this.drawSeason = true;
+      }
       this.getDueDates();
     }
   },
