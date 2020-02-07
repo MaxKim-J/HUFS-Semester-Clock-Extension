@@ -1,7 +1,7 @@
 {
   "name": "외대 종강시계",
-  "description": "종강까지 며칠 남았지?? 한국외대 학생들을 위한 종강시계",
-  "version": "1.0",
+  "description": "이 시계는 한국외대 학생들에게 종강이 몇 일 남았는지 보여줍니다. 종강 화이팅!",
+  "version": "1.0.0",
   "manifest_version": 2,
   "icons": {
     "48": "icons/icon_48.png",
@@ -12,7 +12,8 @@
     "default_popup": "popup/popup.html"
   },
   "permissions": [
-    "storage"
+    "storage",
+    "tabs"
   ],
   "background": {
     "scripts": [

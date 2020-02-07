@@ -50,7 +50,7 @@ export default {
     this.getBackgroundImg();
     setInterval(() => {
       this.mainIsShowing = true;
-    }, 300);
+    }, 1000);
   }
 };
 </script>
