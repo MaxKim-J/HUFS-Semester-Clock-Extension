@@ -34,6 +34,7 @@
 import { greetingValid } from "../utils/GreetingsMessageLogic.js";
 import { FRESHMANYEARS } from "../utils/FreshmanYears.js";
 import { getDistanceFreshman } from "../utils/TimeDistanceCalculator.js";
+import { getRandomArrayIndex } from "../utils/RandomArrayIndex.js";
 
 export default {
   name: "tabMiddle",
@@ -63,7 +64,7 @@ export default {
     getGreetingMessage() {
       const currentHour = new Date().getHours();
       const currentHourMessages = greetingValid(currentHour);
-      const INDEXNUM = this.getRandomArrayIndex(currentHourMessages);
+      const INDEXNUM = getRandomArrayIndex(currentHourMessages);
       this.greetingMessage = currentHourMessages[INDEXNUM].message;
     },
     getUserInfo() {
@@ -88,8 +89,8 @@ export default {
       } else if (this.inputYear === undefined) {
         alert("학우님의 학번을 입력해주세요!");
       } else {
-        if (this.inputName.length > 5 || this.inputName.length < 1) {
-          alert("학우님 이름은 1자 이상부터 5자까지 가능합니다");
+        if (this.inputName.length > 10 || this.inputName.length < 1) {
+          alert("학우님 이름은 1자 이상부터 10자까지 가능합니다");
         } else {
           this.updateUserInfo();
         }
@@ -137,6 +138,7 @@ export default {
         font-weight: 500;
       }
       .tab-middle-content-update-name {
+        width: 250px;
         background: none;
         outline: none;
         border: none;
