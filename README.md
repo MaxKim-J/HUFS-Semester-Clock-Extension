@@ -1,7 +1,7 @@
 # ⏱ 외대 종강시계
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/MaxKim-J/HUFS-Semester-Clock-Extension/master) ![Chrome Web Store](https://img.shields.io/chrome-web-store/users/jadlpknbgnmmelikpcaogikohieafaem?hl=ko) [![GitHub license](https://img.shields.io/github/license/MaxKim-J/HUFS-Semester-Clock-Extension)](https://github.com/MaxKim-J/HUFS-Semester-Clock-Extension)  
 
-![dd](readme_screenshot.png)
+![dd](readme_screenshot.png)  
 HUFS-Semester-Clock-Extension  
 외대생을 위한, 종강까지 얼마나 남았는지 보여주는 크롬 익스텐션  
 
