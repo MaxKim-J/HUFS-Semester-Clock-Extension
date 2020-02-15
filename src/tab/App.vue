@@ -88,7 +88,7 @@ export default {
     z-index: 2;
   }
   .tab-anti-antialiasing {
-    transform: rotate(-0.004deg);
+    transform: rotate(-0.06deg);
   }
 }
 </style>
