@@ -1,8 +1,10 @@
 # ⏱ 외대 종강시계
-<!-- [![HitCount](http://hits.dwyl.com/maxkim-j/https://githubcom/MaxKim-J/HUFS-Semester-Clock-Extension.svg)](http://hits.dwyl.com/maxkim-j/https://githubcom/MaxKim-J/HUFS-Semester-Clock-Extension) -->
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/MaxKim-J/HUFS-Semester-Clock-Extension/master) ![Chrome Web Store](https://img.shields.io/chrome-web-store/users/jadlpknbgnmmelikpcaogikohieafaem?hl=ko) [![GitHub license](https://img.shields.io/github/license/MaxKim-J/HUFS-Semester-Clock-Extension)](https://github.com/MaxKim-J/HUFS-Semester-Clock-Extension)
+![dd](readme_screenshot.png)
 HUFS-Semester-Clock-Extension  
 외대생을 위한, 종강까지 얼마나 남았는지 보여주는 크롬 익스텐션  
-![스크린샷](Readme_screenshot.png)
+
+- [크롬 웹 스토어에서 다운받기](https://chrome.google.com/webstore/detail/%EC%99%B8%EB%8C%80-%EC%A2%85%EA%B0%95%EC%8B%9C%EA%B3%84/jadlpknbgnmmelikpcaogikohieafaem?hl=ko)
 
 ## ✅ 주요 기능
 
@@ -33,16 +35,11 @@ npm run build
 - [vue-moment](https://github.com/brockpetrie/vue-moment)
 
 ## 🚩 버전
-
-**현재 1.0.0 버전이 구글 웹스토어의 승인을 기다리고 있습니다**
-
-릴리즈 노트에 업데이트 될 예정입니다.
+[릴리즈 노트](https://github.com/MaxKim-J/HUFS-Semester-Clock-Extension/releases)를 참고해 주세요!
 
 ## 👨 기여
 **모든 종류의 커밋을 환영합니다!**
 - 관리자) [MaxKim-J](https://github.com/MaxKim-J)
 
 ## 📢 라이센스
-**1.0.0 릴리즈 후 라이센스 파일을 추가할 예정입니다**
-
 MIT
