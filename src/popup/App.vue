@@ -1,7 +1,7 @@
 <template>
   <div class="popup">
     <h3>외대 종강시계</h3>
-    <div>version : 1.0.0</div>
+    <div>version : 1.0.1</div>
     <div>새 탭을 생성하시면 익스텐션이 동작합니다.</div>
   </div>
 </template>
