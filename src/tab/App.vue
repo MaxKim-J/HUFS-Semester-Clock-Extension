@@ -2,13 +2,15 @@
   <transition name="fadeMain" v-if="mainIsShowing">
     <div class="tab" :style="{'background-image' : 'url('+backgroundImg+')'}">
       <div class="tab-background"></div>
-      <tab-header class="tab-header"></tab-header>
-      <div class="tab-main">
-        <tab-clock></tab-clock>
-        <tab-middle></tab-middle>
-        <tab-hotlinks></tab-hotlinks>
+      <tab-header class="tab-header tab-anti-antialiasing"></tab-header>
+      <div class="tab-main-wrap tab-anti-antialiasing">
+        <div class="tab-main">
+          <tab-clock></tab-clock>
+          <tab-middle></tab-middle>
+          <tab-hotlinks></tab-hotlinks>
+        </div>
       </div>
-      <tab-footer class="tab-footer"></tab-footer>
+      <tab-footer class="tab-footer tab-anti-antialiasing"></tab-footer>
     </div>
   </transition>
 </template>
@@ -63,6 +65,8 @@ export default {
   background-repeat: no-repeat;
   background-position: 50% 50%;
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.77);
   .tab-background {
@@ -74,13 +78,17 @@ export default {
   .tab-header {
     z-index: 2;
   }
-  .tab-main {
-    text-align: center;
-    margin-top: 250px;
+  .tab-main-wrap {
     z-index: 1;
+    .tab-main {
+      text-align: center;
+    }
   }
   .tab-footer {
     z-index: 2;
+  }
+  .tab-anti-antialiasing {
+    transform: rotate(-0.06deg);
   }
 }
 </style>

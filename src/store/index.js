@@ -55,7 +55,7 @@ export default new Vuex.Store({
         if (data.backgroundImg) {
           commit('GET_BACKGROUND_IMG', data.backgroundImg)
         } else {
-          commit('GET_BACKGROUND_IMG', "../img/default_image_seoul.jpg")
+          commit('GET_BACKGROUND_IMG', "../img/default_image_seoul.png")
         }
       })
 
