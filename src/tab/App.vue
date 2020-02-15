@@ -2,15 +2,15 @@
   <transition name="fadeMain" v-if="mainIsShowing">
     <div class="tab" :style="{'background-image' : 'url('+backgroundImg+')'}">
       <div class="tab-background"></div>
-      <tab-header class="tab-header"></tab-header>
-      <div class="tab-main-wrap">
+      <tab-header class="tab-header tab-anti-antialiasing"></tab-header>
+      <div class="tab-main-wrap tab-anti-antialiasing">
         <div class="tab-main">
           <tab-clock></tab-clock>
           <tab-middle></tab-middle>
           <tab-hotlinks></tab-hotlinks>
         </div>
       </div>
-      <tab-footer class="tab-footer"></tab-footer>
+      <tab-footer class="tab-footer tab-anti-antialiasing"></tab-footer>
     </div>
   </transition>
 </template>
@@ -86,6 +86,9 @@ export default {
   }
   .tab-footer {
     z-index: 2;
+  }
+  .tab-anti-antialiasing {
+    transform: rotate(-0.004deg);
   }
 }
 </style>
