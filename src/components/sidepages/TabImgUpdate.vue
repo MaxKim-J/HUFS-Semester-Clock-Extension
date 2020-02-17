@@ -45,7 +45,7 @@ export default {
     handleChangeImg(key) {
       if (key == "seoul") {
         this.$store.commit("UPDATE_BACKGROUND_IMG", {
-          backgroundImg: "../../img/default_image_seoul.jpg"
+          backgroundImg: "../../img/default_image_seoul.png"
         });
       } else if (key === "global") {
         this.$store.commit("UPDATE_BACKGROUND_IMG", {
