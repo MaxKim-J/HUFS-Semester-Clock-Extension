@@ -6,3 +6,11 @@ chrome.runtime.onInstalled.addListener(function (details) {
     console.log("Updated from " + details.previousVersion + " to " + thisVersion + "!");
   }
 });
+
+var config = {
+  apiKey: 'AIzaSyDQTDfF0dJSFv1_OF6YGZVnx-E2NWUzWe4',
+  databaseURL: 'https://hufssemesterclockfirebase.firebaseio.com/',
+  storageBucket: '<YOUR_STORAGE_BUCKET_NAME>'
+};
+
+firebase.initializeApp(config);
