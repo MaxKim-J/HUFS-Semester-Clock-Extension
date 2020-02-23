@@ -1,25 +1,38 @@
 <template>
   <div class="tab-side-box">
     <div class="tab-side-box-title">학사공지</div>
-    <div class="tab-side-box-content">학사 공지 연동 기능은</div>
-    <div class="tab-side-box-content">준비중입니다</div>
+      <div class="tab-side-box-content"></div>
+      <div class="tab-notification-box">
+        <div class= "tab-notification" v-for="noti in this.notificationArray" :key="noti.id">
+          <div>
+            <a :href= "noti.link">{{noti.title}}</a>
+          </div>
+        </div>
+      </div>
   </div>
 </template>
 
 <script>
 import "../../style/sidePage.scss";
-import { dataBase } from "../../utils/firebaseInit.js"
+import { getNotificationsFromDB } from "../../services/firebaseDbAccess"
 
 export default {
+  data() {
+    return {
+      notificationArray:[]
+    }
+  },
   created(){
-  //   console.log(VUE_APP_DATABASE_URL);
-  //   console.log(VUE_APP_API_KEY);
-  //   const refObject = dataBase.ref('/weather').once('value').then(function(snapshot) {
-  //     console.log(snapshot.val())
-  //   })
+    getNotificationsFromDB().then(data => {
+      this.notificationArray = data.notifications;
+      console.log(this.notificationArray);
+    })
   }
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.tab-notification-box{
+  font-size:14px;
+}
 </style>
