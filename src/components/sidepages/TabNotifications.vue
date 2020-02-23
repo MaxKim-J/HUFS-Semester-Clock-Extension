@@ -8,7 +8,9 @@
 
 <script>
 import "../../style/sidePage.scss";
-export default {};
+
+export default {
+};
 </script>
 
 <style>
