@@ -8,8 +8,16 @@
 
 <script>
 import "../../style/sidePage.scss";
+import { dataBase } from "../../utils/firebaseInit.js"
 
 export default {
+  created(){
+  //   console.log(VUE_APP_DATABASE_URL);
+  //   console.log(VUE_APP_API_KEY);
+  //   const refObject = dataBase.ref('/weather').once('value').then(function(snapshot) {
+  //     console.log(snapshot.val())
+  //   })
+  }
 };
 </script>
 

@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "dotenv": "^8.2.0",
+    "firebase": "^7.9.1",
     "serialize-javascript": "^2.1.2",
     "vue": "^2.6.10",
     "vue-moment": "^4.0.0",
