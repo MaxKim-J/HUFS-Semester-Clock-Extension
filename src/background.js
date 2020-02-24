@@ -6,3 +6,4 @@ chrome.runtime.onInstalled.addListener(function (details) {
     console.log("Updated from " + details.previousVersion + " to " + thisVersion + "!");
   }
 });
+

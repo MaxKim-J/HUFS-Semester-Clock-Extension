@@ -82,6 +82,7 @@ export default {
     z-index: 1;
     .tab-main {
       text-align: center;
+      font-size:20px;
     }
   }
   .tab-footer {
