@@ -17,7 +17,9 @@
           {{ weather.date }}
         </div>
         <div class="tab-weather-icon">
-          {{ weather.morning_icon }}/{{ weather.afternoon_icon }}
+          {{ changeToEmoji(weather.morning_icon) }}/{{
+            changeToEmoji(weather.afternoon_icon)
+          }}
         </div>
         <div class="tab-weather-temp">
           {{ weather.temp }}
@@ -31,11 +33,18 @@
 <script>
 import "../../style/sidePage.scss";
 import { getWeatherFromDB } from "../../services/firebaseDbAccess";
+import { weatherValid } from "../../utils/tabWeatherValid";
+
 export default {
   data() {
     return {
       weahterArray: []
     };
+  },
+  methods: {
+    changeToEmoji(key) {
+      return weatherValid(key);
+    }
   },
   created() {
     getWeatherFromDB().then(data => {
