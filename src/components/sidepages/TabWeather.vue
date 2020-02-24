@@ -2,7 +2,7 @@
   <div class="tab-side-box">
     <div class="tab-side-box-title">이문동 날씨</div>
     <div class="tab-side-box-content">
-      5일 간의 이문동 날씨와 최저/최고기온 입니다.
+      🌈5일 간의 이문동 날씨와 최저/최고기온입니다.
     </div>
     <div class="tab-weather-box">
       <div
@@ -25,7 +25,9 @@
           {{ weather.temp }}
         </div>
       </div>
-      <!-- <div class="tab-weather-line"></div> -->
+    </div>
+    <div class="tab-alarm">
+      *데이터가 표시되지 않는다면, 와이파이 연결을 확인하세요!
     </div>
   </div>
 </template>
@@ -47,10 +49,14 @@ export default {
     }
   },
   created() {
-    getWeatherFromDB().then(data => {
-      this.weahterArray = data.weather;
-      console.log(this.weahterArray);
-    });
+    getWeatherFromDB()
+      .then(data => {
+        this.weahterArray = data.weather;
+        console.log(this.weahterArray);
+      })
+      .catch(err => {
+        console.error("데이터를 가져올 수 없습니다");
+      });
   }
 };
 </script>

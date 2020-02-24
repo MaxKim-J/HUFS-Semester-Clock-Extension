@@ -7,7 +7,7 @@ export const getWeatherFromDB = async () => {
     const weatherInfo = await dataBase.ref("/weather").once("value");
     return weatherInfo.val();
   } catch {
-    console.log("날씨 데이터를 가져올 수 없습니다");
+    console.error("날씨 데이터를 가져올 수 없습니다");
   }
 };
 
@@ -18,6 +18,6 @@ export const getNotificationsFromDB = async () => {
       .once("value");
     return notificationsInfo.val();
   } catch {
-    console.log("학사공지 데이터를 가져올 수 없습니다");
+    console.error("학사공지 데이터를 가져올 수 없습니다");
   }
 };

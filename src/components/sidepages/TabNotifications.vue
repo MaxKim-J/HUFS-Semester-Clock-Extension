@@ -65,10 +65,13 @@ export default {
     }
   },
   created() {
-    getNotificationsFromDB().then(data => {
-      this.notificationArray = data.notifications;
-      console.log(this.notificationArray);
-    });
+    getNotificationsFromDB()
+      .then(data => {
+        this.notificationArray = data.notifications;
+      })
+      .catch(err => {
+        console.error("데이터를 가져올 수 없습니다");
+      });
   }
 };
 </script>
