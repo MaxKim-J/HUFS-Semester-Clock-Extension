@@ -6,30 +6,40 @@
           class="tab-bar-content"
           :class="[this.notificationIsShowing ? 'tab-bar-content-checked' : '']"
           @click="this.showNotifications"
-        >학사공지</div>
+        >
+          학사공지
+        </div>
       </div>
       <div class="tab-bar-contents-center">
-        <div class="tab-bar-content-title">외대 종강시계</div>
+        <div class="tab-bar-content-main-title">외대 종강시계</div>
       </div>
       <div class="tab-bar-contents-right">
         <div
           class="tab-bar-content"
           :class="[this.randomMenuIsShowing ? 'tab-bar-content-checked' : '']"
           @click="this.showRandomMenu"
-        >오늘 뭐먹지</div>
+        >
+          오늘 뭐먹지
+        </div>
       </div>
     </div>
     <div class="tab-bar-boxes">
       <div class="tab-bar-box-wrap tab-bar-box-left-wrap">
         <transition name="fade">
-          <div class="tab-bar-box tab-bar-box-left" v-if="this.notificationIsShowing">
+          <div
+            class="tab-bar-box tab-bar-box-left"
+            v-if="this.notificationIsShowing"
+          >
             <tab-notifications></tab-notifications>
           </div>
         </transition>
       </div>
       <div class="tab-bar-box-wrap tab-bar-box-right-wrap">
         <transition name="fade">
-          <div class="tab-bar-box tab-bar-box-right" v-if="this.randomMenuIsShowing">
+          <div
+            class="tab-bar-box tab-bar-box-right"
+            v-if="this.randomMenuIsShowing"
+          >
             <tab-random-menu></tab-random-menu>
           </div>
         </transition>
@@ -69,7 +79,7 @@ export default {
 };
 </script>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 .tab-header {
   top: 0;
 }

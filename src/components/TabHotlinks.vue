@@ -1,9 +1,13 @@
 <template>
   <div class="tab-hotlinks">
-    <div class="tab-hotlinks-link" v-for="hotlink in this.hotlinkData" :key="hotlink.id">
+    <div
+      class="tab-hotlinks-link"
+      v-for="hotlink in this.hotlinkData"
+      :key="hotlink.id"
+    >
       <a :href="hotlink.link">
-        <div class="tab-hotlinks-icon">{{hotlink.icon}}</div>
-        <div class="tab-hotlinks-link-title">{{hotlink.name}}</div>
+        <div class="tab-hotlinks-icon">{{ hotlink.icon }}</div>
+        <div class="tab-hotlinks-link-title">{{ hotlink.name }}</div>
       </a>
     </div>
   </div>
@@ -35,7 +39,7 @@ export default {
   }
   .tab-hotlinks-link-title {
     margin: 0px 20px;
-    font-size: $xsmall;
+    font-size: $small;
   }
 }
 </style>

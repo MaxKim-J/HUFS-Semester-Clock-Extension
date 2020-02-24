@@ -45,15 +45,20 @@
         font-weight: 700;
         margin: 10px 0px;
       }
-      .tab-bar-content-schedule{
-        margin:10px 0px;
-        font-size:$small;
+      .tab-bar-content-main-title {
+        font-weight: 700;
+        margin: 10px 0px;
+        font-size: $large;
+      }
+      .tab-bar-content-schedule {
+        margin: 10px 0px;
+        font-size: $small;
         opacity: 0.7;
         cursor: pointer;
         transition: opacity 0.4s, margin 0.4s;
       }
-      .tab-bar-content-schedule:hover{
-        margin:0;
+      .tab-bar-content-schedule:hover {
+        margin: 0;
         opacity: 1;
       }
     }
@@ -83,7 +88,7 @@
 }
 
 @include small {
-  .tab-bar-boxes{
+  .tab-bar-boxes {
     flex-direction: column;
     .tab-bar-box-wrap {
       flex-direction: column;
