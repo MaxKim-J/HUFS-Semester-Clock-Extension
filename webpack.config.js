@@ -5,6 +5,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtensionReloader = require('webpack-extension-reloader')
 const { VueLoaderPlugin } = require('vue-loader')
 const { version } = require('./package.json')
+const dotenv = require('dotenv')
+
+const env = dotenv.config().parsed;
 
 const config = {
   mode: process.env.NODE_ENV,
@@ -66,7 +69,10 @@ const config = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      global: 'window'
+      global: 'window',
+      VUE_APP_DATABASE_URL: JSON.stringify(process.env.VUE_APP_DATABASE_URL),
+      VUE_APP_API_KEY: JSON.stringify(process.env.VUE_APP_API_KEY),
+      VUE_APP_AUTH_DOMAIN: JSON.stringify(process.env.VUE_APP_AUTH_DOMAIN),
     }),
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
