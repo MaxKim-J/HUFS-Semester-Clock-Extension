@@ -64,7 +64,7 @@ export default {
 <style lang="scss" scoped>
 .tab-weather-box {
   display: flex;
-  margin-top: 20px;
+  margin-top: 15px;
   justify-content: center;
   .tab-weather {
     margin-right: 20px;

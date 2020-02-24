@@ -10,14 +10,11 @@
         v-for="(noti, index) in this.notificationArray"
         :key="index"
       >
-        <div
-          class="tab-notification-content"
-          v-if="pageIndex <= noti.id && noti.id < pageIndex + 5"
-        >
-          <span class="tab-notification-date">{{ index + 1 }}.</span>
-          <span class="tab-notificaion-title"
-            ><a :href="noti.link">{{ noti.title }}</a></span
-          >
+        <div v-if="pageIndex <= noti.id && noti.id < pageIndex + 5">
+          <a class="tab-notification-content" :href="noti.link">
+            <div class="tab-notification-date">{{ trimDate(noti.date) }}</div>
+            <div class="tab-notification-title">{{ noti.title }}</div>
+          </a>
         </div>
       </div>
     </div>
@@ -62,6 +59,11 @@ export default {
     changePageIndex(num) {
       this.pageIndex = num * 5;
       this.checkedPageIndex = num;
+    },
+    trimDate(str) {
+      const trimedDate = str.split("-");
+      const result = trimedDate[1] + "." + trimedDate[2];
+      return result;
     }
   },
   created() {
@@ -80,6 +82,20 @@ export default {
 .tab-notification-box {
   font-size: 14px;
   margin: 10px 0px;
+  .tab-notification {
+    .tab-notification-content {
+      display: flex;
+      .tab-notification-date {
+        margin-right: 10px;
+      }
+      .tab-notification-title {
+        width: 370px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
   .tab-notification:hover {
     text-decoration: underline !important;
   }
