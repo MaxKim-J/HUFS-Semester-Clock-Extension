@@ -7,7 +7,7 @@
     <div class="tab-weather-box">
       <div
         class="tab-weather"
-        v-for="(weather, index) in weahterArray"
+        v-for="(weather, index) in weatherArray"
         :key="weather.id"
       >
         <div
@@ -36,11 +36,15 @@
 import "../../style/sidePage.scss";
 import { getWeatherFromDB } from "../../services/firebaseDbAccess";
 import { weatherValid } from "../../utils/tabWeatherValid";
+import {
+  localStorageGet,
+  localStorageSet
+} from "../../services/localStorageAccess";
 
 export default {
   data() {
     return {
-      weahterArray: []
+      weatherArray: []
     };
   },
   methods: {
@@ -49,14 +53,20 @@ export default {
     }
   },
   created() {
-    getWeatherFromDB()
-      .then(data => {
-        this.weahterArray = data.weather;
-        console.log(this.weahterArray);
-      })
-      .catch(err => {
-        console.error("데이터를 가져올 수 없습니다");
-      });
+    localStorageGet(["weatherInfo"]).then(data => {
+      if (data.weatherInfo) {
+        this.weatherArray = data.weatherInfo;
+      } else {
+        getWeatherFromDB()
+          .then(data => {
+            this.weatherArray = data.weather;
+            localStorageSet({ weatherInfo: data.weather });
+          })
+          .catch(err => {
+            console.error("데이터를 가져올 수 없습니다");
+          });
+      }
+    });
   }
 };
 </script>
