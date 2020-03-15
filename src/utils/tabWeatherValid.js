@@ -2,34 +2,71 @@
 
 export const weatherValid = icon => {
   switch (icon) {
-    case "ws1" || "ws2":
-      return "🌞";
-    case "ws3" || "ws4":
+    case "ws1":
+    case "ws2":
+      return "☀️";
+      break;
+    case "ws3":
+    case "ws4":
       return "⛅";
-    case "ws5" || "ws6" || "ws8" || "ws7":
+      break;
+    case "ws5":
+    case "ws6":
       return "🌥";
-    case "ws9" || "ws10":
+      break;
+    case "ws7":
+    case "ws8":
+      return "☁️";
+      break;
+    case "ws9":
+    case "ws10":
       return "🌧";
-    case "ws11" || "ws12" || "ws13":
+      break;
+    case "ws11":
+    case "ws12":
+    case "ws13":
       return "🌨";
-    case "ws14" || "ws21":
+      break;
+    case "ws14":
+    case "ws21":
       return "🌧";
-    case "ws15" || "ws29":
+      break;
+    case "ws15":
+    case "ws29":
       return "☔";
-    case "ws16" || "ws19" || "ws30":
+      break;
+    case "ws16":
+    case "ws19":
+    case "ws30":
       return "⛄";
+      break;
+
     case "ws17":
       return "🌫";
+      break;
+
     case "ws18":
       return "🌩";
+      break;
+
     case "ws20":
       return "😷";
-    case "ws22" || "ws24" || "ws27" || "ws26":
+      break;
+
+    case "ws22":
+    case "ws24":
+    case "ws27":
+    case "ws26":
       return "🌦";
+      break;
+
     case "ws23" || "ws28":
       return "🌦";
+      break;
+
     case "ws25":
       return "⛅";
+      break;
     default:
       return "🌞";
   }
