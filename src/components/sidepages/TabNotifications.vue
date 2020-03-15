@@ -39,6 +39,10 @@
 <script>
 import "../../style/sidePage.scss";
 import { getNotificationsFromDB } from "../../services/firebaseDbAccess";
+import {
+  localStorageGet,
+  localStorageSet
+} from "../../services/localStorageAccess";
 
 export default {
   data() {
@@ -67,13 +71,21 @@ export default {
     }
   },
   created() {
-    getNotificationsFromDB()
-      .then(data => {
-        this.notificationArray = data.notifications;
-      })
-      .catch(err => {
-        console.error("데이터를 가져올 수 없습니다");
-      });
+    // 로컬스토리지를 세션스토리지 처럼 쓰기
+    localStorageGet(["notificationInfo"]).then(data => {
+      if (data.notificationInfo) {
+        this.notificationArray = data.notificationInfo;
+      } else {
+        getNotificationsFromDB()
+          .then(data => {
+            this.notificationArray = data.notifications;
+            localStorageSet({ notificationInfo: data.notifications });
+          })
+          .catch(err => {
+            console.error("데이터를 가져올 수 없습니다");
+          });
+      }
+    });
   }
 };
 </script>

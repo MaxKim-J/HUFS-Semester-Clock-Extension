@@ -1,6 +1,9 @@
 <template>
   <transition name="fadeMain" v-if="mainIsShowing">
-    <div class="tab" :style="{'background-image' : 'url('+backgroundImg+')'}">
+    <div
+      class="tab"
+      :style="{ 'background-image': 'url(' + backgroundImg + ')' }"
+    >
       <div class="tab-background"></div>
       <tab-header class="tab-header tab-anti-antialiasing"></tab-header>
       <div class="tab-main-wrap tab-anti-antialiasing">
@@ -21,6 +24,7 @@ import TabMiddle from "../components/TabMiddle.vue";
 import TabHotlinks from "../components/TabHotlinks.vue";
 import TabFooter from "../components/TabFooter.vue";
 import TabHeader from "../components/TabHeader.vue";
+import { localStorageRemove } from "../services/localStorageAccess";
 import "../style/initialize.scss";
 import "../style/defaultTransition.scss";
 
@@ -49,6 +53,7 @@ export default {
     }
   },
   created() {
+    localStorageRemove(["notificationInfo", "weatherInfo"]);
     this.getBackgroundImg();
     setInterval(() => {
       this.mainIsShowing = true;
@@ -82,7 +87,7 @@ export default {
     z-index: 1;
     .tab-main {
       text-align: center;
-      font-size:20px;
+      font-size: 20px;
     }
   }
   .tab-footer {

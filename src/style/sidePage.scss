@@ -10,7 +10,14 @@
   }
   .tab-side-box-content {
     font-size: $small;
+    .tab-side-box-sub-btn {
+      font-size: $xsmall;
+      margin-left: 10px;
+      cursor: pointer;
+      text-decoration: underline;
+    }
   }
+
   .tab-side-box-content-small {
     font-size: $tab-size-small;
     margin-top: 2px;
