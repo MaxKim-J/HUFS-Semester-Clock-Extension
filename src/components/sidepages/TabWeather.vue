@@ -1,34 +1,22 @@
 <template>
   <div class="tab-side-box">
     <div class="tab-side-box-title">이문동 날씨</div>
-    <div class="tab-side-box-content">
-      🌈5일 간의 이문동 날씨와 최저/최고기온입니다.
-    </div>
+    <div class="tab-side-box-content">🌈5일 간의 이문동 날씨와 최저/최고기온입니다.</div>
     <div class="tab-weather-box">
-      <div
-        class="tab-weather"
-        v-for="(weather, index) in weatherArray"
-        :key="weather.id"
-      >
+      <div class="tab-weather" v-for="(weather, index) in weatherArray" :key="weather.id">
         <div
           class="tab-weather-title"
           :class="[index == 0 ? 'tab-weather-title-today' : '']"
-        >
-          {{ weather.date }}
-        </div>
+        >{{ weather.date }}</div>
         <div class="tab-weather-icon">
           {{ changeToEmoji(weather.morning_icon) }}/{{
-            changeToEmoji(weather.afternoon_icon)
+          changeToEmoji(weather.afternoon_icon)
           }}
         </div>
-        <div class="tab-weather-temp">
-          {{ weather.temp }}
-        </div>
+        <div class="tab-weather-temp">{{ weather.temp }}</div>
       </div>
     </div>
-    <div class="tab-alarm">
-      *데이터가 표시되지 않는다면, 와이파이 연결을 확인하세요!
-    </div>
+    <div class="tab-alarm">*데이터가 표시되지 않는다면, 와이파이 연결을 확인하세요!</div>
   </div>
 </template>
 
