@@ -1,22 +1,14 @@
 <template>
   <div class="tab-middle">
     <div class="tab-middle-content" v-if="userName && userFreshmanYear">
-      <div class="tab-middle-content-message">
-        {{ userFreshmanYear }}학번 외대입학 {{ getDistance }}일 째
-      </div>
-      <div class="tab-middle-content-message">
-        {{ userName }}님, {{ greetingMessage }}
-      </div>
+      <div class="tab-middle-content-message">{{ userFreshmanYear }}학번 외대입학 {{ getDistance }}일 째</div>
+      <div class="tab-middle-content-message">{{ userName }}님, {{ greetingMessage }}</div>
       <div class="tab-middle-content-updatemessage-wrapper">
-        <div class="tab-middle-content-updatemessage" @click="removeUserInfo">
-          이름/학번 수정하기
-        </div>
+        <div class="tab-middle-content-updatemessage" @click="removeUserInfo">이름/학번 수정하기</div>
       </div>
     </div>
     <div class="tab-middle-content" v-else>
-      <div class="tab-middle-content-update-message">
-        학번과 이름을 입력하시면 입학하신지 몇 일 째인지 볼 수 있습니다
-      </div>
+      <div class="tab-middle-content-update-message">학번과 이름을 입력하시면 입학하신지 며칠째인지 볼 수 있습니다</div>
       <div class="tab-middle-content-update">
         <div class="tab-middle-content-update-input">
           <input
@@ -27,25 +19,17 @@
           />
         </div>
         <div class="tab-middle-content-update-input">
-          <select
-            v-model="inputYear"
-            class="tab-middle-content-update-freshman"
-            required
-          >
+          <select v-model="inputYear" class="tab-middle-content-update-freshman" required>
             <option value selected hidden>학번</option>
-            <option v-for="option in freshmanYearOptions" :key="option.value">{{
+            <option v-for="option in freshmanYearOptions" :key="option.value">
+              {{
               option.text
-            }}</option>
+              }}
+            </option>
           </select>
         </div>
       </div>
-      <div
-        class="tab-tabinit-startbtn"
-        @click="userInputValid"
-        style="cursor:pointer"
-      >
-        입력하기
-      </div>
+      <div class="tab-tabinit-startbtn" @click="userInputValid" style="cursor:pointer">입력하기</div>
     </div>
   </div>
 </template>
