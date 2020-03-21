@@ -102,9 +102,10 @@ export default {
 
 <style lang="scss" scoped>
 .tab-weather-box {
+  width: 100%;
   display: flex;
   margin-top: 15px;
-  justify-content: center;
+  justify-content: space-around;
   .tab-weather {
     margin-right: 20px;
     text-align: center;
@@ -118,7 +119,6 @@ export default {
     .tab-weather-icon {
       font-size: 20px;
       margin: 10px 0px;
-      height: 30px;
     }
     .tab-weather-line {
       display: block;
