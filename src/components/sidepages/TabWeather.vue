@@ -116,7 +116,7 @@ export default {
       color: black;
     }
     .tab-weather-icon {
-      font-size: 25px;
+      font-size: 20px;
       margin: 10px 0px;
       height: 30px;
     }
