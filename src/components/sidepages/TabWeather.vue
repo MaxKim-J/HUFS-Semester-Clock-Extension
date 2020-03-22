@@ -66,7 +66,7 @@ export default {
     },
     changeStatus() {
       if (this.weatherStatus === "서울캠(이문동)") {
-        this.weatherStatus = "글캠(모현면)";
+        this.weatherStatus = "글캠(모현읍)";
         localStorageSet({ weatherShow: "global" });
       } else {
         this.weatherStatus = "서울캠(이문동)";
