@@ -79,7 +79,7 @@ export default {
       if (data.weatherShow !== undefined) {
         data.weatherShow === "seoul"
           ? (this.weatherStatus = "서울캠(이문동)")
-          : (this.weatherStatus = "글캠(모현면)");
+          : (this.weatherStatus = "글캠(모현읍)");
       }
       if (data.weatherInfo) {
         this.seoulArray = data.weatherInfo.slice(0, 5);
