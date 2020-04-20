@@ -66,7 +66,7 @@ export default {
     },
     changeStatus() {
       if (this.weatherStatus === "서울캠(이문동)") {
-        this.weatherStatus = "글캠(모현면)";
+        this.weatherStatus = "글캠(모현읍)";
         localStorageSet({ weatherShow: "global" });
       } else {
         this.weatherStatus = "서울캠(이문동)";
@@ -79,7 +79,7 @@ export default {
       if (data.weatherShow !== undefined) {
         data.weatherShow === "seoul"
           ? (this.weatherStatus = "서울캠(이문동)")
-          : (this.weatherStatus = "글캠(모현면)");
+          : (this.weatherStatus = "글캠(모현읍)");
       }
       if (data.weatherInfo) {
         this.seoulArray = data.weatherInfo.slice(0, 5);
@@ -102,9 +102,10 @@ export default {
 
 <style lang="scss" scoped>
 .tab-weather-box {
+  width: 100%;
   display: flex;
   margin-top: 15px;
-  justify-content: center;
+  justify-content: space-around;
   .tab-weather {
     margin-right: 20px;
     text-align: center;
@@ -116,9 +117,8 @@ export default {
       color: black;
     }
     .tab-weather-icon {
-      font-size: 25px;
+      font-size: 20px;
       margin: 10px 0px;
-      height: 30px;
     }
     .tab-weather-line {
       display: block;
