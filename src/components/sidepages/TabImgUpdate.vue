@@ -3,33 +3,16 @@
     <div class="tab-side-box-title">배경화면 수정</div>
     <div class="tab-img-update-box">
       <div class="tab-side-box-content">사진 업로드</div>
-      <input
-        type="file"
-        class="tab-img-update-input"
-        @change="handleFileUpload"
-      />
-      <div class="tab-side-box-content-small">
-        파일 업로드는 3MB 까지 가능합니다. 스크린 비율에 맞는 사진을 권장해요..!
-      </div>
+      <input type="file" class="tab-img-update-input" @change="handleFileUpload" />
+      <div class="tab-side-box-content-small">파일 업로드는 3MB 까지 가능합니다. 스크린 비율에 맞는 직사각형 사진을 권장해요..!</div>
     </div>
     <div class="tab-img-update-box">
       <div class="tab-side-box-content">기본 배경화면</div>
       <div class="tab-img-update-default">
-        <span
-          class="tab-img-update-default-box"
-          @click="handleChangeImg('seoul')"
-          >서울</span
-        >
-        <span
-          class="tab-img-update-default-box"
-          @click="handleChangeImg('global')"
-          >글로벌</span
-        >
+        <span class="tab-img-update-default-box" @click="handleChangeImg('seoul')">서울</span>
+        <span class="tab-img-update-default-box" @click="handleChangeImg('global')">글로벌</span>
       </div>
-
-      <div class="tab-side-box-content-small">
-        📷 Photo by Kihyun Lim, Sangyoung Oh
-      </div>
+      <div class="tab-side-box-content-small">📷 Photo by Kihyun Lim, Sangyoung Oh</div>
     </div>
   </div>
 </template>
