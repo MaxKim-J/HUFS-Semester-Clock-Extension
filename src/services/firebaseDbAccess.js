@@ -21,3 +21,12 @@ export const getNotificationsFromDB = async () => {
     console.error("학사공지 데이터를 가져올 수 없습니다");
   }
 };
+
+export const getSemesterInfoFromDB = async () => {
+  try {
+    const semesterInfo = await dataBase.ref(`/semester`).once("value");
+    return semesterInfo.val();
+  } catch {
+    console.error("학기 날짜 정보를 가져올 수 없습니다");
+  }
+};
