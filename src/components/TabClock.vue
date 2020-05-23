@@ -19,10 +19,10 @@
         <span class="tab-clock-main-contents-figure">초</span>
       </div>
       <div class="tab-clock-main-btn-wrapper" v-if="this.drawSeason && this.exceedSeason">
-        <div class="tab-clock-main-btn" @click="changeSemester('next')">다음학기 개강까지</div>
+        <div class="tab-clock-main-btn" @click="changeSemesterToNext()">다음학기 개강까지</div>
       </div>
-      <div class="tab-clock-main-btn-wrapper" v-else-if="(!this.drawSeason) && this.exceedSeason">
-        <div class="tab-clock-main-btn" @click="changeSemester('season')">계절학기 종강까지</div>
+      <div class="tab-clock-main-btn-wrapper" v-else>
+        <div class="tab-clock-main-btn" @click="changeSemesterToSeason()">계절학기 종강까지</div>
       </div>
     </div>
 
@@ -92,31 +92,29 @@ export default {
       });
       this.semesterInfos = newSemesters;
     },
-    clockValid() {
-      const { current, next, seasonal } = this.semesterInfos;
-      if (this.today <= current.due) {
-        this.semesterInfo = current;
-      } else if (this.today > current.due) {
-        this.exceedSeason = true;
-        this.changeSemester("next");
-      }
-      this.getDueDates();
-    },
     getDueDates() {
       this.gapTime = parseInt(this.semesterInfo.due - this.today);
     },
-    getNowDates() {
-      this.today = new Date();
-    },
-    changeSemester(key) {
+    clockValid() {
       const { current, next, seasonal } = this.semesterInfos;
-      if (key === "next") {
-        this.semesterInfo = next;
-        this.drawSeason = false;
+      if (new Date() <= current.due) {
+        this.semesterInfo = current;
       } else {
-        this.semesterInfo = seasonal;
-        this.drawSeason = true;
+        this.exceedSeason = true;
+        this.changeSemesterToNext();
       }
+      this.getDueDates();
+    },
+    changeSemesterToNext() {
+      const { next } = this.semesterInfos;
+      this.semesterInfo = next;
+      this.drawSeason = false;
+      this.getDueDates();
+    },
+    changeSemesterToSeason() {
+      const { seasonal } = this.semesterInfos;
+      this.semesterInfo = seasonal;
+      this.drawSeason = true;
       this.getDueDates();
     }
   },
@@ -124,12 +122,9 @@ export default {
     this.getSemesterInfo().then(() => {
       this.clockValid();
       this.getDueDates();
-      console.log(this.semesterInfo);
     });
-  },
-  mounted() {
     this.interval = setInterval(() => {
-      this.getNowDates();
+      this.today = new Date();
       this.getDueDates();
     }, 1000);
   }
