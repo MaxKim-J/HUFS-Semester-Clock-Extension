@@ -18,39 +18,38 @@
         <span class="tab-clock-main-contents-time">{{ this.secondsCalculated }}</span>
         <span class="tab-clock-main-contents-figure">초</span>
       </div>
-      <div class="tab-clock-main-btn-wrapper" v-if="this.drawSeason && this.exceedSeason">
+      <div class="tab-clock-main-btn-wrapper" v-if="this.clockType === 'season'">
         <div class="tab-clock-main-btn" @click="changeSemesterToNext()">시계 바꾸기(다음학기 개강까지)</div>
       </div>
-      <div class="tab-clock-main-btn-wrapper" v-else>
+      <div class="tab-clock-main-btn-wrapper" v-if="this.clockType === 'next'">
         <div class="tab-clock-main-btn" @click="changeSemesterToSeason()">시계 바꾸기(계절학기 종강까지)</div>
       </div>
     </div>
-
     <div class="tab-clock-info">현재시간 : {{ this.today | moment("YYYY년 MM월 DD일 h:mm a") }}</div>
   </div>
 </template>
 
 <script>
-import { getSemesterInfoFromDB } from "../services/firebaseDbAccess";
-
 import {
   getDistanceSeconds,
   getDistanceMinutes,
   getDistanceHours,
   getDistanceDays
 } from "../utils/TimeDistanceCalculator.js";
+import "../style/defaultTransition.scss";
 
 export default {
   name: "TabClock",
   data() {
     return {
       semesterInfo: null,
-      drawSeason: null,
-      exceedSeason: false,
+      clockType: "",
       today: new Date(),
-      gapTime: 0,
-      semesterInfos: {}
+      gapTime: null
     };
+  },
+  props: {
+    semesterInfos: Object
   },
   computed: {
     secondsCalculated() {
@@ -67,25 +66,6 @@ export default {
     }
   },
   methods: {
-    async getSemesterInfo() {
-      const semesters = await getSemesterInfoFromDB();
-      let newSemesters = {};
-      Object.keys(semesters).forEach(key => {
-        const { due, act, id } = semesters[key];
-        console.log(due, act, id);
-        const splitInfo = due.split("-").map(elem => parseInt(elem));
-        const [year, month, day] = splitInfo;
-        newSemesters = {
-          ...newSemesters,
-          [key]: {
-            act: act,
-            id: id,
-            due: new Date(year, month, day, 23, 59, 59)
-          }
-        };
-      });
-      this.semesterInfos = newSemesters;
-    },
     getDueDates() {
       this.gapTime = parseInt(this.semesterInfo.due - this.today);
     },
@@ -93,8 +73,8 @@ export default {
       const { current, next, seasonal } = this.semesterInfos;
       if (new Date() <= current.due) {
         this.semesterInfo = current;
+        this.clockType = "current";
       } else {
-        this.exceedSeason = true;
         this.changeSemesterToNext();
       }
       this.getDueDates();
@@ -103,20 +83,22 @@ export default {
       const { next } = this.semesterInfos;
       this.semesterInfo = next;
       this.drawSeason = false;
+      this.clockType = "next";
       this.getDueDates();
     },
     changeSemesterToSeason() {
       const { seasonal } = this.semesterInfos;
       this.semesterInfo = seasonal;
       this.drawSeason = true;
+      this.clockType = "season";
       this.getDueDates();
     }
   },
   created() {
-    this.getSemesterInfo().then(() => {
-      this.clockValid();
-      this.getDueDates();
-    });
+    // this.getSemesterInfo().then(() => {
+    this.clockValid();
+    this.getDueDates();
+    // });
     this.interval = setInterval(() => {
       this.today = new Date();
       this.getDueDates();
@@ -159,7 +141,7 @@ export default {
 
 @include small {
   .tab-clock-main-contents-time {
-    font-size: 60px !important;
+    font-size: 70px !important;
   }
 }
 </style>
