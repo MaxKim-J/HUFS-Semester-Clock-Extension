@@ -19,10 +19,10 @@
         <span class="tab-clock-main-contents-figure">초</span>
       </div>
       <div class="tab-clock-main-btn-wrapper" v-if="this.drawSeason && this.exceedSeason">
-        <div class="tab-clock-main-btn" @click="changeSemesterToNext()">다음학기 개강까지</div>
+        <div class="tab-clock-main-btn" @click="changeSemesterToNext()">시계 바꾸기(다음학기 개강까지)</div>
       </div>
       <div class="tab-clock-main-btn-wrapper" v-else>
-        <div class="tab-clock-main-btn" @click="changeSemesterToSeason()">계절학기 종강까지</div>
+        <div class="tab-clock-main-btn" @click="changeSemesterToSeason()">시계 바꾸기(계절학기 종강까지)</div>
       </div>
     </div>
 
@@ -143,7 +143,6 @@ export default {
   display: flex;
   justify-content: center;
   .tab-clock-main-btn {
-    width: 140px;
     cursor: pointer;
     font-size: $small;
     text-decoration: underline;
