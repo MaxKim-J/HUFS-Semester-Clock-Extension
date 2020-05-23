@@ -146,6 +146,11 @@ export default {
     cursor: pointer;
     font-size: $small;
     text-decoration: underline;
+    opacity: 0.6;
+    transition: opacity 0.5s;
+  }
+  .tab-clock-main-btn:hover {
+    opacity: 1;
   }
 }
 .tab-clock-info {
