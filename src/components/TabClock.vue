@@ -31,12 +31,6 @@
 </template>
 
 <script>
-import {
-  CURRENT_SEMESTER_INFO,
-  SEASONAL_SEMESTER_INFO,
-  NEXT_SEMESTER_INFO
-} from "../utils/SemesterInfo.js";
-
 import { getSemesterInfoFromDB } from "../services/firebaseDbAccess";
 
 import {
