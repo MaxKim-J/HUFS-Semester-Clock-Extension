@@ -18,10 +18,16 @@
         <span class="tab-clock-main-contents-time">{{ this.secondsCalculated }}</span>
         <span class="tab-clock-main-contents-figure">초</span>
       </div>
-      <div class="tab-clock-main-btn-wrapper" v-if="this.clockType === 'season'">
+      <div
+        class="tab-clock-main-btn-wrapper"
+        v-if="this.clockType === 'season' && !this.isPassSeasonal"
+      >
         <div class="tab-clock-main-btn" @click="changeSemesterToNext()">시계 바꾸기(다음학기 개강까지)</div>
       </div>
-      <div class="tab-clock-main-btn-wrapper" v-if="this.clockType === 'next'">
+      <div
+        class="tab-clock-main-btn-wrapper"
+        v-if="this.clockType === 'next' && !this.isPassSeasonal"
+      >
         <div class="tab-clock-main-btn" @click="changeSemesterToSeason()">시계 바꾸기(계절학기 종강까지)</div>
       </div>
     </div>
@@ -43,6 +49,7 @@ export default {
   data() {
     return {
       semesterInfo: null,
+      isPassSeasonal: false,
       clockType: "",
       today: new Date(),
       gapTime: null
@@ -71,10 +78,12 @@ export default {
     },
     clockValid() {
       const { current, next, seasonal } = this.semesterInfos;
-      if (new Date() <= current.due) {
+      const now = new Date();
+      if (now <= current.due) {
         this.semesterInfo = current;
         this.clockType = "current";
       } else {
+        this.isPassSeasonal = now > seasonal.due ? true : false;
         this.changeSemesterToNext();
       }
       this.getDueDates();
@@ -82,23 +91,19 @@ export default {
     changeSemesterToNext() {
       const { next } = this.semesterInfos;
       this.semesterInfo = next;
-      this.drawSeason = false;
       this.clockType = "next";
       this.getDueDates();
     },
     changeSemesterToSeason() {
       const { seasonal } = this.semesterInfos;
       this.semesterInfo = seasonal;
-      this.drawSeason = true;
       this.clockType = "season";
       this.getDueDates();
     }
   },
   created() {
-    // this.getSemesterInfo().then(() => {
     this.clockValid();
     this.getDueDates();
-    // });
     this.interval = setInterval(() => {
       this.today = new Date();
       this.getDueDates();
