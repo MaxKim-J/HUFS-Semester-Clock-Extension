@@ -3,6 +3,7 @@
     <div class="tab-clock-main">
       <div
         class="tab-clock-main-title"
+        v-if="this.semesterInfo"
       >{{this.semesterInfo.id}}학기 {{this.semesterInfo.act}}({{this.semesterInfo.due | moment("YY년 MM월 DD일")}})까지</div>
       <div class="tab-clock-main-contents">
         <span class="tab-clock-main-contents-time">{{ this.daysCalculated }}</span>
@@ -17,42 +18,45 @@
         <span class="tab-clock-main-contents-time">{{ this.secondsCalculated }}</span>
         <span class="tab-clock-main-contents-figure">초</span>
       </div>
-      <div class="tab-clock-main-btn-wrapper" v-if="this.drawSeason && this.exceedSeason">
-        <div class="tab-clock-main-btn" @click="changeSemester('next')">다음학기 개강까지</div>
+      <div
+        class="tab-clock-main-btn-wrapper"
+        v-if="this.clockType === 'season' && !this.isPassSeasonal"
+      >
+        <div class="tab-clock-main-btn" @click="changeSemesterToNext()">시계 바꾸기(다음학기 개강까지)</div>
       </div>
-      <div class="tab-clock-main-btn-wrapper" v-else-if="(!this.drawSeason) && this.exceedSeason">
-        <div class="tab-clock-main-btn" @click="changeSemester('season')">계절학기 종강까지</div>
+      <div
+        class="tab-clock-main-btn-wrapper"
+        v-if="this.clockType === 'next' && !this.isPassSeasonal"
+      >
+        <div class="tab-clock-main-btn" @click="changeSemesterToSeason()">시계 바꾸기(계절학기 종강까지)</div>
       </div>
     </div>
-
     <div class="tab-clock-info">현재시간 : {{ this.today | moment("YYYY년 MM월 DD일 h:mm a") }}</div>
   </div>
 </template>
 
 <script>
 import {
-  CURRENT_SEMESTER_INFO,
-  SEASONAL_SEMESTER_INFO,
-  NEXT_SEMESTER_INFO
-} from "../utils/SemesterInfo.js";
-
-import {
   getDistanceSeconds,
   getDistanceMinutes,
   getDistanceHours,
   getDistanceDays
 } from "../utils/TimeDistanceCalculator.js";
+import "../style/defaultTransition.scss";
 
 export default {
   name: "TabClock",
   data() {
     return {
       semesterInfo: null,
-      drawSeason: null,
-      exceedSeason: false,
+      isPassSeasonal: false,
+      clockType: "",
       today: new Date(),
-      gapTime: 0
+      gapTime: null
     };
+  },
+  props: {
+    semesterInfos: Object
   },
   computed: {
     secondsCalculated() {
@@ -69,40 +73,39 @@ export default {
     }
   },
   methods: {
-    clockValid() {
-      if (this.today <= CURRENT_SEMESTER_INFO.due) {
-        this.semesterInfo = CURRENT_SEMESTER_INFO;
-      } else if (this.today > SEASONAL_SEMESTER_INFO.due) {
-        this.changeSemester("next");
-      } else if (this.today > CURRENT_SEMESTER_INFO.due) {
-        this.exceedSeason = true;
-        this.changeSemester("next");
-      }
-    },
     getDueDates() {
       this.gapTime = parseInt(this.semesterInfo.due - this.today);
     },
-    getNowDates() {
-      this.today = new Date();
-    },
-    changeSemester(key) {
-      if (key === "next") {
-        this.semesterInfo = NEXT_SEMESTER_INFO;
-        this.drawSeason = false;
+    clockValid() {
+      const { current, next, seasonal } = this.semesterInfos;
+      const now = new Date();
+      if (now <= current.due) {
+        this.semesterInfo = current;
+        this.clockType = "current";
       } else {
-        this.semesterInfo = SEASONAL_SEMESTER_INFO;
-        this.drawSeason = true;
+        this.isPassSeasonal = now > seasonal.due ? true : false;
+        this.changeSemesterToNext();
       }
+      this.getDueDates();
+    },
+    changeSemesterToNext() {
+      const { next } = this.semesterInfos;
+      this.semesterInfo = next;
+      this.clockType = "next";
+      this.getDueDates();
+    },
+    changeSemesterToSeason() {
+      const { seasonal } = this.semesterInfos;
+      this.semesterInfo = seasonal;
+      this.clockType = "season";
       this.getDueDates();
     }
   },
   created() {
     this.clockValid();
     this.getDueDates();
-  },
-  mounted() {
     this.interval = setInterval(() => {
-      this.getNowDates();
+      this.today = new Date();
       this.getDueDates();
     }, 1000);
   }
@@ -127,10 +130,14 @@ export default {
   display: flex;
   justify-content: center;
   .tab-clock-main-btn {
-    width: 140px;
     cursor: pointer;
     font-size: $small;
     text-decoration: underline;
+    opacity: 0.6;
+    transition: opacity 0.5s;
+  }
+  .tab-clock-main-btn:hover {
+    opacity: 1;
   }
 }
 .tab-clock-info {
@@ -139,7 +146,7 @@ export default {
 
 @include small {
   .tab-clock-main-contents-time {
-    font-size: 60px !important;
+    font-size: 70px !important;
   }
 }
 </style>

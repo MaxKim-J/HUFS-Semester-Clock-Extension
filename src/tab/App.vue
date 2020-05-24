@@ -1,14 +1,11 @@
 <template>
   <transition name="fadeMain" v-if="mainIsShowing">
-    <div
-      class="tab"
-      :style="{ 'background-image': 'url(' + backgroundImg + ')' }"
-    >
+    <div class="tab" :style="{ 'background-image': 'url(' + backgroundImg + ')' }">
       <div class="tab-background"></div>
       <tab-header class="tab-header tab-anti-antialiasing"></tab-header>
       <div class="tab-main-wrap tab-anti-antialiasing">
         <div class="tab-main">
-          <tab-clock></tab-clock>
+          <tab-clock :semesterInfos="this.semesterInfos"></tab-clock>
           <tab-middle></tab-middle>
           <tab-hotlinks></tab-hotlinks>
         </div>
@@ -27,6 +24,7 @@ import TabHeader from "../components/TabHeader.vue";
 import { localStorageRemove } from "../services/localStorageAccess";
 import "../style/initialize.scss";
 import "../style/defaultTransition.scss";
+import { getSemesterInfoFromDB } from "../services/firebaseDbAccess";
 
 export default {
   name: "App",
@@ -39,7 +37,8 @@ export default {
   },
   data() {
     return {
-      mainIsShowing: false
+      mainIsShowing: false,
+      semesterInfos: null
     };
   },
   computed: {
@@ -50,11 +49,30 @@ export default {
   methods: {
     getBackgroundImg() {
       this.$store.dispatch("getBackgroundImg");
+    },
+    async getSemesterInfo() {
+      const semesters = await getSemesterInfoFromDB();
+      let newSemesters = {};
+      Object.keys(semesters).forEach(key => {
+        const { due, act, id } = semesters[key];
+        const splitInfo = due.split("-").map(elem => parseInt(elem));
+        const [year, month, day] = splitInfo;
+        newSemesters = {
+          ...newSemesters,
+          [key]: {
+            act: act,
+            id: id,
+            due: new Date(year, month, day, 23, 59, 59)
+          }
+        };
+      });
+      this.semesterInfos = newSemesters;
     }
   },
   created() {
     localStorageRemove(["notificationInfo", "weatherInfo"]);
     this.getBackgroundImg();
+    this.getSemesterInfo();
     setInterval(() => {
       this.mainIsShowing = true;
     }, 1000);

@@ -1,12 +1,14 @@
-# ⏱ 외대 종강시계
+# 외대 종강시계
 
+### 🏛🙏⏱
+![라스트커밋](https://img.shields.io/badge/MadeFor-HUFS%20Students-%23002a48?style=for-the-badge&logo=Vue.js)  
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/MaxKim-J/HUFS-Semester-Clock-Extension/master) ![Chrome Web Store](https://img.shields.io/chrome-web-store/users/jadlpknbgnmmelikpcaogikohieafaem?hl=ko) [![GitHub license](https://img.shields.io/github/license/MaxKim-J/HUFS-Semester-Clock-Extension)](https://github.com/MaxKim-J/HUFS-Semester-Clock-Extension) ![Chrome Web Store](https://img.shields.io/chrome-web-store/v/jadlpknbgnmmelikpcaogikohieafaem)
 
 ![스크린샷](screenshot.png)
 HUFS-Semester-Clock-Extension  
 외대생을 위한, 종강까지 얼마나 남았는지 보여주는 크롬 익스텐션
 
-- [크롬 웹 스토어에서 다운받기](https://chrome.google.com/webstore/detail/%EC%99%B8%EB%8C%80-%EC%A2%85%EA%B0%95%EC%8B%9C%EA%B3%84/jadlpknbgnmmelikpcaogikohieafaem?hl=ko)
+- 🧩 [크롬 웹 스토어에서 다운받기](https://chrome.google.com/webstore/detail/%EC%99%B8%EB%8C%80-%EC%A2%85%EA%B0%95%EC%8B%9C%EA%B3%84/jadlpknbgnmmelikpcaogikohieafaem?hl=ko)
 
 ## ✅ 주요 기능
 
