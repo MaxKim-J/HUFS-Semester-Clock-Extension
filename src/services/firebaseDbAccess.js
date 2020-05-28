@@ -24,7 +24,7 @@ export const getNotificationsFromDB = async () => {
 
 export const getSemesterInfoFromDB = async () => {
   try {
-    const semesterInfo = await dataBase.ref(`/semester`).once("value");
+    const semesterInfo = await dataBase.ref("/semester").once("value");
     return semesterInfo.val();
   } catch {
     console.error("학기 날짜 정보를 가져올 수 없습니다");

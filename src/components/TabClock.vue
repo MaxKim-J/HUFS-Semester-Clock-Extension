@@ -48,15 +48,12 @@ export default {
   name: "TabClock",
   data() {
     return {
-      semesterInfo: null,
-      isPassSeasonal: false,
-      clockType: "",
       today: new Date(),
-      gapTime: null
+      clockType: "",
+      gapTime: null,
+      semesterInfo: null,
+      isPassSeasonal: false
     };
-  },
-  props: {
-    semesterInfos: Object
   },
   computed: {
     secondsCalculated() {
@@ -70,6 +67,9 @@ export default {
     },
     daysCalculated() {
       return getDistanceDays(this.gapTime);
+    },
+    semesterInfos() {
+      return this.$store.state.semesterInfos;
     }
   },
   methods: {
@@ -104,6 +104,8 @@ export default {
   created() {
     this.clockValid();
     this.getDueDates();
+  },
+  mounted() {
     this.interval = setInterval(() => {
       this.today = new Date();
       this.getDueDates();

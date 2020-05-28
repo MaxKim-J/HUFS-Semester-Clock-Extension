@@ -5,7 +5,7 @@
       <tab-header class="tab-header tab-anti-antialiasing"></tab-header>
       <div class="tab-main-wrap tab-anti-antialiasing">
         <div class="tab-main">
-          <tab-clock :semesterInfos="this.semesterInfos"></tab-clock>
+          <tab-clock></tab-clock>
           <tab-middle></tab-middle>
           <tab-hotlinks></tab-hotlinks>
         </div>
@@ -37,8 +37,7 @@ export default {
   },
   data() {
     return {
-      mainIsShowing: false,
-      semesterInfos: null
+      mainIsShowing: false
     };
   },
   computed: {
@@ -50,29 +49,14 @@ export default {
     getBackgroundImg() {
       this.$store.dispatch("getBackgroundImg");
     },
-    async getSemesterInfo() {
-      const semesters = await getSemesterInfoFromDB();
-      let newSemesters = {};
-      Object.keys(semesters).forEach(key => {
-        const { due, act, id } = semesters[key];
-        const splitInfo = due.split("-").map(elem => parseInt(elem));
-        const [year, month, day] = splitInfo;
-        newSemesters = {
-          ...newSemesters,
-          [key]: {
-            act: act,
-            id: id,
-            due: new Date(year, month, day, 23, 59, 59)
-          }
-        };
-      });
-      this.semesterInfos = newSemesters;
+    getSemesterInfo() {
+      this.$store.dispatch("getSemesterInfos");
     }
   },
   created() {
     localStorageRemove(["notificationInfo", "weatherInfo"]);
-    this.getBackgroundImg();
     this.getSemesterInfo();
+    this.getBackgroundImg();
     setInterval(() => {
       this.mainIsShowing = true;
     }, 1000);
