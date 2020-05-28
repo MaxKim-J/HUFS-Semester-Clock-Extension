@@ -2,7 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 /* 
-뷰엑스 저장소에서 다루는 데이터 : 
+뷰엑스 저장소에서  : 
 1. 유저 이름, 유저 학번, 유저 배경화면 로컬스토리지에서 가져오기
 2. 학기 정보 파이어베이스 DB에서 가져오기
 3. 날씨, 공지사항은 tabWeather, tabNotifications에서 따로 구현

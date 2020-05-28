@@ -6,16 +6,16 @@
         v-if="this.semesterInfo"
       >{{this.semesterInfo.id}}학기 {{this.semesterInfo.act}}({{this.semesterInfo.due | moment("YY년 MM월 DD일")}})까지</div>
       <div class="tab-clock-main-contents">
-        <span class="tab-clock-main-contents-time">{{ this.daysCalculated }}</span>
+        <span class="tab-clock-main-contents-time">{{ this.calculatedDistances.days }}</span>
         <span class="tab-clock-main-contents-figure">일</span>
 
-        <span class="tab-clock-main-contents-time">{{ this.hoursCalculated }}</span>
+        <span class="tab-clock-main-contents-time">{{ this.calculatedDistances.hours }}</span>
         <span class="tab-clock-main-contents-figure">시간</span>
 
-        <span class="tab-clock-main-contents-time">{{ this.minutesCalculated }}</span>
+        <span class="tab-clock-main-contents-time">{{ this.calculatedDistances.minutes }}</span>
         <span class="tab-clock-main-contents-figure">분</span>
 
-        <span class="tab-clock-main-contents-time">{{ this.secondsCalculated }}</span>
+        <span class="tab-clock-main-contents-time">{{ this.calculatedDistances.seconds }}</span>
         <span class="tab-clock-main-contents-figure">초</span>
       </div>
       <div
@@ -36,12 +36,7 @@
 </template>
 
 <script>
-import {
-  getDistanceSeconds,
-  getDistanceMinutes,
-  getDistanceHours,
-  getDistanceDays
-} from "../utils/TimeDistanceCalculator.js";
+import { getDistancesFromToday } from "../utils/TimeDistanceCalculator.js";
 import "../style/defaultTransition.scss";
 
 export default {
@@ -56,17 +51,8 @@ export default {
     };
   },
   computed: {
-    secondsCalculated() {
-      return getDistanceSeconds(this.gapTime);
-    },
-    minutesCalculated() {
-      return getDistanceMinutes(this.gapTime);
-    },
-    hoursCalculated() {
-      return getDistanceHours(this.gapTime);
-    },
-    daysCalculated() {
-      return getDistanceDays(this.gapTime);
+    calculatedDistances() {
+      return getDistancesFromToday(this.gapTime);
     },
     semesterInfos() {
       return this.$store.state.semesterInfos;
