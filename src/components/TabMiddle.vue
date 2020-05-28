@@ -37,7 +37,7 @@
 <script>
 import { greetingValid } from "../utils/GreetingsMessageLogic.js";
 import { FRESHMANYEARS } from "../utils/FreshmanYears.js";
-import { getDistanceFreshman } from "../utils/TimeDistanceCalculator.js";
+import { getDistanceFromAdmissionDay } from "../utils/TimeDistanceCalculator.js";
 import { getRandomArrayIndex } from "../utils/RandomArrayIndex.js";
 
 export default {
@@ -52,7 +52,7 @@ export default {
   },
   computed: {
     getDistance() {
-      return getDistanceFreshman(this.userFreshmanYear);
+      return getDistanceFromAdmissionDay(this.userFreshmanYear);
     },
     userName() {
       return this.$store.state.userName;
