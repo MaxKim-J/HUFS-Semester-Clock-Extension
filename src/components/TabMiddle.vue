@@ -71,9 +71,6 @@ export default {
       const INDEXNUM = getRandomArrayIndex(currentHourMessages);
       this.greetingMessage = currentHourMessages[INDEXNUM].message;
     },
-    getUserInfo() {
-      this.$store.dispatch("getUserInfo");
-    },
     removeUserInfo() {
       const { userName, userFreshmanYear } = this.$store.state;
       this.inputName = userName;
@@ -103,7 +100,6 @@ export default {
   },
   created() {
     this.getGreetingMessage();
-    this.getUserInfo();
   }
 };
 </script>

@@ -2,15 +2,15 @@
   <transition name="fadeMain" v-if="mainIsShowing">
     <div class="tab" :style="{ 'background-image': 'url(' + backgroundImg + ')' }">
       <div class="tab-background"></div>
-      <tab-header class="tab-header tab-anti-antialiasing"></tab-header>
-      <div class="tab-main-wrap tab-anti-antialiasing">
+      <tab-header class="tab-header tab-antialiasing"></tab-header>
+      <div class="tab-main-wrap tab-antialiasing">
         <div class="tab-main">
           <tab-clock></tab-clock>
           <tab-middle></tab-middle>
           <tab-hotlinks></tab-hotlinks>
         </div>
       </div>
-      <tab-footer class="tab-footer tab-anti-antialiasing"></tab-footer>
+      <tab-footer class="tab-footer tab-antialiasing"></tab-footer>
     </div>
   </transition>
 </template>
@@ -24,7 +24,7 @@ import TabHeader from "../components/TabHeader.vue";
 import { localStorageRemove } from "../services/localStorageAccess";
 import "../style/initialize.scss";
 import "../style/defaultTransition.scss";
-import { getSemesterInfoFromDB } from "../services/firebaseDbAccess";
+import "../style/defaultTransition.scss";
 
 export default {
   name: "App",
@@ -46,20 +46,25 @@ export default {
     }
   },
   methods: {
-    getBackgroundImg() {
-      this.$store.dispatch("getBackgroundImg");
+    async getBackgroundImg() {
+      await this.$store.dispatch("getBackgroundImg");
     },
-    getSemesterInfo() {
-      this.$store.dispatch("getSemesterInfos");
+    async getSemesterInfos() {
+      await this.$store.dispatch("getSemesterInfos");
+    },
+    async getUserInfo() {
+      await this.$store.dispatch("getUserInfo");
     }
   },
   created() {
     localStorageRemove(["notificationInfo", "weatherInfo"]);
-    this.getSemesterInfo();
-    this.getBackgroundImg();
-    setInterval(() => {
+    Promise.all([
+      this.getBackgroundImg(),
+      this.getSemesterInfos(),
+      this.getUserInfo()
+    ]).then(data => {
       this.mainIsShowing = true;
-    }, 1000);
+    });
   }
 };
 </script>
@@ -95,7 +100,7 @@ export default {
   .tab-footer {
     z-index: 2;
   }
-  .tab-anti-antialiasing {
+  .tab-antialiasing {
     transform: rotate(-0.06deg);
   }
 }

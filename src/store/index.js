@@ -72,24 +72,23 @@ export default new Vuex.Store({
         }
       });
     },
-    getSemesterInfos({ commit }) {
-      getSemesterInfoFromDB().then((semesters) => {
-        let newSemesters = {};
-        Object.keys(semesters).forEach((key) => {
-          const { due, act, id } = semesters[key];
-          const splitInfo = due.split("-").map((elem) => parseInt(elem));
-          const [year, month, day] = splitInfo;
-          newSemesters = {
-            ...newSemesters,
-            [key]: {
-              act: act,
-              id: id,
-              due: new Date(year, month, day, 23, 59, 59),
-            },
-          };
-        });
-        commit("GET_SEMESTER_INFO", newSemesters);
+    async getSemesterInfos({ commit }) {
+      const semesters = await getSemesterInfoFromDB();
+      let newSemesters = {};
+      Object.keys(semesters).forEach((key) => {
+        const { due, act, id } = semesters[key];
+        const splitInfo = due.split("-").map((elem) => parseInt(elem));
+        const [year, month, day] = splitInfo;
+        newSemesters = {
+          ...newSemesters,
+          [key]: {
+            act: act,
+            id: id,
+            due: new Date(year, month, day, 23, 59, 59),
+          },
+        };
       });
+      commit("GET_SEMESTER_INFO", newSemesters);
     },
   },
 });
