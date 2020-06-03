@@ -1,15 +1,16 @@
 <template>
-  <transition name="fadeMain" v-if="mainIsShowing">
+  <transition name="fadeMain" v-if="backgroundImgLoading">
     <div class="tab" :style="{ 'background-image': 'url(' + backgroundImg + ')' }">
       <div class="tab-background"></div>
       <tab-header class="tab-header tab-antialiasing"></tab-header>
-      <div class="tab-main-wrap tab-antialiasing">
+      <div class="tab-main-wrap tab-antialiasing" v-if="semesterInfoLoading">
         <div class="tab-main">
           <tab-clock></tab-clock>
           <tab-middle></tab-middle>
           <tab-hotlinks></tab-hotlinks>
         </div>
       </div>
+      <div v-if="loadingFailed" class="tab-warning">😅 wifi 연결을 확인하고 새로고침을 눌러주세요!</div>
       <tab-footer class="tab-footer tab-antialiasing"></tab-footer>
     </div>
   </transition>
@@ -24,7 +25,6 @@ import TabHeader from "../components/TabHeader.vue";
 import { localStorageRemove } from "../services/localStorageAccess";
 import "../style/initialize.scss";
 import "../style/defaultTransition.scss";
-import "../style/defaultTransition.scss";
 
 export default {
   name: "App",
@@ -37,7 +37,9 @@ export default {
   },
   data() {
     return {
-      mainIsShowing: false
+      backgroundImgLoading: false,
+      semesterInfoLoading: false,
+      loadingFailed: false
     };
   },
   computed: {
@@ -51,6 +53,7 @@ export default {
     },
     async getSemesterInfos() {
       await this.$store.dispatch("getSemesterInfos");
+      this.semesterInfoLoading = true;
     },
     async getUserInfo() {
       await this.$store.dispatch("getUserInfo");
@@ -58,13 +61,20 @@ export default {
   },
   created() {
     localStorageRemove(["notificationInfo", "weatherInfo"]);
-    Promise.all([
-      this.getBackgroundImg(),
-      this.getSemesterInfos(),
-      this.getUserInfo()
-    ]).then(data => {
-      this.mainIsShowing = true;
-    });
+    if (navigator.onLine === false) {
+      this.getBackgroundImg().then(() => {
+        this.backgroundImgLoading = true;
+      });
+      this.loadingFailed = true;
+    } else {
+      Promise.all([
+        this.getBackgroundImg(),
+        this.getSemesterInfos(),
+        this.getUserInfo()
+      ]).then(() => {
+        this.backgroundImgLoading = true;
+      });
+    }
   }
 };
 </script>
@@ -96,6 +106,10 @@ export default {
       text-align: center;
       font-size: 20px;
     }
+  }
+  .tab-warning {
+    z-index: 1;
+    font-size: 20px;
   }
   .tab-footer {
     z-index: 2;
