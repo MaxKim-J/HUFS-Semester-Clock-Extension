@@ -19,6 +19,10 @@
 
 <script>
 import "../../style/sidePage.scss";
+import {
+  getSeoulImgFromStorage,
+  getGlobalImgFromStorage
+} from "../../services/storageAccess";
 
 export default {
   methods: {
@@ -33,7 +37,10 @@ export default {
     handleFileUpload() {
       this.fileToData()
         .then(data => {
-          this.$store.commit("UPDATE_BACKGROUND_IMG", { backgroundImg: data });
+          this.$store.commit("UPDATE_BACKGROUND_IMG", {
+            backgroundImgDay: data,
+            backgroundImgNight: data
+          });
         })
         .catch(() => {
           alert("배경화면 이미지는 3MB를 초과할 수 없습니다");
@@ -46,12 +53,12 @@ export default {
     },
     handleChangeImg(key) {
       if (key == "seoul") {
-        this.$store.commit("UPDATE_BACKGROUND_IMG", {
-          backgroundImg: "../../img/default_image_seoul.png"
+        getSeoulImgFromStorage().then(data => {
+          this.$store.commit("UPDATE_BACKGROUND_IMG", data);
         });
       } else if (key === "global") {
-        this.$store.commit("UPDATE_BACKGROUND_IMG", {
-          backgroundImg: "../../img/default_image_global.png"
+        getGlobalImgFromStorage().then(data => {
+          this.$store.commit("UPDATE_BACKGROUND_IMG", data);
         });
       }
     }

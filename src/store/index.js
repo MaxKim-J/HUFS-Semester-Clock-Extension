@@ -17,6 +17,8 @@ import {
 } from "../services/localStorageAccess";
 
 import { getSemesterInfoFromDB } from "../services/firebaseDbAccess";
+import { getSeoulImgFromStorage } from "../services/storageAccess";
+import getImageByTime from "../utils/getImageByTime";
 
 const dataArr = ["userName", "userFreshmanYear"];
 
@@ -24,7 +26,7 @@ export default new Vuex.Store({
   state: {
     userName: "",
     userFreshmanYear: 0,
-    userBackgroundImg: "",
+    backgroundImg: "",
     semesterInfos: {},
   },
   mutations: {
@@ -43,10 +45,14 @@ export default new Vuex.Store({
       localStorageSet(payload);
     },
     GET_BACKGROUND_IMG(state, payload) {
-      state.userBackgroundImg = payload;
+      state.backgroundImg = getImageByTime()
+        ? payload.backgroundImgDay
+        : payload.backgroundImgNight;
     },
     UPDATE_BACKGROUND_IMG(state, payload) {
-      state.userBackgroundImg = payload.backgroundImg;
+      state.backgroundImg = getImageByTime()
+        ? payload.backgroundImgDay
+        : payload.backgroundImgNight;
       localStorageSet(payload);
     },
     GET_SEMESTER_INFO(state, payload) {
@@ -64,13 +70,19 @@ export default new Vuex.Store({
       });
     },
     getBackgroundImg({ commit }) {
-      localStorageGet(["backgroundImg"]).then((data) => {
-        if (data.backgroundImg) {
-          commit("GET_BACKGROUND_IMG", data.backgroundImg);
-        } else {
-          commit("GET_BACKGROUND_IMG", "../img/default_image_seoul.png");
+      localStorageGet(["backgroundImgDay", "backgroundImgNight"]).then(
+        (data) => {
+          console.log(data);
+          if (data.backgroundImgDay && data.backgroundImgNight) {
+            commit("GET_BACKGROUND_IMG", data);
+          } else {
+            console.log("없음");
+            getSeoulImgFromStorage().then((img) => {
+              commit("UPDATE_BACKGROUND_IMG", img);
+            });
+          }
         }
-      });
+      );
     },
     async getSemesterInfos({ commit }) {
       const semesters = await getSemesterInfoFromDB();

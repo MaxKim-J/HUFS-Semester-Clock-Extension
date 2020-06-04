@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     backgroundImg() {
-      return this.$store.state.userBackgroundImg;
+      return this.$store.state.backgroundImg;
     }
   },
   methods: {
