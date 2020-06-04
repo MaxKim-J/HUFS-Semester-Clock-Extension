@@ -85,7 +85,6 @@ const config = {
     }),
     new CopyWebpackPlugin([
       { from: "icons", to: "icons", ignore: ["icon.xcf"] },
-      { from: "img", to: "img", ignore: ["icon.xcf"] },
       {
         from: "popup/popup.html",
         to: "popup/popup.html",
@@ -103,7 +102,6 @@ const config = {
             jsonContent.content_security_policy =
               "script-src 'self' 'unsafe-eval'; object-src 'self'";
           }
-
           return JSON.stringify(jsonContent, null, 2);
         },
       },
