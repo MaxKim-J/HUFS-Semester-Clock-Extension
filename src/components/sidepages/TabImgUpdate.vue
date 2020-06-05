@@ -23,6 +23,7 @@ import {
   getSeoulImgFromStorage,
   getGlobalImgFromStorage
 } from "../../services/storageAccess";
+import { imageToString } from "../../utils/imageToString";
 
 export default {
   methods: {

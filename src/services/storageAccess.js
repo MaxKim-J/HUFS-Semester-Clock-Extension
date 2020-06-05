@@ -1,9 +1,13 @@
 import { storage } from "../utils/firebaseInit";
+import imageToString from "../utils/imageToString";
+import axios from "axios";
 
 const getImgFromStorage = async (fileName) => {
+  console.log(`storage에 ${fileName} 이미지 파일을 요청합니다`);
   const storageRef = storage.ref();
-  const img = await storageRef.child(`${fileName}.png`).getDownloadURL();
-  return img;
+  const url = await storageRef.child(`${fileName}.png`).getDownloadURL();
+  const res = await axios.get(url, { responseType: "blob" });
+  return imageToString(res.data);
 };
 
 export const getSeoulImgFromStorage = async () => {
