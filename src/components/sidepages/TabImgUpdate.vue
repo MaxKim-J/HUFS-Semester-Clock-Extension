@@ -2,7 +2,9 @@
   <div class="tab-side-box">
     <div class="tab-side-box-title">배경화면 수정</div>
     <div class="tab-img-update-box">
-      <div class="tab-side-box-content">사진 업로드</div>
+      <div class="tab-side-box-content">
+        사진 업로드
+      </div>
       <input
         type="file"
         class="tab-img-update-input"
@@ -28,6 +30,9 @@
           @click="handleChangeImg('global')"
           >글로벌</span
         >
+        <span class="tab-side-box-content-small" v-if="this.isLoading">
+          &nbsp;&nbsp;&nbsp;변경중... 잠시 기다려 주세요
+        </span>
       </div>
       <div class="tab-side-box-content-small">
         낮/밤 다른 사진이 표시됩니다__📷 Photo by Kihyun Lim, Sangyoung Oh
@@ -45,6 +50,11 @@ import {
 import { imageToString } from "../../utils/imageToString";
 
 export default {
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
   methods: {
     fileToData() {
       this.isFileSizeValid(event.target.files[0]);
@@ -66,16 +76,14 @@ export default {
         console.log(e.message);
       }
     },
-    handleChangeImg(key) {
-      if (key == "seoul") {
-        getSeoulImgFromStorage().then((data) => {
-          this.$store.commit("UPDATE_BACKGROUND_IMG", data);
-        });
-      } else if (key === "global") {
-        getGlobalImgFromStorage().then((data) => {
-          this.$store.commit("UPDATE_BACKGROUND_IMG", data);
-        });
-      }
+    async handleChangeImg(key) {
+      this.isLoading = true;
+      const data =
+        key === "seoul"
+          ? await getSeoulImgFromStorage()
+          : await getGlobalImgFromStorage();
+      this.$store.commit("UPDATE_BACKGROUND_IMG", data);
+      this.isLoading = false;
     },
   },
 };
