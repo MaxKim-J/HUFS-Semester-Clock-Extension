@@ -14,7 +14,6 @@ const config = {
   context: __dirname + "/src",
   entry: {
     background: "./background.js",
-    "popup/popup": "./popup/popup.js",
     "tab/tab": "./tab/tab.js",
   },
   output: {
@@ -85,11 +84,6 @@ const config = {
     }),
     new CopyWebpackPlugin([
       { from: "icons", to: "icons", ignore: ["icon.xcf"] },
-      {
-        from: "popup/popup.html",
-        to: "popup/popup.html",
-        transform: transformHtml,
-      },
       { from: "tab/tab.html", to: "tab/tab.html", transform: transformHtml },
       {
         from: "manifest.json",
