@@ -45,14 +45,24 @@ export default new Vuex.Store({
       localStorageSet(payload);
     },
     GET_BACKGROUND_IMG(state, payload) {
-      state.backgroundImg = getImageByTime()
-        ? payload.backgroundImgDay
-        : payload.backgroundImgNight;
+      if (payload.userBackgroundImg) {
+        state.backgroundImg = payload.userBackgroundImg;
+      } else {
+        state.backgroundImg = getImageByTime()
+          ? payload.backgroundImgDay
+          : payload.backgroundImgNight;
+      }
     },
     UPDATE_BACKGROUND_IMG(state, payload) {
-      state.backgroundImg = getImageByTime()
-        ? payload.backgroundImgDay
-        : payload.backgroundImgNight;
+      if (payload.userBackgroundImg) {
+        localStorageRemove(["backgroundImgDay", "backgroundImgNight"]);
+        state.backgroundImg = payload.userBackgroundImg;
+      } else {
+        localStorageRemove(["userBackgroundImg"]);
+        state.backgroundImg = getImageByTime()
+          ? payload.backgroundImgDay
+          : payload.backgroundImgNight;
+      }
       localStorageSet(payload);
     },
     GET_SEMESTER_INFO(state, payload) {
@@ -70,19 +80,27 @@ export default new Vuex.Store({
       });
     },
     getBackgroundImg({ commit }) {
-      localStorageGet(["backgroundImgDay", "backgroundImgNight"]).then(
-        (data) => {
-          console.log(data);
-          if (data.backgroundImgDay && data.backgroundImgNight) {
-            commit("GET_BACKGROUND_IMG", data);
-          } else {
-            console.log("없음");
-            getSeoulImgFromStorage().then((img) => {
-              commit("UPDATE_BACKGROUND_IMG", img);
-            });
-          }
+      localStorageGet([
+        "backgroundImgDay",
+        "backgroundImgNight",
+        "userBackgroundImg",
+      ]).then((data) => {
+        console.log(data);
+        if (data.userBackgroundImg) {
+          commit("GET_BACKGROUND_IMG", {
+            userBackgroundImg: data.userBackgroundImg,
+          });
+        } else if (data.backgroundImgDay && data.backgroundImgNight) {
+          commit("GET_BACKGROUND_IMG", {
+            backgroundImgDay: data.backgroundImgDay,
+            backgroundImgNight: data.backgroundImgNight,
+          });
+        } else {
+          getSeoulImgFromStorage().then((img) => {
+            commit("UPDATE_BACKGROUND_IMG", img);
+          });
         }
-      );
+      });
     },
     async getSemesterInfos({ commit }) {
       const semesters = await getSemesterInfoFromDB();

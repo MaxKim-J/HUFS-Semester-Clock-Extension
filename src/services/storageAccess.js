@@ -1,5 +1,5 @@
 import { storage } from "../utils/firebaseInit";
-import imageToString from "../utils/imageToString";
+import { imageToString } from "../utils/imageToString";
 import axios from "axios";
 
 const getImgFromStorage = async (fileName) => {
