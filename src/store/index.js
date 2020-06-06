@@ -85,7 +85,6 @@ export default new Vuex.Store({
         "backgroundImgNight",
         "userBackgroundImg",
       ]).then((data) => {
-        console.log(data);
         if (data.userBackgroundImg) {
           commit("GET_BACKGROUND_IMG", {
             userBackgroundImg: data.userBackgroundImg,
