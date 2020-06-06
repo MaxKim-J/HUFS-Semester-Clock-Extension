@@ -9,12 +9,12 @@
     "128": "icons/icon_128.png"
   },
   "browser_action": {
-    "default_title": "외대 종강시계",
-    "default_popup": "popup/popup.html"
+    "default_title": "외대 종강시계"
   },
-  "permissions": ["storage"],
+  "permissions": ["storage", "tabs"],
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["background.js"],
+    "persistent": false
   },
   "web_accessible_resources": ["RELATIVE_PATH_TO_RESOURCE.EXTENTION"],
   "chrome_url_overrides": {

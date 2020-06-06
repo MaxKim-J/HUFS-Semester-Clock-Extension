@@ -14,7 +14,6 @@ const config = {
   context: __dirname + "/src",
   entry: {
     background: "./background.js",
-    "popup/popup": "./popup/popup.js",
     "tab/tab": "./tab/tab.js",
   },
   output: {
@@ -77,6 +76,7 @@ const config = {
       VUE_APP_DATABASE_URL: JSON.stringify(process.env.VUE_APP_DATABASE_URL),
       VUE_APP_API_KEY: JSON.stringify(process.env.VUE_APP_API_KEY),
       VUE_APP_AUTH_DOMAIN: JSON.stringify(process.env.VUE_APP_AUTH_DOMAIN),
+      VUE_APP_BUCKET_URL: JSON.stringify(process.env.VUE_APP_BUCKET_URL),
     }),
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
@@ -84,12 +84,6 @@ const config = {
     }),
     new CopyWebpackPlugin([
       { from: "icons", to: "icons", ignore: ["icon.xcf"] },
-      { from: "img", to: "img", ignore: ["icon.xcf"] },
-      {
-        from: "popup/popup.html",
-        to: "popup/popup.html",
-        transform: transformHtml,
-      },
       { from: "tab/tab.html", to: "tab/tab.html", transform: transformHtml },
       {
         from: "manifest.json",
@@ -102,7 +96,6 @@ const config = {
             jsonContent.content_security_policy =
               "script-src 'self' 'unsafe-eval'; object-src 'self'";
           }
-
           return JSON.stringify(jsonContent, null, 2);
         },
       },
