@@ -1,21 +1,22 @@
 <template>
   <div class="tab-clock">
-    <div class="tab-clock-main">
+    <div :class="[this.semesterInfo ? 'tab-clock-main' : 'tab-clock-main-hide']">
       <div
         class="tab-clock-main-title"
         v-if="this.semesterInfo"
       >{{this.semesterInfo.id}}학기 {{this.semesterInfo.act}}({{this.semesterInfo.due | moment("YY년 MM월 DD일")}})까지</div>
+      <div class="tab-clock-main-title" v-else>학기 정보를 가져오는 중입니다</div>
       <div class="tab-clock-main-contents">
-        <span class="tab-clock-main-contents-time">{{ this.daysCalculated }}</span>
+        <span class="tab-clock-main-contents-time">{{ this.calculatedDistances.days || "00" }}</span>
         <span class="tab-clock-main-contents-figure">일</span>
 
-        <span class="tab-clock-main-contents-time">{{ this.hoursCalculated }}</span>
+        <span class="tab-clock-main-contents-time">{{ this.calculatedDistances.hours || "00" }}</span>
         <span class="tab-clock-main-contents-figure">시간</span>
 
-        <span class="tab-clock-main-contents-time">{{ this.minutesCalculated }}</span>
+        <span class="tab-clock-main-contents-time">{{ this.calculatedDistances.minutes || "00" }}</span>
         <span class="tab-clock-main-contents-figure">분</span>
 
-        <span class="tab-clock-main-contents-time">{{ this.secondsCalculated }}</span>
+        <span class="tab-clock-main-contents-time">{{ this.calculatedDistances.seconds || "00" }}</span>
         <span class="tab-clock-main-contents-figure">초</span>
       </div>
       <div
@@ -31,53 +32,41 @@
         <div class="tab-clock-main-btn" @click="changeSemesterToSeason()">시계 바꾸기(계절학기 종강까지)</div>
       </div>
     </div>
+
     <div class="tab-clock-info">현재시간 : {{ this.today | moment("YYYY년 MM월 DD일 h:mm a") }}</div>
   </div>
 </template>
 
 <script>
-import {
-  getDistanceSeconds,
-  getDistanceMinutes,
-  getDistanceHours,
-  getDistanceDays
-} from "../utils/TimeDistanceCalculator.js";
+import { getDistancesFromToday } from "../utils/TimeDistanceCalculator.js";
 import "../style/defaultTransition.scss";
 
 export default {
   name: "TabClock",
   data() {
     return {
-      semesterInfo: null,
-      isPassSeasonal: false,
-      clockType: "",
       today: new Date(),
-      gapTime: null
+      clockType: "",
+      gapTime: null,
+      semesterInfo: null,
+      isPassSeasonal: false
     };
   },
-  props: {
-    semesterInfos: Object
-  },
   computed: {
-    secondsCalculated() {
-      return getDistanceSeconds(this.gapTime);
-    },
-    minutesCalculated() {
-      return getDistanceMinutes(this.gapTime);
-    },
-    hoursCalculated() {
-      return getDistanceHours(this.gapTime);
-    },
-    daysCalculated() {
-      return getDistanceDays(this.gapTime);
+    calculatedDistances() {
+      return getDistancesFromToday(this.gapTime);
     }
   },
   methods: {
+    getSemesterInfos() {
+      this.clockValid();
+      this.getDueDates();
+    },
     getDueDates() {
       this.gapTime = parseInt(this.semesterInfo.due - this.today);
     },
     clockValid() {
-      const { current, next, seasonal } = this.semesterInfos;
+      const { current, next, seasonal } = this.$store.state.semesterInfos;
       const now = new Date();
       if (now <= current.due) {
         this.semesterInfo = current;
@@ -89,21 +78,22 @@ export default {
       this.getDueDates();
     },
     changeSemesterToNext() {
-      const { next } = this.semesterInfos;
+      const { next } = this.$store.state.semesterInfos;
       this.semesterInfo = next;
       this.clockType = "next";
       this.getDueDates();
     },
     changeSemesterToSeason() {
-      const { seasonal } = this.semesterInfos;
+      const { seasonal } = this.$store.state.semesterInfos;
       this.semesterInfo = seasonal;
       this.clockType = "season";
       this.getDueDates();
     }
   },
   created() {
-    this.clockValid();
-    this.getDueDates();
+    this.getSemesterInfos();
+  },
+  mounted() {
     this.interval = setInterval(() => {
       this.today = new Date();
       this.getDueDates();
@@ -114,8 +104,15 @@ export default {
 
 <style lang="scss" scoped>
 @import "../style/global.scss";
+.tab-clock-main-hide {
+  visibility: hidden;
+}
 .tab-clock-main {
   margin-bottom: 20px;
+  position: relative;
+  .tab-clock-main-title {
+    width: 100%;
+  }
   .tab-clock-main-contents {
     .tab-clock-main-contents-time {
       font-size: $time-size;
