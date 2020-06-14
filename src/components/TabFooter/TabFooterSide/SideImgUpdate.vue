@@ -42,14 +42,15 @@
 </template>
 
 <script>
-import "../../style/sidePage.scss";
+import "../../../style/sidePage.scss";
 import {
   getSeoulImgFromStorage,
   getGlobalImgFromStorage,
-} from "../../services/storageAccess";
-import { imageToString } from "../../utils/imageToString";
+} from "../../../services/storageAccess";
+import { imageToString } from "../../../utils/imageToString";
 
 export default {
+  name: "SideImgUpdate",
   data() {
     return {
       isLoading: false,

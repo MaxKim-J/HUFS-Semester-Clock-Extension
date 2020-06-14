@@ -14,20 +14,20 @@
 </template>
 
 <script>
-import { HOTLINK } from "../utils/HotLinks.js";
+import { HOTLINK } from "../../utils/HotLinks.js";
 
 export default {
-  name: "tabHotlinks",
+  name: "MainHotlinks",
   data() {
     return {
-      hotlinkData: HOTLINK
+      hotlinkData: HOTLINK,
     };
-  }
+  },
 };
 </script>
 
 <style scoped lang="scss">
-@import "../style/global.scss";
+@import "../../style/global.scss";
 
 .tab-hotlinks {
   display: flex;

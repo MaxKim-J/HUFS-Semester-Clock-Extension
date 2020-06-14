@@ -1,14 +1,22 @@
 <template>
   <div class="tab-middle">
     <div class="tab-middle-content" v-if="userName && userFreshmanYear">
-      <div class="tab-middle-content-message">{{ userFreshmanYear }}학번 외대입학 {{ getDistance }}일 째</div>
-      <div class="tab-middle-content-message">{{ userName }}님, {{ greetingMessage }}</div>
+      <div class="tab-middle-content-message">
+        {{ userFreshmanYear }}학번 외대입학 {{ getDistance }}일 째
+      </div>
+      <div class="tab-middle-content-message">
+        {{ userName }}님, {{ greetingMessage }}
+      </div>
       <div class="tab-middle-content-updatemessage-wrapper">
-        <div class="tab-middle-content-updatemessage" @click="removeUserInfo">이름/학번 수정하기</div>
+        <div class="tab-middle-content-updatemessage" @click="removeUserInfo">
+          이름/학번 수정하기
+        </div>
       </div>
     </div>
     <div class="tab-middle-content" v-else>
-      <div class="tab-middle-content-update-message">학번과 이름을 입력하시면 입학하신지 며칠째인지 볼 수 있습니다</div>
+      <div class="tab-middle-content-update-message">
+        학번과 이름을 입력하시면 입학하신지 며칠째인지 볼 수 있습니다
+      </div>
       <div class="tab-middle-content-update">
         <div class="tab-middle-content-update-input">
           <input
@@ -19,35 +27,43 @@
           />
         </div>
         <div class="tab-middle-content-update-input">
-          <select v-model="inputYear" class="tab-middle-content-update-freshman" required>
+          <select
+            v-model="inputYear"
+            class="tab-middle-content-update-freshman"
+            required
+          >
             <option value selected hidden>학번</option>
             <option v-for="option in freshmanYearOptions" :key="option.value">
-              {{
-              option.text
-              }}
+              {{ option.text }}
             </option>
           </select>
         </div>
       </div>
-      <div class="tab-tabinit-startbtn" @click="userInputValid" style="cursor:pointer">입력하기</div>
+      <div
+        class="tab-tabinit-startbtn"
+        @click="userInputValid"
+        style="cursor:pointer"
+      >
+        입력하기
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { greetingValid } from "../utils/GreetingsMessageLogic.js";
-import { FRESHMANYEARS } from "../utils/FreshmanYears.js";
-import { getDistanceFromAdmissionDay } from "../utils/TimeDistanceCalculator.js";
-import { getRandomArrayIndex } from "../utils/RandomArrayIndex.js";
+import { greetingValid } from "../../utils/GreetingsMessageLogic.js";
+import { FRESHMANYEARS } from "../../utils/FreshmanYears.js";
+import { getDistanceFromAdmissionDay } from "../../utils/TimeDistanceCalculator.js";
+import { getRandomArrayIndex } from "../../utils/RandomArrayIndex.js";
 
 export default {
-  name: "tabMiddle",
+  name: "MainUserInfo",
   data() {
     return {
       greetingMessage: null,
       freshmanYearOptions: FRESHMANYEARS,
       inputYear: 0,
-      inputName: ""
+      inputName: "",
     };
   },
   computed: {
@@ -59,7 +75,7 @@ export default {
     },
     userFreshmanYear() {
       return this.$store.state.userFreshmanYear;
-    }
+    },
   },
   methods: {
     getRandomArrayIndex(arr) {
@@ -80,7 +96,7 @@ export default {
     updateUserInfo() {
       const updateArr = {
         userName: this.inputName,
-        userFreshmanYear: this.inputYear
+        userFreshmanYear: this.inputYear,
       };
       this.$store.commit("UPDATE_USER_INFO", updateArr);
     },
@@ -96,16 +112,16 @@ export default {
           this.updateUserInfo();
         }
       }
-    }
+    },
   },
   created() {
     this.getGreetingMessage();
-  }
+  },
 };
 </script>
 
 <style scoped lang="scss">
-@import "../style/global.scss";
+@import "../../style/global.scss";
 
 .tab-middle {
   margin-bottom: 20px;

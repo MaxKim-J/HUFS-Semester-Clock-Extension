@@ -1,61 +1,80 @@
 <template>
   <div class="tab-clock">
-    <div :class="[this.semesterInfo ? 'tab-clock-main' : 'tab-clock-main-hide']">
-      <div
-        class="tab-clock-main-title"
-        v-if="this.semesterInfo"
-      >{{this.semesterInfo.id}}학기 {{this.semesterInfo.act}}({{this.semesterInfo.due | moment("YY년 MM월 DD일")}})까지</div>
-      <div class="tab-clock-main-title" v-else>학기 정보를 가져오는 중입니다</div>
+    <div
+      :class="[this.semesterInfo ? 'tab-clock-main' : 'tab-clock-main-hide']"
+    >
+      <div class="tab-clock-main-title" v-if="this.semesterInfo">
+        {{ this.semesterInfo.id }}학기 {{ this.semesterInfo.act }}({{
+          this.semesterInfo.due | moment("YY년 MM월 DD일")
+        }})까지
+      </div>
+      <div class="tab-clock-main-title" v-else>
+        학기 정보를 가져오는 중입니다
+      </div>
       <div class="tab-clock-main-contents">
-        <span class="tab-clock-main-contents-time">{{ this.calculatedDistances.days || "00" }}</span>
+        <span class="tab-clock-main-contents-time">{{
+          this.calculatedDistances.days || "00"
+        }}</span>
         <span class="tab-clock-main-contents-figure">일</span>
 
-        <span class="tab-clock-main-contents-time">{{ this.calculatedDistances.hours || "00" }}</span>
+        <span class="tab-clock-main-contents-time">{{
+          this.calculatedDistances.hours || "00"
+        }}</span>
         <span class="tab-clock-main-contents-figure">시간</span>
 
-        <span class="tab-clock-main-contents-time">{{ this.calculatedDistances.minutes || "00" }}</span>
+        <span class="tab-clock-main-contents-time">{{
+          this.calculatedDistances.minutes || "00"
+        }}</span>
         <span class="tab-clock-main-contents-figure">분</span>
 
-        <span class="tab-clock-main-contents-time">{{ this.calculatedDistances.seconds || "00" }}</span>
+        <span class="tab-clock-main-contents-time">{{
+          this.calculatedDistances.seconds || "00"
+        }}</span>
         <span class="tab-clock-main-contents-figure">초</span>
       </div>
       <div
         class="tab-clock-main-btn-wrapper"
         v-if="this.clockType === 'season' && !this.isPassSeasonal"
       >
-        <div class="tab-clock-main-btn" @click="changeSemesterToNext()">시계 바꾸기(다음학기 개강까지)</div>
+        <div class="tab-clock-main-btn" @click="changeSemesterToNext()">
+          시계 바꾸기(다음학기 개강까지)
+        </div>
       </div>
       <div
         class="tab-clock-main-btn-wrapper"
         v-if="this.clockType === 'next' && !this.isPassSeasonal"
       >
-        <div class="tab-clock-main-btn" @click="changeSemesterToSeason()">시계 바꾸기(계절학기 종강까지)</div>
+        <div class="tab-clock-main-btn" @click="changeSemesterToSeason()">
+          시계 바꾸기(계절학기 종강까지)
+        </div>
       </div>
     </div>
 
-    <div class="tab-clock-info">현재시간 : {{ this.today | moment("YYYY년 MM월 DD일 h:mm a") }}</div>
+    <div class="tab-clock-info">
+      현재시간 : {{ this.today | moment("YYYY년 MM월 DD일 h:mm a") }}
+    </div>
   </div>
 </template>
 
 <script>
-import { getDistancesFromToday } from "../utils/TimeDistanceCalculator.js";
-import "../style/defaultTransition.scss";
+import { getDistancesFromToday } from "../../utils/TimeDistanceCalculator.js";
+import "../../style/defaultTransition.scss";
 
 export default {
-  name: "TabClock",
+  name: "MainClock",
   data() {
     return {
       today: new Date(),
       clockType: "",
       gapTime: null,
       semesterInfo: null,
-      isPassSeasonal: false
+      isPassSeasonal: false,
     };
   },
   computed: {
     calculatedDistances() {
       return getDistancesFromToday(this.gapTime);
-    }
+    },
   },
   methods: {
     getSemesterInfos() {
@@ -88,7 +107,7 @@ export default {
       this.semesterInfo = seasonal;
       this.clockType = "season";
       this.getDueDates();
-    }
+    },
   },
   created() {
     this.getSemesterInfos();
@@ -98,12 +117,12 @@ export default {
       this.today = new Date();
       this.getDueDates();
     }, 1000);
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../style/global.scss";
+@import "../../style/global.scss";
 .tab-clock-main-hide {
   visibility: hidden;
 }

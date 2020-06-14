@@ -6,12 +6,16 @@
           class="tab-bar-content"
           :class="[this.notificationIsShowing ? 'tab-bar-content-checked' : '']"
           @click="this.showNotifications"
-        >학사공지</div>
+        >
+          학사공지
+        </div>
         <div
           class="tab-bar-content"
           :class="[this.weatherIsShowing ? 'tab-bar-content-checked' : '']"
           @click="this.showWeather"
-        >외대 날씨</div>
+        >
+          외대 날씨
+        </div>
       </div>
       <div class="tab-bar-contents-center">
         <div class="tab-bar-content-main-title">외대 종강시계</div>
@@ -21,27 +25,38 @@
           class="tab-bar-content"
           :class="[this.randomMenuIsShowing ? 'tab-bar-content-checked' : '']"
           @click="this.showRandomMenu"
-        >오늘 뭐먹지</div>
+        >
+          오늘 뭐먹지
+        </div>
       </div>
     </div>
     <div class="tab-bar-boxes">
       <div class="tab-bar-box-wrap tab-bar-box-left-wrap">
         <transition name="fade">
-          <div class="tab-bar-box tab-bar-box-left" v-if="this.notificationIsShowing">
-            <tab-notifications></tab-notifications>
+          <div
+            class="tab-bar-box tab-bar-box-left"
+            v-if="this.notificationIsShowing"
+          >
+            <side-notifications></side-notifications>
           </div>
         </transition>
         <transition name="fade">
-          <div class="tab-bar-box tab-bar-box-left" v-if="this.weatherIsShowing">
-            <tab-weather></tab-weather>
+          <div
+            class="tab-bar-box tab-bar-box-left"
+            v-if="this.weatherIsShowing"
+          >
+            <side-weather></side-weather>
           </div>
         </transition>
       </div>
 
       <div class="tab-bar-box-wrap tab-bar-box-right-wrap">
         <transition name="fade">
-          <div class="tab-bar-box tab-bar-box-right" v-if="this.randomMenuIsShowing">
-            <tab-random-menu></tab-random-menu>
+          <div
+            class="tab-bar-box tab-bar-box-right"
+            v-if="this.randomMenuIsShowing"
+          >
+            <side-random-menu></side-random-menu>
           </div>
         </transition>
       </div>
@@ -50,23 +65,23 @@
 </template>
 
 <script>
-import TabRandomMenu from "../components/sidepages/TabRandomMenu";
-import TabNotifications from "../components/sidepages/TabNotifications";
-import TabWeather from "../components/sidepages/TabWeather";
-import "../style/bar.scss";
+import SideRandomMenu from "./TabHeaderSide/SideRandomMenu";
+import SideNotifications from "./TabHeaderSide/SideNotifications";
+import SideWeather from "./TabHeaderSide/SideWeather";
+import "../../style/bar.scss";
 
 export default {
-  name: "tabHeader",
+  name: "TabHeader",
   components: {
-    TabRandomMenu,
-    TabNotifications,
-    TabWeather
+    SideRandomMenu,
+    SideNotifications,
+    SideWeather,
   },
   data() {
     return {
       randomMenuIsShowing: false,
       notificationIsShowing: false,
-      weatherIsShowing: false
+      weatherIsShowing: false,
     };
   },
   methods: {
@@ -82,8 +97,8 @@ export default {
     showWeather() {
       this.weatherIsShowing = !this.weatherIsShowing;
       this.randomMenuIsShowing = false;
-    }
-  }
+    },
+  },
 };
 </script>
 

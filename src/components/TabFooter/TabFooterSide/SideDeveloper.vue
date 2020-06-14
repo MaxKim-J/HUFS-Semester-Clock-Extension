@@ -29,9 +29,11 @@
 </template>
 
 <script>
-import "../../style/sidePage.scss";
+import "../../../style/sidePage.scss";
 
-export default {};
+export default {
+  name: "SideDeveloper",
+};
 </script>
 
 <style lang="scss" scoped>

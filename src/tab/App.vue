@@ -1,27 +1,32 @@
 <template>
   <transition name="fadeMain" v-if="backgroundImgLoading">
-    <div class="tab" :style="{ 'background-image': 'url(' + backgroundImg + ')' }">
+    <div
+      class="tab"
+      :style="{ 'background-image': 'url(' + backgroundImg + ')' }"
+    >
       <div class="tab-background"></div>
       <tab-header class="tab-header tab-antialiasing"></tab-header>
       <div class="tab-main-wrap tab-antialiasing" v-if="semesterInfoLoading">
         <div class="tab-main">
-          <tab-clock></tab-clock>
-          <tab-middle></tab-middle>
-          <tab-hotlinks></tab-hotlinks>
+          <main-clock></main-clock>
+          <main-user-info></main-user-info>
+          <main-hotlinks></main-hotlinks>
         </div>
       </div>
-      <div v-if="loadingFailed" class="tab-warning">😅 wifi 연결을 확인하고 새로고침을 눌러주세요!</div>
+      <div v-if="loadingFailed" class="tab-warning">
+        😅 wifi 연결을 확인하고 새로고침을 눌러주세요!
+      </div>
       <tab-footer class="tab-footer tab-antialiasing"></tab-footer>
     </div>
   </transition>
 </template>
 
 <script>
-import TabClock from "../components/TabClock.vue";
-import TabMiddle from "../components/TabMiddle.vue";
-import TabHotlinks from "../components/TabHotlinks.vue";
-import TabFooter from "../components/TabFooter.vue";
-import TabHeader from "../components/TabHeader.vue";
+import MainClock from "../components/MainClock/MainClock.vue";
+import MainUserInfo from "../components/MainUserInfo/MainUserInfo.vue";
+import MainHotlinks from "../components/MainHotlinks/MainHotlinks.vue";
+import TabFooter from "../components/TabFooter/TabFooter.vue";
+import TabHeader from "../components/TabHeader/TabHeader.vue";
 import { localStorageRemove } from "../services/localStorageAccess";
 import "../style/initialize.scss";
 import "../style/defaultTransition.scss";
@@ -29,23 +34,23 @@ import "../style/defaultTransition.scss";
 export default {
   name: "App",
   components: {
-    TabClock,
-    TabMiddle,
-    TabHotlinks,
+    TabHeader,
     TabFooter,
-    TabHeader
+    MainClock,
+    MainUserInfo,
+    MainHotlinks,
   },
   data() {
     return {
       backgroundImgLoading: false,
       semesterInfoLoading: false,
-      loadingFailed: false
+      loadingFailed: false,
     };
   },
   computed: {
     backgroundImg() {
       return this.$store.state.backgroundImg;
-    }
+    },
   },
   methods: {
     async getBackgroundImg() {
@@ -57,7 +62,7 @@ export default {
     },
     async getUserInfo() {
       await this.$store.dispatch("getUserInfo");
-    }
+    },
   },
   created() {
     localStorageRemove(["notificationInfo", "weatherInfo"]);
@@ -70,12 +75,12 @@ export default {
       Promise.all([
         this.getBackgroundImg(),
         this.getSemesterInfos(),
-        this.getUserInfo()
+        this.getUserInfo(),
       ]).then(() => {
         this.backgroundImgLoading = true;
       });
     }
-  }
+  },
 };
 </script>
 
