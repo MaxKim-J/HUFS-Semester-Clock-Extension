@@ -51,8 +51,8 @@
 </template>
 
 <script>
-import { greetingValid } from "../../utils/GreetingsMessageLogic.js";
-import { FRESHMANYEARS } from "../../utils/FreshmanYears.js";
+import { greetingValid } from "../../config/greetingsMessages.js";
+import { FRESHMANYEARS } from "../../config/freshmanYears.js";
 import { getDistanceFromAdmissionDay } from "../../utils/TimeDistanceCalculator.js";
 import { getRandomArrayIndex } from "../../utils/RandomArrayIndex.js";
 

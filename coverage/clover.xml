@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1592114719053" clover="3.2.0">
-  <project timestamp="1592114719053" name="All files">
-    <metrics statements="534" coveredstatements="3" conditionals="10173" coveredconditionals="0" methods="3566" coveredmethods="1" elements="14273" coveredelements="4" complexity="0" loc="534" ncloc="534" packages="17" files="34" classes="34"/>
+<coverage generated="1592117102895" clover="3.2.0">
+  <project timestamp="1592117102896" name="All files">
+    <metrics statements="534" coveredstatements="3" conditionals="10173" coveredconditionals="0" methods="3566" coveredmethods="1" elements="14273" coveredelements="4" complexity="0" loc="534" ncloc="534" packages="18" files="34" classes="34"/>
     <package name="HUFS-Semester-Clock-Extension">
       <metrics statements="21" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <file name="webpack.config.js" path="/Users/jonghyukkim/dev/HUFS-Semester-Clock-Extension/webpack.config.js">
@@ -457,6 +457,39 @@
         <line num="110" count="0" type="stmt"/>
       </file>
     </package>
+    <package name="HUFS-Semester-Clock-Extension.src.config">
+      <metrics statements="18" coveredstatements="1" conditionals="20" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="freshmanYears.js" path="/Users/jonghyukkim/dev/HUFS-Semester-Clock-Extension/src/config/freshmanYears.js">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="0" type="stmt"/>
+      </file>
+      <file name="greetingsMessages.js" path="/Users/jonghyukkim/dev/HUFS-Semester-Clock-Extension/src/config/greetingsMessages.js">
+        <metrics statements="15" coveredstatements="0" conditionals="20" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="4" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+      </file>
+      <file name="hotLinks.js" path="/Users/jonghyukkim/dev/HUFS-Semester-Clock-Extension/src/config/hotLinks.js">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="randomMenuList.js" path="/Users/jonghyukkim/dev/HUFS-Semester-Clock-Extension/src/config/randomMenuList.js">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="0" type="stmt"/>
+      </file>
+    </package>
     <package name="HUFS-Semester-Clock-Extension.src.services">
       <metrics statements="37" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="0"/>
       <file name="firebaseDbAccess.js" path="/Users/jonghyukkim/dev/HUFS-Semester-Clock-Extension/src/services/firebaseDbAccess.js">
@@ -584,40 +617,10 @@
       </file>
     </package>
     <package name="HUFS-Semester-Clock-Extension.src.utils">
-      <metrics statements="73" coveredstatements="1" conditionals="58" coveredconditionals="0" methods="11" coveredmethods="0"/>
-      <file name="FreshmanYears.js" path="/Users/jonghyukkim/dev/HUFS-Semester-Clock-Extension/src/utils/FreshmanYears.js">
-        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
-      </file>
-      <file name="GreetingsMessageLogic.js" path="/Users/jonghyukkim/dev/HUFS-Semester-Clock-Extension/src/utils/GreetingsMessageLogic.js">
-        <metrics statements="15" coveredstatements="0" conditionals="20" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="4" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="8" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="12" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="51" count="0" type="stmt"/>
-      </file>
-      <file name="HotLinks.js" path="/Users/jonghyukkim/dev/HUFS-Semester-Clock-Extension/src/utils/HotLinks.js">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-      </file>
+      <metrics statements="55" coveredstatements="0" conditionals="38" coveredconditionals="0" methods="10" coveredmethods="0"/>
       <file name="RandomArrayIndex.js" path="/Users/jonghyukkim/dev/HUFS-Semester-Clock-Extension/src/utils/RandomArrayIndex.js">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="5" count="0" type="stmt"/>
-      </file>
-      <file name="RandomMenuList.js" path="/Users/jonghyukkim/dev/HUFS-Semester-Clock-Extension/src/utils/RandomMenuList.js">
-        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="0" type="stmt"/>
       </file>
       <file name="TimeDistanceCalculator.js" path="/Users/jonghyukkim/dev/HUFS-Semester-Clock-Extension/src/utils/TimeDistanceCalculator.js">
         <metrics statements="9" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { HOTLINK } from "../../utils/HotLinks.js";
+import { HOTLINK } from "../../config/hotLinks.js";
 
 export default {
   name: "MainHotlinks",

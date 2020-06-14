@@ -25,7 +25,7 @@
 
 <script>
 import "../../../style/sidePage.scss";
-import { menuArr } from "../../../utils/RandomMenuList.js";
+import { menuArr } from "../../../config/randomMenuList.js";
 import { getRandomArrayIndex } from "../../../utils/RandomArrayIndex.js";
 export default {
   name: "SideRandomMenu",
