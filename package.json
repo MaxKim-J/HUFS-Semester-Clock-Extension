@@ -3,6 +3,22 @@
   "version": "1.0.0",
   "description": "A Vue.js web extension",
   "author": "Max Jonghyuk Kim <hwaseen@gmail.com>",
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      ".*\\.(vue)$": "vue-jest",
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+    },
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,vue}",
+      "!**/node_modules/**"
+    ]
+  },
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
     "prettier": "prettier \"src/**/*.{js,vue}\"",
@@ -11,7 +27,8 @@
     "build:dev": "cross-env NODE_ENV=development webpack --hide-modules",
     "build-zip": "node scripts/build-zip.js",
     "watch": "npm run build -- --watch",
-    "watch:dev": "cross-env HMR=true npm run build:dev -- --watch"
+    "watch:dev": "cross-env HMR=true npm run build:dev -- --watch",
+    "test": "jest"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -29,8 +46,11 @@
     "@babel/runtime-corejs3": "^7.7.4",
     "@types/chrome": "^0.0.91",
     "@vue/devtools": "^5.3.3",
+    "@vue/test-utils": "^1.0.3",
     "archiver": "^3.1.1",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.3",
+    "babel-jest": "^26.0.1",
     "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.0.5",
     "core-js": "^3.4.5",
@@ -47,9 +67,11 @@
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-vue": "^6.0.1",
     "file-loader": "^5.0.2",
+    "jest": "^26.0.1",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.13.0",
     "sass-loader": "^8.0.0",
+    "vue-jest": "^3.0.5",
     "vue-loader": "^15.7.2",
     "vue-template-compiler": "^2.6.10",
     "webpack": "^4.41.2",
