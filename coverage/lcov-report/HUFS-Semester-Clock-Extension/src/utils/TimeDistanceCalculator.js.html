@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">55.56% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>5/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">55.56% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>5/9</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -85,42 +85,42 @@
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">function <span class="fstat-no" title="function not covered" >addZero(</span>num) {
-<span class="cstat-no" title="statement not covered" >  if (num &lt; 10) {</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">function addZero(num) {
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (num &lt; 10) {
 <span class="cstat-no" title="statement not covered" >    return `0${num}`;</span>
   } else {
-<span class="cstat-no" title="statement not covered" >    return `${num}`;</span>
+    return `${num}`;
   }
 }
 &nbsp;
-function <span class="fstat-no" title="function not covered" >getDistanceDays(</span>time) {
-<span class="cstat-no" title="statement not covered" >  return addZero(parseInt(time / (1000 * 60 * 60 * 24)));</span>
+function getDistanceDays(time) {
+  return addZero(parseInt(time / (1000 * 60 * 60 * 24)));
 }
 &nbsp;
 export function <span class="fstat-no" title="function not covered" >getDistanceFromAdmissionDay(</span>year) {
@@ -129,14 +129,14 @@ export function <span class="fstat-no" title="function not covered" >getDistance
 <span class="cstat-no" title="statement not covered" >  return distance;</span>
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >getDistancesFromToday(</span>time) {
-  const distances = <span class="cstat-no" title="statement not covered" >{</span>
+export function getDistancesFromToday(time) {
+  const distances = {
     days: getDistanceDays(time),
     hours: addZero(parseInt((time / (1000 * 60 * 60)) % 24)),
     minutes: addZero(parseInt((time / (1000 * 60)) % 60)),
     seconds: addZero(parseInt((time / 1000) % 60)),
   };
-<span class="cstat-no" title="statement not covered" >  return distances;</span>
+  return distances;
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -145,7 +145,7 @@ export function <span class="fstat-no" title="function not covered" >getDistance
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun Jun 14 2020 15:45:00 GMT+0900 (GMT+09:00)
+                at Sun Jun 21 2020 02:03:17 GMT+0900 (GMT+09:00)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

@@ -1,123 +1,95 @@
 <template>
   <div class="tab-clock">
-    <div
-      :class="[this.semesterInfo ? 'tab-clock-main' : 'tab-clock-main-hide']"
-    >
+    <div :class="[this.semesterInfo ? 'tab-clock-main' : 'tab-clock-main-hide']">
       <div class="tab-clock-main-title" v-if="this.semesterInfo">
         {{ this.semesterInfo.id }}학기 {{ this.semesterInfo.act }}({{
-          this.semesterInfo.due | moment("YY년 MM월 DD일")
+        this.semesterInfo.due | moment("YY년 MM월 DD일")
         }})까지
       </div>
-      <div class="tab-clock-main-title" v-else>
-        학기 정보를 가져오는 중입니다
-      </div>
+      <div class="tab-clock-main-title" v-else>학기 정보를 가져오는 중입니다</div>
       <div class="tab-clock-main-contents">
-        <span class="tab-clock-main-contents-time">{{
-          this.calculatedDistances.days || "00"
-        }}</span>
+        <span class="tab-clock-main-contents-time">{{ this.gapTime.days || "00" }}</span>
         <span class="tab-clock-main-contents-figure">일</span>
 
-        <span class="tab-clock-main-contents-time">{{
-          this.calculatedDistances.hours || "00"
-        }}</span>
+        <span class="tab-clock-main-contents-time">{{ this.gapTime.hours || "00" }}</span>
         <span class="tab-clock-main-contents-figure">시간</span>
 
-        <span class="tab-clock-main-contents-time">{{
-          this.calculatedDistances.minutes || "00"
-        }}</span>
+        <span class="tab-clock-main-contents-time">{{ this.gapTime.minutes || "00" }}</span>
         <span class="tab-clock-main-contents-figure">분</span>
 
-        <span class="tab-clock-main-contents-time">{{
-          this.calculatedDistances.seconds || "00"
-        }}</span>
+        <span class="tab-clock-main-contents-time">{{ this.gapTime.seconds || "00" }}</span>
         <span class="tab-clock-main-contents-figure">초</span>
       </div>
       <div
         class="tab-clock-main-btn-wrapper"
-        v-if="this.clockType === 'season' && !this.isPassSeasonal"
+        v-if="this.clockType === 'seasonal' && !this.isPassSeasonal"
       >
-        <div class="tab-clock-main-btn" @click="changeSemesterToNext()">
-          시계 바꾸기(다음학기 개강까지)
-        </div>
+        <div class="tab-clock-main-btn" @click="changeSemester('next')">시계 바꾸기(다음학기 개강까지)</div>
       </div>
       <div
         class="tab-clock-main-btn-wrapper"
         v-if="this.clockType === 'next' && !this.isPassSeasonal"
       >
-        <div class="tab-clock-main-btn" @click="changeSemesterToSeason()">
-          시계 바꾸기(계절학기 종강까지)
-        </div>
+        <div class="tab-clock-main-btn" @click="changeSemester('seasonal')">시계 바꾸기(계절학기 종강까지)</div>
       </div>
     </div>
 
-    <div class="tab-clock-info">
-      현재시간 : {{ this.today | moment("YYYY년 MM월 DD일 h:mm a") }}
-    </div>
+    <div class="tab-clock-info">현재시간 : {{ this.today | moment("YYYY년 MM월 DD일 h:mm a") }}</div>
   </div>
 </template>
 
 <script>
 import { getDistancesFromToday } from "../../utils/TimeDistanceCalculator.js";
-import "../../style/defaultTransition.scss";
 
 export default {
   name: "MainClock",
   data() {
     return {
-      today: new Date(),
-      clockType: "",
-      gapTime: null,
       semesterInfo: null,
-      isPassSeasonal: false,
+      clockType: "",
+      gapTime: {},
+      today: new Date(),
+      isPassSeasonal: false
     };
   },
-  computed: {
-    calculatedDistances() {
-      return getDistancesFromToday(this.gapTime);
-    },
-  },
   methods: {
-    getSemesterInfos() {
-      this.clockValid();
+    getSemesterInfo(current, seasonal, now) {
+      if (this.clockValid(current, now) === "next") {
+        this.setIsPassSeasonal(seasonal, now);
+      }
+    },
+    clockValid(current, now) {
+      const semester = now <= current.due ? "current" : "next";
+      this.changeSemester(semester);
+      return semester;
+    },
+    setIsPassSeasonal(seasonal, now) {
+      this.isPassSeasonal = now > seasonal.due ? true : false;
+    },
+    changeSemester(semesterName) {
+      const semesterInfo = this.$store.state.semesterInfos[`${semesterName}`];
+      this.semesterInfo = semesterInfo;
+      this.clockType = semesterName;
       this.getDueDates();
     },
     getDueDates() {
-      this.gapTime = parseInt(this.semesterInfo.due - this.today);
-    },
-    clockValid() {
-      const { current, next, seasonal } = this.$store.state.semesterInfos;
-      const now = new Date();
-      if (now <= current.due) {
-        this.semesterInfo = current;
-        this.clockType = "current";
-      } else {
-        this.isPassSeasonal = now > seasonal.due ? true : false;
-        this.changeSemesterToNext();
-      }
-      this.getDueDates();
-    },
-    changeSemesterToNext() {
-      const { next } = this.$store.state.semesterInfos;
-      this.semesterInfo = next;
-      this.clockType = "next";
-      this.getDueDates();
-    },
-    changeSemesterToSeason() {
-      const { seasonal } = this.$store.state.semesterInfos;
-      this.semesterInfo = seasonal;
-      this.clockType = "season";
-      this.getDueDates();
-    },
+      this.gapTime = getDistancesFromToday(
+        parseInt(this.semesterInfo.due - this.today)
+      );
+      return this.gapTime;
+    }
   },
   created() {
-    this.getSemesterInfos();
+    const { current, seasonal } = this.$store.state.semesterInfos;
+    const now = new Date();
+    this.getSemesterInfo(current, seasonal, now);
   },
   mounted() {
     this.interval = setInterval(() => {
       this.today = new Date();
-      this.getDueDates();
+      this.getDueDates(this.semesterInfo);
     }, 1000);
-  },
+  }
 };
 </script>
 
