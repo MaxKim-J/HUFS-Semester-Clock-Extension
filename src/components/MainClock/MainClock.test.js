@@ -38,6 +38,11 @@ describe("현재 시간이 현재 학기(current) 종강일 이전일 때", () =
 
   const cmp = mount(MainClock, { store, localVue });
 
+  it("next 학기와 seasonal 학기를 전환하는 시계 바꾸기 버튼을 표시한다.", () => {
+    // then
+    expect(cmp.find(".tab-clock-main-btn").exists()).toBe(false);
+  });
+
   it("시계에 표시되는 학기 정보(semesterInfo)가 current 학기가 된다.", () => {
     // then
     expect(cmp.vm.semesterInfo).toBe(state.semesterInfos.current);
