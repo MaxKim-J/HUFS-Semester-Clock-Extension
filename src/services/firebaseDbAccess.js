@@ -30,3 +30,12 @@ export const getSemesterInfoFromDB = async () => {
     console.error("학기 정보 데이터를 가져올 수 없습니다");
   }
 };
+
+export const getCovidInfoFromDB = async () => {
+  try {
+    const covidInfo = await dataBase.ref("/corona").once("value");
+    return covidInfo.val();
+  } catch {
+    console.error("코로나 19관련 데이터를 가져올 수 없습니다.");
+  }
+};
