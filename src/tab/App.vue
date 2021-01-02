@@ -65,7 +65,11 @@ export default {
     },
   },
   created() {
-    localStorageRemove(["notificationInfo", "weatherInfo"]);
+    localStorageRemove([
+      "notificationInfo", 
+      "weatherInfo", 
+      "covidInfo", 
+    ]);
     if (navigator.onLine === false) {
       this.getBackgroundImg().then(() => {
         this.backgroundImgLoading = true;

@@ -12,12 +12,44 @@
 
 <script>
 import "../../../style/sidePage.scss";
+import { getCovidInfoFromDB } from "../../../services/firebaseDbAccess";
+
+import {
+  localStorageGet,
+  localStorageSet,
+} from "../../../services/localStorageAccess";
 
 export default {
   name:'SideCoronaStatus',
   data: () => ({
     isCityMode: false,
+    totalData: [],
+    cityData: [],
+    timeStatus: ''
   }),
+  created() {
+    localStorageGet(["covidInfo"]).then(data => {
+      if(Object.keys(data).length !== 0) {
+        const {city, total, cityTimeStatus} = data.covidInfo
+        this.totalData = total.reverse().slice(0,5)
+        this.cityData = city.slice(0,9)
+        this.timeStatus = cityTimeStatus
+      } else {
+        getCovidInfoFromDB()
+          .then((data) => {
+            const {city, total, cityTimeStatus} = data
+            this.totalData = total.reverse().slice(0,5)
+            this.cityData = city.slice(0,9)
+            this.timeStatus = cityTimeStatus
+            localStorageSet({covidInfo:data})
+            console.log(this.totalData, this.cityData)
+          }).catch((err) => {
+            console.log(err)
+            console.error("데이터를 가져올 수 없습니다");
+          });
+      }
+    })
+  },
   methods: {
     changeMode() {
       this.isCityMode = !this.isCityMode
