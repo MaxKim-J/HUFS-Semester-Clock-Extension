@@ -54,7 +54,7 @@ export default {
         datasets: [{
           label: false,
           type: 'line',
-          borderColor: 'red',
+          borderColor: '#f22ead',
           data: this.chartValues,
           pointBackgroundColor: 'yellow',
           lineTension: 0,

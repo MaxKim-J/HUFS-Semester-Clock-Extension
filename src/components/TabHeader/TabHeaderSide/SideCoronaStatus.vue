@@ -2,7 +2,7 @@
   <div class="tab-side-box">
     <div class="tab-side-box-title">코로나19 현황</div>
     <div class="tab-side-box-content" >
-      {{isCityMode ? "주요 시도별 확진자 증감 현황입니다." : "5일간의 국내 코로나 19 신규 확진자 추이입니다."}}
+      {{isCityMode ? `${timeStatus} 시도별 확진자 증감 현황입니다.` : "5일간의 국내 코로나 19 신규 확진자 추이입니다."}}
       <span class="tab-side-box-sub-btn" @click="this.changeMode"
         >{{ isCityMode ? "신규 확진자 추이 보기" : "주요 도시별 확진자 증감 현황 보기" }} </span
       >
@@ -24,7 +24,7 @@
           <div v-for="(info,i) in cityData.slice(0,5)" :key="i" >
             <span class="covid-region-label">{{info.region}}</span>
             <span class="covid-region-data" 
-              :style="{color: info.rate > 0 ? 'red':'blue'}"
+              :style="{color: info.rate > 0 ? '#f22ead':'#2e90f2'}"
               v-text="`${info.rate > 0 ? '+':'-'}${info.rate}`"
             />
           </div>
@@ -33,7 +33,7 @@
           <div v-for="(info,i) in cityData.slice(5,9)" :key="i" >
             <span class="covid-region-label">{{info.region}}</span>
             <span class="covid-region-data" 
-              :style="{color: info.rate > 0 ? 'red':'blue'}"
+              :style="{color: info.rate > 0 ? '#f22ead':'#2e90f2'}"
               v-text="`${info.rate > 0 ? '+':'-'}${info.rate}`"
             />
           </div>
