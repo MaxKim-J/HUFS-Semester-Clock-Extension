@@ -15,7 +15,7 @@
         :height="120"
       />
       <div class="tab-alarm">
-        *3시간 주기로 업데이트됩니다.
+        *2시간 주기로 업데이트됩니다.
       </div>
     </div>
      <div v-else class="tab-side-box-content" >
