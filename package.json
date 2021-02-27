@@ -1,6 +1,6 @@
 {
   "name": "hufs-semester-clock",
-  "version": "1.0.0",
+  "version": "1.5.1",
   "description": "A Vue.js web extension",
   "author": "Max Jonghyuk Kim <hwaseen@gmail.com>",
   "jest": {

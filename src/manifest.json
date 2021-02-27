@@ -1,7 +1,7 @@
 {
   "name": "외대 종강시계",
   "description": "HUFS-Clock : 이 시계는 한국외대 학생들에게 종강이 몇 일 남았는지 보여줍니다. 종강 화이팅!",
-  "version": "1.0.2",
+  "version": "1.5.0",
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://auth.firebase.com  https://*.firebaseio.com https://cdn.firebase.com https://www.googleapis.com; object-src 'self'",
   "icons": {
@@ -11,7 +11,7 @@
   "browser_action": {
     "default_title": "외대 종강시계"
   },
-  "permissions": ["storage", "tabs"],
+  "permissions": ["storage"],
   "background": {
     "scripts": ["background.js"],
     "persistent": false

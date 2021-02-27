@@ -8,5 +8,6 @@ export const FRESHMANYEARS = [
   { text: 17, value: 2017 },
   { text: 18, value: 2018 },
   { text: 19, value: 2019 },
-  { text: 20, value: 2020 }
+  { text: 20, value: 2020 },
+  { text: 21, value: 2021 },
 ]

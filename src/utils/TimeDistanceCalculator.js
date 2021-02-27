@@ -1,4 +1,7 @@
 function addZero(num) {
+  if (num < 0) {
+    return `${num - 1}`
+  }
   if (num < 10) {
     return `0${num}`;
   } else {
