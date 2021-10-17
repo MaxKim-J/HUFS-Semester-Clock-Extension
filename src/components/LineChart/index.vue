@@ -13,8 +13,8 @@ export default {
       layout: {
         padding: {
           top:40,
-          left:20,
-          right:15,
+          left:25,
+          right:25,
         },
       },
       scales: {

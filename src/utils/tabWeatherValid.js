@@ -40,30 +40,24 @@ export const weatherValid = icon => {
     case "ws30":
       return "⛄";
       break;
-
     case "ws17":
       return "🌫";
       break;
-
     case "ws18":
       return "🌩";
       break;
-
     case "ws20":
       return "😷";
       break;
-
     case "ws22":
     case "ws24":
     case "ws27":
     case "ws26":
       return "🌦";
       break;
-
     case "ws23" || "ws28":
       return "🌦";
       break;
-
     case "ws25":
       return "⛅";
       break;

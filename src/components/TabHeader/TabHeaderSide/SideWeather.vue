@@ -22,9 +22,7 @@
           {{ weather.date }}
         </div>
         <div class="tab-weather-icon">
-          {{ changeToEmoji(weather.morning_icon) }}/{{
-            changeToEmoji(weather.afternoon_icon)
-          }}
+          {{ changeToEmoji(weather.afternoon_icon)}}
         </div>
         <div class="tab-weather-temp">{{ weather.temp }}</div>
       </div>
@@ -43,9 +41,7 @@
           {{ weather.date }}
         </div>
         <div class="tab-weather-icon">
-          {{ changeToEmoji(weather.morning_icon) }}/{{
-            changeToEmoji(weather.afternoon_icon)
-          }}
+          {{ changeToEmoji(weather.morning_icon) }}
         </div>
         <div class="tab-weather-temp">{{ weather.temp }}</div>
       </div>

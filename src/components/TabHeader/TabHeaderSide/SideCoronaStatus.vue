@@ -102,7 +102,7 @@ export default {
 }
 .tab-side-box-content {
   position: relative;
-  >a {
+  > a {
     font-size: 12px;
     position: absolute;
     text-decoration: underline;
