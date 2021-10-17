@@ -1,12 +1,12 @@
 <template>
   <div class="tab-side-box">
     <div class="tab-side-box-title">개발자 소개</div>
-    <div class="tab-side-box-content-name">### Max Kim</div>
+    <div class="tab-side-box-content-name">### Max Kim (빅융소맨)</div>
     <div class="tab-side-box-content">
-      외대 서울캠에서 융복합소프트웨어를 이중하고 있는 고학번입니다!
+      외대 서울캠에서 융복합소프트웨어를 이중하고 있는 고학번입니다! 현재 종강시계 2.0을 만들면서 취준하는 중이에요.
     </div>
     <div class="tab-side-box-content">
-      현재 스타트업에서 프론트엔드 개발자로 일하고 있고, 자바스크립트 개발을 좋아합니다. 종강시계에 대한 피드백은 하단 이메일로 연락주세요!
+      종강시계에 대한 피드백은 하단 이메일로 연락주세요!
     </div>
     <div class="tab-side-box-content-icons">
       <a class="tab-box-icon" href="mailto:hwaseen@gmail.com">
@@ -20,7 +20,7 @@
       </a>
     </div>
     <div class="tab-side-box-content-small">
-      HUFS Semester Clock 1.5.1 © Max Kim. 2021
+      HUFS Semester Clock 1.5.2 © Max Kim. 2021
     </div>
   </div>
 </template>
